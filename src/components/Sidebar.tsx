@@ -21,12 +21,18 @@ export default function Sidebar() {
               key={item.name}
               onClick={() => setActiveItem(item.name)}
               className={`flex items-center gap-3 p-3 cursor-pointer rounded-4xl  
-              ${activeItem === item.name ? "bg-[#2959BF] text-white" : "text-[#694800]"} 
+              ${
+                activeItem === item.name
+                  ? "bg-[#2959BF] text-white"
+                  : "text-[#694800]"
+              } 
               transition hover:bg-blue-200 `}
             >
               <div
                 className={`flex items-center justify-center w-8 h-8 rounded-full border-2 
-                ${activeItem === item.name ? "border-white" : "border-[#694800]"}`}
+                ${
+                  activeItem === item.name ? "border-white" : "border-[#694800]"
+                }`}
               >
                 <item.icon size={20} />
               </div>

@@ -1,4 +1,7 @@
+'use client'
+
 import { Gamepad2, Mic, MessageSquare, List, User } from "lucide-react";
+import { useRouter } from "next/compat/router";
 import { useState } from "react";
 
 const menuItems = [
@@ -10,8 +13,7 @@ const menuItems = [
 ];
 
 export default function Sidebar() {
-  const [activeItem, setActiveItem] = useState("Games");
-
+  const router = useRouter()
   return (
     <aside className="w-1/5 bg-transparent p-4 h-screen text-[#694800] ml-3">
       <nav>
@@ -19,10 +21,12 @@ export default function Sidebar() {
           {menuItems.map((item) => (
             <li
               key={item.name}
-              onClick={() => setActiveItem(item.name)}
+              onClick={() => {
+                router?.push(`/${item.name.toLowerCase()}`)
+              }}
               className={`flex items-center gap-3 p-3 cursor-pointer rounded-4xl  
               ${
-                activeItem === item.name
+                router?.pathname === `/${item.name.toLowerCase()}`
                   ? "bg-[#2959BF] text-white"
                   : "text-[#694800]"
               } 
@@ -31,7 +35,7 @@ export default function Sidebar() {
               <div
                 className={`flex items-center justify-center w-8 h-8 rounded-full border-2 
                 ${
-                  activeItem === item.name ? "border-white" : "border-[#694800]"
+                  router?.pathname === `/${item.name.toLowerCase()}` ? "border-white" : "border-[#694800]"
                 }`}
               >
                 <item.icon size={20} />

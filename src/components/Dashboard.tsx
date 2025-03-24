@@ -1,7 +1,5 @@
 import Image from "next/image";
 import { useState } from "react";
-import Sidebar from "@/components/Sidebar";
-import Header from "@/components/Header";
 
 interface Game {
   name: string;
@@ -26,11 +24,7 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FFF5E1]">
-      <Header />
-
       <main className="flex flex-1">
-        <Sidebar />
 
         <section className="flex-1 p-6">
           <div className="mb-6 border-[#694800]">
@@ -113,6 +107,5 @@ export default function Dashboard() {
           </ol>
         </aside>
       </main>
-    </div>
   );
 }

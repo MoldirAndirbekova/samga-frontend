@@ -12,7 +12,7 @@ export default function Header() {
     <header className="bg-[#2959BF] p-4 flex justify-between items-center text-white shadow-md mb-3">
       <Image src="/logo.png" alt="Samga Logo" width={100} height={40} />
 
-      {/* Navigation Links */}
+     
       <nav className="flex justify-between w-2/5 text-lg">
         <a href="#about" className="hover:underline">About Us</a>
         <a href="#skills" className="hover:underline">Skills We Develop</a>

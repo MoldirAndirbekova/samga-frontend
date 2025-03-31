@@ -95,8 +95,7 @@ export default function Home() {
   </div>
 </div>
 
-{/* WHY US Section */}
-{/* WHY US Section */}
+
 <div className="flex justify-center bg-[#FFF5E1] py-20 px-6 sm:px-20">
         <div className="bg-[#A97CB5] text-white p-16 rounded-xl max-w-5xl w-full shadow-lg text-left relative">
           <h2 className="text-6xl font-bold mb-8 text-center">WHY US?</h2>
@@ -176,7 +175,7 @@ export default function Home() {
 </div>
 
 
-        {/* Review Section */}
+        
         <div className="flex flex-col items-center py-20 bg-[#FFF6E2] px-6 sm:px-20">
   <div className="relative bg-[#F9DB63] p-16 rounded-xl max-w-5xl w-full shadow-lg text-left">
     <h2 className="text-6xl font-bold text-[#694800] text-center mb-8">
@@ -186,7 +185,7 @@ export default function Home() {
     <p className="mt-6 font-bold text-xl text-black">{reviews[currentIndex].author}</p>
     <p className="text-lg text-black">{reviews[currentIndex].role}</p>
 
-    {/* Кнопки переключения */}
+    
     <div className="flex justify-center items-center mt-10 gap-10">
       <button
         onClick={() => handleScroll("left")}
@@ -195,7 +194,7 @@ export default function Home() {
         ◀
       </button>
 
-      {/* Индикаторы */}
+      
       <div className="flex gap-3">
         {reviews.map((_, index) => (
           <span

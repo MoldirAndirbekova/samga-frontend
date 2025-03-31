@@ -11,15 +11,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname(); // detect current route
-  const isHome = pathname === "/"; // check if we're on homepage
+  const pathname = usePathname(); 
+  const isHome = pathname === "/"; 
 
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen bg-[#FFF5E1]">
         <Header />
         <div className="flex flex-1">
-          {!isHome && <Sidebar />} {/* 👈 Only show Sidebar if not on home */}
+          {!isHome && <Sidebar />}
           <main className="flex-1">{children}</main>
         </div>
         <Footer />

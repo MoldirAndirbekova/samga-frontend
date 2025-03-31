@@ -36,7 +36,7 @@ body {
 .animate-marquee {
   display: flex;
   white-space: nowrap;
-  gap: 2.5rem; /* Equivalent to gap-10 in Tailwind */
+  gap: 2.5rem; 
   animation: marquee 10s linear infinite;
 }
 @keyframes marqueeWord {
@@ -62,12 +62,11 @@ body {
 .marquee-item {
   display: inline-block;
   font-weight: bold;
-  font-size: 1.875rem; /* text-3xl */
-  margin-right: 2rem; /* Аналог gap в Tailwind */
+  font-size: 1.875rem; 
+  margin-right: 2rem; 
   animation: marqueeWord 10s linear infinite;
 }
 
-/* Добавляем задержку каждому элементу */
 .marquee-item:nth-child(1) { animation-delay: 0s; }
 .marquee-item:nth-child(2) { animation-delay: 2s; }
 .marquee-item:nth-child(3) { animation-delay: 6s; }

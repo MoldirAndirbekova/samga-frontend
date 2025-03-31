@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#F1E1C3] py-12 px-8">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
-        {/* Logo & description */}
+     
         <div className="flex flex-col gap-6 max-w-xs">
           <img src="/icons/samga_blue.png" alt="Samga logo" className="h-10 w-34" />
           <p className="text-lg leading-relaxed">
@@ -20,7 +20,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Quick Links */}
+       
         <div className="text-lg">
           <h3 className="text-[#2F63D3] font-bold mb-3">QUICK LINKS</h3>
           <ul className="space-y-">
@@ -32,7 +32,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Skills */}
+      
         <div className="text-lg">
           <h3 className="text-[#2F63D3] font-bold mb-3">SKILLS WE DEVELOP</h3>
           <ul className="">
@@ -41,13 +41,12 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Blue contact box */}
         <div className="bg-[#2F63D3] text-white rounded-xl px-6 py-5 w-[300px] shadow-[10px_10px_0px_#00000080]">
   <h2 className="text-base font-bold mb-3">
     DO YOU HAVE QUESTIONS OR SUGGESTIONS?
   </h2>
 
-  {/* White Email Input */}
+ 
   <input
     type="email"
     placeholder="Enter your email address"

@@ -1,17 +1,18 @@
-'use client';
+"use client";
 
 import { usePathname } from "next/navigation";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import "@/styles/globals.css";
-// import Footer from "@/components/ui/footer";
-// import Navbar from "@/components/ui/navbar";
+import Footer from "@/components/ui/footer";
+import Navbar from "@/components/ui/navbar";
 
-const AUTH_ROUTES = ["/dashboard", "/profile", "/guidelines", "/reports", "/feedback", "/games"]
+const AUTH_ROUTES = ["/profile", "/guidelines", "/reports", "/feedback", "/games"];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAuthRoute = AUTH_ROUTES.includes(pathname);
+  const isHome = pathname === "/";
 
   return (
     <html lang="en">
@@ -24,12 +25,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <main className="flex-1">{children}</main>
             </div>
           </>
-        ) : (
-          <div>
-            {/* <Navbar /> */}
+        ) : isHome ? (
+          <>
+            <Navbar />
             <main className="flex-1">{children}</main>
-            {/* <Footer /> */}
-          </div>
+            <Footer />
+          </>
+        ) : (
+          <main className="flex-1">{children}</main>
         )}
       </body>
     </html>

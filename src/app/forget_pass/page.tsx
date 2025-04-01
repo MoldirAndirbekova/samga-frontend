@@ -2,37 +2,26 @@
 
 import { useState } from "react";
 import { Button, Input, Form } from "antd";
-import { GoogleOutlined } from "@ant-design/icons";
 import { ChevronDown } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useActionState } from "react";
-import { login } from "@/components/actions/login-action";
 import Link from "next/link";
 
-export default function LoginPage() {
-  const router = useRouter();
-  const [state, dispatch] = useActionState(login, undefined);
+export default function ForgotPasswordPage() {
   const [language, setLanguage] = useState("RU");
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [form] = Form.useForm();
-
-  if (state?.success) {
-    router.push("/games");
-    console.log("Login successful");
-  }
 
   return (
     <div
       className="flex h-screen w-full items-center justify-center px-4 sm:px-0"
       style={{
-        backgroundImage: "url('/auth/login_background.png')",
+        backgroundImage: "url('/auth/forget_pass_background.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
       <div className="flex flex-col sm:flex-row w-full max-w-5xl rounded-xl shadow-lg overflow-hidden bg-white">
-        <div className="w-full sm:w-1/2 p-6 sm:p-8">
-          <div className="relative flex justify-end mb-10 sm:mb-20">
+        <div className="w-full sm:w-1/2 p-6 sm:p-14">
+          <div className="relative flex justify-end mb-6 sm:mb-16">
             <button
               onClick={() => setIsLangOpen(!isLangOpen)}
               className="flex items-center border px-2 py-1 rounded-md"
@@ -56,57 +45,37 @@ export default function LoginPage() {
               </div>
             )}
           </div>
+          <h2 className="text-2xl font-bold text-[#1A54AF]">FORGOT PASSWORD</h2>
+          <p className="text-gray-600 mb-4">
+            Enter your email and we’ll send you a link to reset your password.
+          </p>
           <Form
             form={form}
             layout="vertical"
             className="font-semibold"
             requiredMark={false}
-            onFinish={dispatch}
           >
             <Form.Item
-              name="username"
+              name="email"
               label="Email Address"
               rules={[{ required: true, message: "Please input your email!" }]}
             >
-              <Input type="email" placeholder="Type your email" />
+              <Input placeholder="Type your email" />
             </Form.Item>
-            <Form.Item
-              name="password"
-              label="Password"
-              rules={[
-                { required: true, message: "Please input your password!" },
-              ]}
-            >
-              <Input.Password placeholder="Type your password" />
-            </Form.Item>
-            <div className="flex justify-between mb-4">
-              <Link href="/password-recovery" className="text-blue-500 text-sm">
-                Forgot password?
+            <div className="flex flex-col sm:flex-row gap-4 mb-10 sm:mb-20">
+              <Button className="bg-yellow-400 text-black border-none px-6 w-full sm:w-auto">
+                Send Email
+              </Button>
+              <Link href="/login">
+                <Button className="border-black w-full sm:w-auto">
+                  Back to Login
+                </Button>
               </Link>
             </div>
-            <div>
-              <p className="mb-2">
-                Don't have an account?{" "}
-                <Link href="/register" className="underline text-black text-sm">
-                  Sign up here
-                </Link>
-              </p>
-              <Button
-                className="w-full sm:w-1/2 flex items-center justify-center gap-2 mb-6"
-                icon={<GoogleOutlined />}
-              >
-                Sign up with Google
-              </Button>
-            </div>
-            <Form.Item className="flex justify-center">
-              <Button htmlType="submit" className="w-full">
-                Sign in
-              </Button>
-            </Form.Item>
           </Form>
         </div>
         <div className="hidden sm:flex w-1/2 flex-col justify-center items-center relative p-6">
-          <div className="absolute inset-0 bg-yellow-200/60"></div>
+          <div className="absolute inset-0 bg-blue-500/70"></div>
           <h2 className="text-6xl font-bold text-[#FFF5E1] relative z-10">
             WELCOME TO
           </h2>
@@ -119,7 +88,7 @@ export default function LoginPage() {
             Active minds, moving bodies!
           </p>
           <img
-            src="/auth/login_welcome.png"
+            src="/auth/forget_pass_welcome.png"
             alt="Background"
             className="absolute inset-0 w-full h-full object-cover"
           />

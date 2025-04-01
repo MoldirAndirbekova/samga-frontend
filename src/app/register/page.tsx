@@ -1,96 +1,124 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-
+import { useState } from "react";
+import { Button, Input, Form } from "antd";
+import { GoogleOutlined } from "@ant-design/icons";
+import { ChevronDown } from "lucide-react";
 import { register } from "@/components/actions/register-action";
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/ui/submitButton";
 import Link from "next/link";
-// import { FieldError, FormError } from "@/components/ui/FormError";
 
-export default function Page() {
-  const [state, dispatch] = useActionState(register, undefined);
-  
+export default function SignupPage() {
+  const [language, setLanguage] = useState("RU");
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const [form] = Form.useForm();
+  const [dispatch] = useActionState(register, undefined);
+
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
-      <form action={dispatch}>
-        <Card className="w-full max-w-sm rounded-lg shadow-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-semibold text-gray-800 dark:text-white">
-              Sign Up
-            </CardTitle>
-            <CardDescription className="text-sm text-gray-600 dark:text-gray-400">
-              Enter your email and password below to create your account.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-6 p-6">
-          <div className="grid gap-3">
-              <Label htmlFor="full-name" className="text-gray-700 dark:text-gray-300">
-                Full Name
-              </Label>
-              <Input
-                id="full-name"
-                name="fullName"
-                type="text"
-                placeholder="John Doe"
-                required
-                className="border-gray-300 dark:border-gray-600"
-              />
-            </div>
-            <div className="grid gap-3">
-              <Label
-                htmlFor="email"
-                className="text-gray-700 dark:text-gray-300"
-              >
-                Email
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-                className="border-gray-300 dark:border-gray-600"
-              />
-              {/* <FieldError state={state} field="email" /> */}
-            </div>
-            <div className="grid gap-3">
-              <Label
-                htmlFor="password"
-                className="text-gray-700 dark:text-gray-300"
-              >
-                Password
-              </Label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                required
-                className="border-gray-300 dark:border-gray-600"
-              />
-              {/* <FieldError state={state} field="password" /> */}
-            </div>
-            <SubmitButton text="Sign Up" />
-            {/* <FormError state={state} /> */}
-            <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
-              <Link
-                href="/login"
-                className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500"
-              >
-                Back to login
+    <div
+      className="flex h-screen w-full items-center justify-center px-4 sm:px-0"
+      style={{
+        backgroundImage: "url('/auth/background_registration.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="flex flex-col sm:flex-row w-full max-w-5xl rounded-xl shadow-lg overflow-hidden bg-white">
+        <div className="w-full sm:w-1/2 p-6 sm:p-8">
+          <div className="relative flex justify-end mb-4">
+            <button
+              onClick={() => setIsLangOpen(!isLangOpen)}
+              className="flex items-center border px-2 py-1 rounded-md"
+            >
+              {language} <ChevronDown className="ml-1 w-3 h-3" />
+            </button>
+            {isLangOpen && (
+              <div className="absolute top-full right-0 mt-1 bg-white border rounded shadow-md w-16">
+                {["KZ", "RU", "EN"].map((lang) => (
+                  <div
+                    key={lang}
+                    onClick={() => {
+                      setLanguage(lang);
+                      setIsLangOpen(false);
+                    }}
+                    className="px-2 py-1 cursor-pointer hover:bg-gray-200"
+                  >
+                    {lang}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <Button
+            className="w-full sm:w-1/2 flex items-center justify-center gap-2 mb-6"
+            icon={<GoogleOutlined />}
+          >
+            Sign up with Google
+          </Button>
+          <Form
+            form={form}
+            layout="vertical"
+            className="font-semibold"
+            requiredMark={false}
+            onFinish={dispatch}
+          >
+            <Form.Item
+              name="fullName"
+              label="Full Name"
+              rules={[
+                { required: true, message: "Please input your full name!" },
+              ]}
+            >
+              <Input placeholder="Full Name" />
+            </Form.Item>
+            <Form.Item
+              name="email"
+              label="Email"
+              rules={[{ required: true, message: "Please input your email!" }]}
+            >
+              <Input type="email" placeholder="Email" />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              label="Password"
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
+            >
+              <Input.Password placeholder="Password" />
+            </Form.Item>
+            <Form.Item className="flex justify-center">
+              <Button htmlType="submit" className="w-full">
+                Sign up
+              </Button>
+            </Form.Item>
+            <Form.Item>
+              <Link href="/login" className="text-blue-500 text-sm">
+                Back to Login
               </Link>
-            </div>
-          </CardContent>
-        </Card>
-      </form>
+            </Form.Item>
+          </Form>
+        </div>
+        <div className="hidden sm:flex w-1/2 flex-col justify-center items-center relative p-6">
+          <div className="absolute inset-0 bg-yellow-200/60"></div>
+          <h2 className="text-6xl font-bold text-[#694800] relative z-10">
+            WELCOME TO
+          </h2>
+          <img
+            src="/auth/logo_brown.png"
+            alt="samğa"
+            className="relative z-10 w-56 h-auto mt-2"
+          />
+          <p className="text-[#694800] relative z-10 mt-1">
+            Active minds, moving bodies!
+          </p>
+          <img
+            src="/auth/registration_welcome.png"
+            alt="Background"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+      </div>
     </div>
   );
 }

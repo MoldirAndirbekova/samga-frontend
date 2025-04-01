@@ -7,12 +7,34 @@ import { ChevronDown } from "lucide-react";
 import { register } from "@/components/actions/register-action";
 import { useActionState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { APILogin } from "@/components/actions/login-action";
+import form from "antd/es/form";
+import { useFormik } from "formik";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [language, setLanguage] = useState("RU");
   const [isLangOpen, setIsLangOpen] = useState(false);
-  const [form] = Form.useForm();
-  const [dispatch] = useActionState(register, undefined);
+  const [error, setError] = useState<string | null>(null);
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: async (values) => {
+      const res = await APILogin(values);
+      
+      if (res.status === 200) {
+        router.push("/games");
+        console.log("Login successful");
+      }
+      else {
+        setError("Пользователь с таким email уже существует");
+      }
+    },
+  });
 
   return (
     <div
@@ -56,12 +78,12 @@ export default function SignupPage() {
             Sign up with Google
           </Button>
           <Form
-            form={form}
             layout="vertical"
             className="font-semibold"
             requiredMark={false}
-            onFinish={dispatch}
+            onFinish={formik.handleSubmit}
           >
+            {error && <p className="text-red-500">{error}</p>}
             <Form.Item
               name="fullName"
               label="Full Name"
@@ -69,14 +91,14 @@ export default function SignupPage() {
                 { required: true, message: "Please input your full name!" },
               ]}
             >
-              <Input placeholder="Full Name" />
+              <Input placeholder="Full Name" {...formik.getFieldProps("fullName")} />
             </Form.Item>
             <Form.Item
               name="email"
               label="Email"
               rules={[{ required: true, message: "Please input your email!" }]}
             >
-              <Input type="email" placeholder="Email" />
+              <Input type="email" placeholder="Email" {...formik.getFieldProps("email")} />
             </Form.Item>
             <Form.Item
               name="password"
@@ -85,7 +107,7 @@ export default function SignupPage() {
                 { required: true, message: "Please input your password!" },
               ]}
             >
-              <Input.Password placeholder="Password" />
+              <Input.Password placeholder="Password" {...formik.getFieldProps("password")} />
             </Form.Item>
             <Form.Item className="flex justify-center">
               <Button htmlType="submit" className="w-full">

@@ -1,4 +1,4 @@
-"use server";
+"use client";
 
 import { redirect } from "next/navigation";
 import api from "@/features/page";

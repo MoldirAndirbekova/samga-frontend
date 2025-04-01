@@ -1,15 +1,14 @@
 "use client";
 
+import '@ant-design/v5-patch-for-react-19';
 import { useState } from "react";
+import Image from "next/image";
 import { Button, Input, Form } from "antd";
 import { GoogleOutlined } from "@ant-design/icons";
 import { ChevronDown } from "lucide-react";
-import { register } from "@/components/actions/register-action";
-import { useActionState } from "react";
+import { APIRegister } from "@/components/actions/register-action";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { APILogin } from "@/components/actions/login-action";
-import form from "antd/es/form";
+import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 
 export default function SignupPage() {
@@ -22,13 +21,14 @@ export default function SignupPage() {
     initialValues: {
       email: "",
       password: "",
+      fullName: "",
     },
     onSubmit: async (values) => {
-      const res = await APILogin(values);
-      
+      const res = await APIRegister(values);
+
       if (res.status === 200) {
-        router.push("/games");
-        console.log("Login successful");
+        router.push("/login");
+        console.log("Register successful");
       }
       else {
         setError("Пользователь с таким email уже существует");

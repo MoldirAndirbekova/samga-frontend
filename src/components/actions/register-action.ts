@@ -21,3 +21,18 @@ export async function register(prevState: any, formData: FormData) {
     };
   }
 }
+
+
+interface RegisterProps {
+  email: string;
+  password: string;
+  fullName: string;
+}
+
+export async function APIRegister(values: RegisterProps) {
+
+    // Рабочий запрос на сервер
+    const response = await api.post("apis/auth/sign-up", {values});
+
+    return response;
+}

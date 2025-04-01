@@ -1,39 +1,34 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import Header from "@/components/Header";
+import HeaderHome from "@/components/ui/navbar";
 import Sidebar from "@/components/Sidebar";
+import Footer from "@/components/Footer";
 import "@/styles/globals.css";
-import Footer from "@/components/ui/footer";
-import Navbar from "@/components/ui/navbar";
+import { usePathname } from "next/navigation";
 
-const AUTH_ROUTES = ["/profile", "/guidelines", "/reports", "/feedback", "/games"];
+const routes = ["/", "/login", "/register"];
+const authRoutes = ["/login", "/register"];
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const isAuthRoute = AUTH_ROUTES.includes(pathname);
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const pathname = usePathname(); 
+  const needSidebar = !routes.includes(pathname); 
   const isHome = pathname === "/";
+  const isAuth = authRoutes.includes(pathname);
 
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen bg-[#FFF5E1]">
-        {isAuthRoute ? (
-          <>
-            <Header />
-            <div className="flex flex-1">
-              <Sidebar />
-              <main className="flex-1">{children}</main>
-            </div>
-          </>
-        ) : isHome ? (
-          <>
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </>
-        ) : (
+        {isHome? <HeaderHome /> : !isAuth? <Header /> : null}
+        <div className="flex flex-1">
+          {needSidebar && <Sidebar />}
           <main className="flex-1">{children}</main>
-        )}
+        </div>
+        {isHome && <Footer />}
       </body>
     </html>
   );

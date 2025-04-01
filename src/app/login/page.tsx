@@ -1,25 +1,39 @@
 "use client";
 
+import '@ant-design/v5-patch-for-react-19';
 import { useState } from "react";
 import { Button, Input, Form } from "antd";
 import { GoogleOutlined } from "@ant-design/icons";
 import { ChevronDown } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useActionState } from "react";
-import { login } from "@/components/actions/login-action";
+import { APILogin } from "@/components/actions/login-action";
 import Link from "next/link";
+import { useFormik } from "formik";
+
 
 export default function LoginPage() {
   const router = useRouter();
-  const [state, dispatch] = useActionState(login, undefined);
   const [language, setLanguage] = useState("RU");
   const [isLangOpen, setIsLangOpen] = useState(false);
-  const [form] = Form.useForm();
+  const [error, setError] = useState<string | null>(null);
 
-  if (state?.success) {
-    router.push("/games");
-    console.log("Login successful");
-  }
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: async (values) => {
+      const res = await APILogin(values);
+      
+      if (res.status === 200) {
+        router.push("/games");
+        console.log("Login successful");
+      }
+      else {
+        setError("Неправильный email или пароль");
+      }
+    },
+  });
 
   return (
     <div
@@ -57,18 +71,18 @@ export default function LoginPage() {
             )}
           </div>
           <Form
-            form={form}
             layout="vertical"
             className="font-semibold"
             requiredMark={false}
-            onFinish={dispatch}
+            onFinish={formik.handleSubmit}
           >
+            {error && <p className="text-red-500">{error}</p>}
             <Form.Item
               name="username"
               label="Email Address"
               rules={[{ required: true, message: "Please input your email!" }]}
             >
-              <Input type="email" placeholder="Type your email" />
+              <Input type="email" placeholder="Type your email" {...formik.getFieldProps("email")} />
             </Form.Item>
             <Form.Item
               name="password"
@@ -77,7 +91,7 @@ export default function LoginPage() {
                 { required: true, message: "Please input your password!" },
               ]}
             >
-              <Input.Password placeholder="Type your password" />
+              <Input.Password placeholder="Type your password" {...formik.getFieldProps("password")}/>
             </Form.Item>
             <div className="flex justify-between mb-4">
               <Link href="/password-recovery" className="text-blue-500 text-sm">
@@ -128,3 +142,6 @@ export default function LoginPage() {
     </div>
   );
 }
+
+
+    

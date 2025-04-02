@@ -37,9 +37,6 @@ export default function Feedback() {
               />
             ))}
           </div>
-          <p className="text-3xl font-bold">
-            Our rating is <span className="text-6xl">{rating}.0</span>
-          </p>
         </div>
         <div className="ml-16 flex flex-col items-center mt-6">
           <div className="bg-transparent p-6 rounded-lg">

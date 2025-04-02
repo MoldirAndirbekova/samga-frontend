@@ -30,9 +30,13 @@ interface RegisterProps {
 }
 
 export async function APIRegister(values: RegisterProps) {
+  const formattedValues = {
+      email: values.email,
+      password: values.password,
+      full_name: values.fullName, // Convert fullName to full_name
+  };
 
-    // Рабочий запрос на сервер
-    const response = await api.post("apis/auth/sign-up", {values});
+  const response = await api.post("apis/auth/sign-up", formattedValues);
 
-    return response;
+  return response;
 }

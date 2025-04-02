@@ -24,6 +24,7 @@ export default function SignupPage() {
       fullName: "",
     },
     onSubmit: async (values) => {
+      console.log(values);
       const res = await APIRegister(values);
 
       if (res.status === 200) {

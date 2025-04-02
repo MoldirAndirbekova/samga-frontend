@@ -79,28 +79,36 @@ export default function Dashboard() {
             <h4>Make sure to follow all these steps</h4>
             <h3 className="font-bold">STEP 1</h3>
             <div className="flex items-center space-x-2">
-              <img src="/icons/webcam.png" alt="PC" className="w-9 h-9" />
-              <img src="/icons/mackbook.png" alt="Camera" className="w-9 h-9" />
-              <img src="/icons/wifi.png" alt="Wi-Fi" className="w-9 h-9" />
+              <Image src="/icons/webcam.png" alt="PC"   width={36}
+                    height={36} className="w-9 h-9" />
+              <Image src="/icons/mackbook.png" alt="Camera"  width={36}
+                    height={36}  className="w-9 h-9" />
+              <Image src="/icons/wifi.png" alt="Wi-Fi" width={36}
+                    height={36}  className="w-9 h-9" />
             </div>
             <li>Connect your webcam and check your internet.</li>
             <h3 className="font-bold">STEP 2</h3>
             <div className="flex items-center space-x-2">
-              <img src="/icons/wired_net.png" alt="PC" className="w-9 h-9" />
-              <img src="/icons/traners.png" alt="Camera" className="w-9 h-9" />
-              <img src="/icons/arms_up.png" alt="Wi-Fi" className="w-9 h-9" />
+              <Image src="/icons/wired_net.png" alt="PC" width={36}
+                    height={36}  className="w-9 h-9" />
+              <Image src="/icons/traners.png" alt="Camera"  width={36}
+                    height={36} className="w-9 h-9" />
+              <Image src="/icons/arms_up.png" alt="Wi-Fi"  width={36}
+                    height={36}  className="w-9 h-9" />
             </div>
             <li>Use a computer screen and stand 3-4 feet away.</li>
             <h3 className="font-bold">STEP 3</h3>
             <div className="flex items-center space-x-2">
-              <img
+              <Image
                 src="/icons/game_controller.png"
-                alt="PC"
+                alt="PC"  width={36}
+                height={36} 
                 className="w-9 h-9"
               />
-              <img
+              <Image
                 src="/icons/workplace.png"
-                alt="Camera"
+                alt="Camera" width={36}
+                height={36} 
                 className="w-9 h-9"
               />
             </div>

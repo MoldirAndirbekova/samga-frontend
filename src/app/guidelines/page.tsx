@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import { useState } from "react";
 
@@ -41,19 +42,25 @@ export default function GuidelinesPage() {
             <div className="grid md:grid-cols-2 gap-6 mt-6">
               <div className="bg-white p-4 shadow-md rounded-lg grid grid-cols-2">
                 <div className="flex flex-col items-center ">
-                  <img
+                  <Image
                     src="/guidelines/laptop.png"
                     alt="Laptop"
+                    width={120}
+                    height={120}
                     className="w-30 h-30 object-contain"
                   />
-                  <img
+                  <Image
                     src="/guidelines/router.png"
                     alt="Router"
+                    width={104}
+                    height={104}
                     className="w-26 h-26 object-contain"
                   />
-                  <img
+                  <Image
                     src="/guidelines/camera.png"
                     alt="Camera"
+                    width={48}
+                    height={48}
                     className="w-12 h-12 object-contain"
                   />
                 </div>
@@ -78,9 +85,11 @@ export default function GuidelinesPage() {
 
               <div className="bg-white p-4 shadow-md rounded-lg grid grid-cols-2 ">
                 <div className="mt-4">
-                  <img
+                  <Image
                     src="/guidelines/webcam_placement.png"
                     alt="Webcam Placement"
+                    width={320}
+                    height={200}
                     className="w-80 h-50 object-contain rounded-lg  items-center"
                   />
                 </div>
@@ -113,9 +122,11 @@ export default function GuidelinesPage() {
 
                 <div className="grid md:grid-cols-3 gap-3 mt-2 mb-6">
                   <div>
-                    <img
+                    <Image
                       src="/guidelines/battery_level.png"
                       alt="Battery"
+                      width={212}
+                      height={104}
                       className="mt-2 w-53 h-26"
                     />
                     <p className="ml-5 text-[15px] font-semibold text-neutral-950">
@@ -126,9 +137,11 @@ export default function GuidelinesPage() {
                     </p>
                   </div>
                   <div>
-                    <img
+                    <Image
                       src="/guidelines/bright-light.png"
                       alt="Bright Light"
+                      width={212}
+                      height={104}
                       className="mt-2 w-53 h-26"
                     />
                     <p className="ml-5 text-[15px] font-semibold text-neutral-950">
@@ -136,9 +149,11 @@ export default function GuidelinesPage() {
                     </p>
                   </div>
                   <div>
-                    <img
+                    <Image
                       src="/guidelines/bad_bg.png"
                       alt="Bad background"
+                      width={212}
+                      height={104}
                       className="mt-2 w-53 h-26"
                     />
                     <p className="ml-5 text-[15px] font-semibold text-neutral-950">
@@ -148,9 +163,11 @@ export default function GuidelinesPage() {
                     </p>
                   </div>
                   <div>
-                    <img
+                    <Image
                       src="/guidelines/colorful_bg.png"
                       alt="Colorful Background"
+                      width={212}
+                      height={104}
                       className="mt-2 w-53 h-26"
                     />
                     <p className="ml-5 text-[15px] font-semibold text-neutral-950">
@@ -159,9 +176,11 @@ export default function GuidelinesPage() {
                     </p>
                   </div>
                   <div>
-                    <img
+                    <Image
                       src="/guidelines/good_bg.png"
                       alt="Good background"
+                      width={200}
+                      height={100}
                       className="mt-2 w-50 h-25"
                     />
                     <p className="ml-5 text-[15px] font-semibold text-neutral-950">
@@ -170,9 +189,11 @@ export default function GuidelinesPage() {
                     </p>
                   </div>
                   <div>
-                    <img
+                    <Image
                       src="/guidelines/bad_bg.png"
                       alt="Clothing Restrictions"
+                      width={212}
+                      height={104}
                       className="mt-2 w-53 h-26"
                     />
                     <p className="ml-5 text-[15px] font-semibold text-neutral-950">

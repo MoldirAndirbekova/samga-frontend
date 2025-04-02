@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Button, Input, Form } from "antd";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
@@ -79,18 +80,22 @@ export default function ForgotPasswordPage() {
           <h2 className="text-6xl font-bold text-[#FFF5E1] relative z-10">
             WELCOME TO
           </h2>
-          <img
+          <Image
             src="/auth/logo_white.png"
             alt="samğa"
+            width={224}
+            height={112} 
             className="relative z-10 w-56 h-auto mt-2"
           />
           <p className="text-[#FFF5E1] relative z-10 mt-1">
             Active minds, moving bodies!
           </p>
-          <img
+          <Image
             src="/auth/forget_pass_welcome.png"
             alt="Background"
-            className="absolute inset-0 w-full h-full object-cover"
+            layout="fill" 
+            objectFit="cover"
+            className="absolute inset-0"
           />
         </div>
       </div>

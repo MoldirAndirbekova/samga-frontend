@@ -1,6 +1,7 @@
 'use client'
 import api from "@/features/page";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -46,6 +47,13 @@ export default function Dashboard() {
     fetchGames();
   }, [selectedCategory, categories]);
 
+  const router = useRouter(); // Initialize router
+
+  const handlePlay = (gameId: string) => {
+    console.log("Play button clicked for game ID:", gameId);
+    router.push(`/games/${gameId}`); // Redirect to the game page
+  };
+
   return (
       <main className="flex flex-1">
         <section className="flex-1 p-6">
@@ -82,7 +90,8 @@ export default function Dashboard() {
               className="rounded-md"
             />
             <h3 className="mt-2 text-lg font-bold text-[#694800]">{game.name}</h3>
-            <button className="mt-2 w-1/3 ms-56 flex items-center justify-center bg-[#F9DB63] text-[#694800] font-bold py-2 px-4 rounded-md shadow-md hover:bg-[#f7c948] transition">
+            <button onClick={() => handlePlay(game.id)}
+            className="mt-2 w-1/3 ms-56 flex items-center justify-center bg-[#F9DB63] text-[#694800] font-bold py-2 px-4 rounded-md shadow-md hover:bg-[#f7c948] transition">
               <Image
                 src="/icons/play.png"
                 alt="Play"

@@ -4,16 +4,10 @@ import Image from "next/image";
 import { useState } from "react";
 import { useEffect } from "react";
 
-interface Game {
-  name: string;
-  image: string;
-  category: string;
-}
-
 export default function Dashboard() {
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("All Games");
-  const [games, setGames] = useState<{ id: string; name: string; image?: string }[]>([]);
+  const [games, setGames] = useState<{ id: string; name: string; image_url: string }[]>([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -81,7 +75,7 @@ export default function Dashboard() {
             className="border rounded-lg p-4 shadow-lg bg-transparent hover:shadow-xl transition border-[#7E6396] relative"
           >
             <Image
-              src={game.image || "/alpha-trace.png"} // change it after setting game images in db.
+              src={game.image_url || "/alpha-trace.png"} // change it after setting game images in db.
               alt={game.name}
               width={360}
               height={230}

@@ -1,9 +1,11 @@
 'use client'
 import { SetStateAction, useState } from "react";
-import Link from "next/link";
 import { FaStar } from "react-icons/fa";
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 
 export default function Feedback() {
+  const t = useTranslations('Feedback');
   const [rating, setRating] = useState(4);
 
   const handleRating = async (newRating: SetStateAction<number>) => {
@@ -35,7 +37,7 @@ export default function Feedback() {
             ))}
           </div>
           <p className="text-3xl font-bold">
-            Our rating is <span className="text-6xl">{rating}.0</span>
+            {t('rating')}<span className="text-6xl">{rating}.0</span>
           </p>
         </div>
       </main>

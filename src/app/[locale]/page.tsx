@@ -1,14 +1,17 @@
 "use client";
+
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 
-
-export default function Home() {
+export default function HomePage() {
+  const t = useTranslations('HomePage');
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const reviews = [
     {
-      text: "It is an incredible platform that provides an engaging and accessible experience for children with motor and cognitive disabilities. Designed with inclusivity in mind, it features intuitive controls, adaptive difficulty levels, and interactive gameplay that keeps kids entertained while supporting their development.",
+      text: t('review1'),
       author: "Quralay Quanysh",
       role: "Special Educator"
     },
@@ -35,8 +38,8 @@ export default function Home() {
   return (
     <>
       <div className="bg-[#FFF6E2] min-h-screen flex flex-col items-center justify-center sm:flex-row sm:justify-between px-6 sm:px-20 py-10 gap-10 font-sans">
-        
-        <div className="flex flex-col gap-8 text-[#3C2A00] max-w-md">
+          
+      <div className="flex flex-col gap-8 text-[#3C2A00] max-w-md">
           
           <div className="text-xl sm:text-8xl font-semibold leading-snug space-y-1">
             <p>Welcome</p>

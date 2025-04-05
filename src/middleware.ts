@@ -1,24 +1,33 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
+import { routing } from './i18n/routing';
 
+// Создаём next-intl middleware
+const intlMiddleware = createMiddleware(routing);
+
+// Оборачиваем в кастомный middleware
 export function middleware(req: NextRequest) {
   const userAgent = req.headers.get('user-agent') || '';
   const isMobile = /mobile|android|iphone|ipad/i.test(userAgent);
 
-  // Get the pathname of the requested URL
   const { pathname } = req.nextUrl;
 
-  // Allow mobile access only to these routes
-  const allowedRoutes = ['/', '/login', '/register'];
+  // Разрешенные маршруты для мобильных устройств
+  const allowedMobileRoutes = ['/', '/login', '/register'];
 
-  if (isMobile && !allowedRoutes.includes(pathname)) {
-    return new NextResponse('Access Denied. Mobile devices are not allowed on this page.', { status: 403 });
+  if (isMobile && !allowedMobileRoutes.includes(pathname)) {
+    return new NextResponse(
+      'Access Denied. Mobile devices are not allowed on this page.',
+      { status: 403 }
+    );
   }
 
-  return NextResponse.next();
+  // Возвращаем intl middleware, если доступ разрешён
+  return intlMiddleware(req);
 }
 
-// Apply middleware to all routes
+// Конфигурация для покрытия всех маршрутов (без API и статики)
 export const config = {
-  matcher: '/:path*',
+  matcher: ["/((?!api|trpc|_next|_vercel|.*\\..*).*)", "/", "/(en|ru|kz)/:path*"],
 };

@@ -20,6 +20,7 @@
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.483.0",
     "next": "^15.2.3",
+    "next-intl": "^4.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
@@ -29,7 +30,7 @@
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^20",
+    "@types/node": "20.17.30",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
@@ -37,6 +38,6 @@
     "eslint-config-next": "15.2.3",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.0.17",
-    "typescript": "^5"
+    "typescript": "5.8.2"
   }
 }

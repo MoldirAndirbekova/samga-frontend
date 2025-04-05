@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { useState } from "react";
-import { ChevronDown, User, LogOut } from "lucide-react";
+import { User, LogOut } from "lucide-react";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function Header() {
-  const [language, setLanguage] = useState("RU");
-  const [isLangOpen, setIsLangOpen] = useState(false);
+ 
   const [isAccountOpen, setIsAccountOpen] = useState(false);
 
   return (
@@ -12,30 +12,7 @@ export default function Header() {
       <Image src="/logo.png" alt="Samga Logo" width={100} height={40} />
 
       <div className="flex items-center space-x-4">
-        <div className="relative">
-          <button
-            onClick={() => setIsLangOpen(!isLangOpen)}
-            className="flex items-center border-2 border-white px-3 py-1 rounded-full"
-          >
-            {language} <ChevronDown className="ml-1 w-4 h-4" />
-          </button>
-          {isLangOpen && (
-            <div className="absolute right-0 mt-2 bg-white text-black rounded shadow-md w-24">
-              {["KZ", "RU", "EN"].map((lang) => (
-                <div
-                  key={lang}
-                  onClick={() => {
-                    setLanguage(lang);
-                    setIsLangOpen(false);
-                  }}
-                  className="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                >
-                  {lang}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        <LanguageSwitcher/>
 
         <div className="relative">
           <button className="rounded-full border-2 border-white p-1 mr-3">

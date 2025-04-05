@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -6,17 +7,17 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
      
         <div className="flex flex-col gap-6 max-w-xs">
-          <img src="/icons/samga_blue.png" alt="Samga logo" className="h-10 w-34" />
+          <Image src="/icons/samga_blue.png" alt="Samga logo" width={136} height={40} className="h-10 w-34" />
           <p className="text-lg leading-relaxed">
             Inclusive platform that helps kids<br />
             with motor and cognitive disabilities.
           </p>
           <div className="flex gap-1 text-xl">
-            <img src="/icons/instagram_icon.png" alt="Instagram" className="h-8 w-8" />
-            <img src="/icons/youtube_icon.png" alt="YouTube" className="h-8 w-8" />
-            <img src="/icons/twitter_icon.png" alt="Twitter" className="h-8 w-8" />
-            <img src="/icons/linkedin_icon.png" alt="LinkedIn" className="h-8 w-8" />
-            <img src="/icons/facebook_icon.png" alt="Facebook" className="h-8 w-8" />
+            <Image src="/icons/instagram_icon.png" alt="Instagram" width={32} height={32} className="h-8 w-8" />
+            <Image src="/icons/youtube_icon.png" alt="YouTube" width={32} height={32} className="h-8 w-8" />
+            <Image src="/icons/twitter_icon.png" alt="Twitter" width={32} height={32} className="h-8 w-8" />
+            <Image src="/icons/linkedin_icon.png" alt="LinkedIn" width={32} height={32} className="h-8 w-8" />
+            <Image src="/icons/facebook_icon.png" alt="Facebook" width={32} height={32} className="h-8 w-8" />
           </div>
         </div>
 

@@ -2,6 +2,7 @@
 
 import '@ant-design/v5-patch-for-react-19';
 import { useState } from "react";
+import Image from "next/image";
 import { Button, Input, Form } from "antd";
 import { GoogleOutlined } from "@ant-design/icons";
 import { ChevronDown } from "lucide-react";
@@ -124,18 +125,21 @@ export default function LoginPage() {
           <h2 className="text-6xl font-bold text-[#FFF5E1] relative z-10">
             WELCOME TO
           </h2>
-          <img
+          <Image
             src="/auth/logo_white.png"
             alt="samğa"
+            width={224} 
+            height={56} 
             className="relative z-10 w-56 h-auto mt-2"
           />
           <p className="text-[#FFF5E1] relative z-10 mt-1">
             Active minds, moving bodies!
           </p>
-          <img
+          <Image
             src="/auth/login_welcome.png"
             alt="Background"
-            className="absolute inset-0 w-full h-full object-cover"
+            fill
+            className="absolute inset-0 object-cover"
           />
         </div>
       </div>

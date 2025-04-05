@@ -127,18 +127,22 @@ export default function SignupPage() {
           <h2 className="text-6xl font-bold text-[#694800] relative z-10">
             WELCOME TO
           </h2>
-          <img
+          <Image
             src="/auth/logo_brown.png"
             alt="samğa"
+            width={224}
+            height={224}
             className="relative z-10 w-56 h-auto mt-2"
           />
           <p className="text-[#694800] relative z-10 mt-1">
             Active minds, moving bodies!
           </p>
-          <img
+          <Image
             src="/auth/registration_welcome.png"
             alt="Background"
-            className="absolute inset-0 w-full h-full object-cover"
+            layout="fill"
+            objectFit="cover"
+            className="absolute inset-0"
           />
         </div>
       </div>

@@ -45,7 +45,13 @@ export default function Profile() {
       <div className="flex items-center gap-10">
         <div className="flex flex-col items-center w-1/3">
           <h2 className="text-3xl font-bold mb-6">Account</h2>
-          <img src="/icons/user-avatar.png" alt="User Avatar" className="w-40 h-40 rounded-xl bg-[#F9DB63]" />
+          <Image
+            src="/icons/user-avatar.png"
+            alt="User Avatar"
+            width={160}
+            height={160}
+            className="bg-[#F9DB63] rounded-xl w-40 h-40"
+          />
           <p className="mt-3 text-xl font-bold">Personal Account</p>
         </div>
         <div className="flex-1 p-10 relative">
@@ -61,7 +67,13 @@ export default function Profile() {
 
       <div className="flex items-center gap-10">
           <div className="flex flex-col items-center w-1/3">
-            <img src="/icons/kid-avatar.png" alt="Child Avatar" className="w-40 h-40 rounded-xl bg-[#F9DB63]" />
+            <Image
+            src="/icons/kid-avatar.png"
+            alt="Child Avatar"
+            width={160}
+            height={160}
+            className="bg-[#F9DB63] rounded-xl w-40 h-40"
+          />
             <p className="mt-3 text-xl font-bold">Player</p>
           </div>
           <div className="flex-1 p-10 relative">

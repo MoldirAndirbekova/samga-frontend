@@ -1,4 +1,3 @@
-'use client'
 import Image from "next/image";
 import { useState } from "react";
 import { ChevronDown, User, LogOut } from "lucide-react";
@@ -9,16 +8,8 @@ export default function Header() {
   const [isAccountOpen, setIsAccountOpen] = useState(false);
 
   return (
-    <header className="bg-[#2959BF] p-4 flex justify-between items-center text-white shadow-md mb-3">
+    <header className="bg-[#2959BF] p-4 flex justify-between items-center text-white shadow-md mb-3 px-10">
       <Image src="/logo.png" alt="Samga Logo" width={100} height={40} />
-
-     
-      <nav className="flex justify-between w-2/5 text-lg">
-        <a href="#about" className="hover:underline">About Us</a>
-        <a href="#skills" className="hover:underline">Skills We Develop</a>
-        <a href="#who-we-help" className="hover:underline">Who We Help</a>
-        <a href="#contact" className="hover:underline">Contact Us</a>
-      </nav>
 
       <div className="flex items-center space-x-4">
         <div className="relative">

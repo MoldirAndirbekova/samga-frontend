@@ -16,14 +16,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname(); 
-  const needSidebar = !routes.includes(pathname); 
   const isHome = pathname === "/";
   const isAuth = authRoutes.includes(pathname);
+  const isGameDetailPage = pathname.startsWith("/games/") && pathname.split("/").length > 2;
+  const needSidebar = !routes.includes(pathname) && !isGameDetailPage;
 
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen bg-[#FFF5E1]">
-        {isHome? <HeaderHome /> : !isAuth? <Header /> : null}
+        {isHome ? <HeaderHome /> : !isAuth && !isGameDetailPage ? <Header /> : null}
         <div className="flex flex-1">
           {needSidebar && <Sidebar />}
           <main className="flex-1">{children}</main>

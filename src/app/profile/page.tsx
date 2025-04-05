@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { BiPencil } from "react-icons/bi";
-import api from "@/features/page"; 
+import api from "@/features/page";
+import Image from "next/image"; 
 
 interface User {
   id: string;

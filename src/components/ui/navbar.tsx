@@ -22,8 +22,10 @@ const Navbar = () => {
           </Link>
         ))}
       </ul>
+      <div className="text-white">
+      <LanguageSwitcher/> 
+      </div>
       <div className="lg:flex items-center justify-center hidden">
-        <LanguageSwitcher/>
       <Link href="/login">
           <Button className="px-8 py-4 text-xl font-semibold rounded-full shadow-lg bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600 focus:ring-4 focus:ring-blue-300">
             Login

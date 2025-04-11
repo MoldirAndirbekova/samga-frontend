@@ -1,21 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from 'next-intl';
+
 
 export default function GuidelinesPage() {
+   const t = useTranslations('GuidelinesPage');
   const [activeTab, setActiveTab] = useState("play");
 
   return (
     <div className="min-h-screen bg-[#FFF5E1] flex flex-col text-[#694800]">
       <div className="flex flex-1">
         <main className="flex-1 p-6">
-          <h1 className="text-3xl font-bold ">Guidelines</h1>
-          <h4 className=" mt-7 font-bold text-xl">
-            Games are way more enjoyable without any glitches. To make sure your{" "}
-            <br />
-            experience is smooth and glitch-free while learning through play,
-            follow the <br />
-            guidelines.
+          <h1 className="text-3xl font-bold ">{t('title')}</h1>
+          <h4 className=" mt-7 font-bold text-xl whitespace-pre-line">
+           {t('lead-paragraph')}
           </h4>
 
           <div className="mt-6 flex space-x-6 border-b-8 border-[#E8DEF8]  pb-2 text-lg font-bold">
@@ -25,7 +24,7 @@ export default function GuidelinesPage() {
               }`}
               onClick={() => setActiveTab("play")}
             >
-              Play Setup
+              {t('play-setup')}
             </button>
             <button
               className={`font-semibold pb-2 ${
@@ -33,7 +32,7 @@ export default function GuidelinesPage() {
               }`}
               onClick={() => setActiveTab("faq")}
             >
-              FAQ
+              {t('faq')}
             </button>
           </div>
 
@@ -58,20 +57,14 @@ export default function GuidelinesPage() {
                   />
                 </div>
                 <div className="">
-                  <h2 className="text-xl font-bold flex items-center ">
+                  <h2 className="text-xl font-bold flex items-center whitespace-pre-line">
                     <span className="text-[#2959bf] font-bold border-3 border-[#2959bf] rounded-full w-6 h-6 flex items-center justify-center mr-3  mb-20">
                       1
                     </span>
-                    What you <br /> need to <br />
-                    start the
-                    <br /> game
+                    {t('rule1')}
                   </h2>
-                  <p className="text-neutral-950 mt-2 font-semibold ml-9">
-                    To dive into the
-                    <br /> game, all you <br /> need is a solid
-                    <br /> internet
-                    <br />
-                    connection, a<br /> laptop, and a<br /> webcam.
+                  <p className="text-neutral-950 mt-2 font-semibold ml-9 whitespace-pre-line">
+                   {t('rule1-paragraph')}
                   </p>
                 </div>
               </div>
@@ -85,30 +78,24 @@ export default function GuidelinesPage() {
                   />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold flex items-center ">
+                  <h2 className="text-xl font-bold flex items-center whitespace-pre-line">
                     <span className="text-[#2959bf] font-bold border-3 border-[#2959bf] rounded-full w-6 h-6 flex items-center justify-center mr-3 mb-20">
                       2
                     </span>
-                    Webcam <br /> placement
-                    <br /> and Moving
-                    <br /> Space
+                   {t('rule2')}
                   </h2>
-                  <p className="text-neutral-950 mt-2 font-semibold ml-9">
-                    Make sure you <br /> are at least 4 feet
-                    <br /> from the
-                    <br /> webcam and that
-                    <br /> you have sample
-                    <br /> space to move.
+                  <p className="text-neutral-950 mt-2 font-semibold ml-9 whitespace-pre-line">
+                  {t('rule2-paragraph')}
                   </p>
                 </div>
               </div>
 
-              <div className="bg-white p-4 shadow-md rounded-lg md:col-span-2">
+              <div className="bg-white p-4 shadow-md rounded-lg md:col-span-2  whitespace-pre-line">
                 <h2 className="text-lg font-semibold flex items-center space-x-2">
                   <span className="text-[#2959bf] font-bold border-3 border-[#2959bf] rounded-full w-6 h-6 flex items-center justify-center mr-3 ml-3">
                     3
                   </span>
-                  Background Setup
+                  {t('rule3')}
                 </h2>
 
                 <div className="grid md:grid-cols-3 gap-3 mt-2 mb-6">
@@ -118,11 +105,8 @@ export default function GuidelinesPage() {
                       alt="Battery"
                       className="mt-2 w-53 h-26"
                     />
-                    <p className="ml-5 text-[15px] font-semibold text-neutral-950">
-                      When playing on a <br />
-                      laptop, make sure you <br />
-                      have enough battery <br />
-                      power.
+                    <p className="ml-5 text-[15px] font-semibold text-neutral-950  whitespace-pre-line">
+                     {t('rule3-paragraph')}
                     </p>
                   </div>
                   <div>
@@ -131,8 +115,8 @@ export default function GuidelinesPage() {
                       alt="Bright Light"
                       className="mt-2 w-53 h-26"
                     />
-                    <p className="ml-5 text-[15px] font-semibold text-neutral-950">
-                      Avoid bright lights in <br /> in the users' background.
+                    <p className="ml-5 text-[15px] font-semibold text-neutral-950 whitespace-pre-line">
+                      {t('rule3-parapgraph2')}
                     </p>
                   </div>
                   <div>
@@ -141,10 +125,8 @@ export default function GuidelinesPage() {
                       alt="Bad background"
                       className="mt-2 w-53 h-26"
                     />
-                    <p className="ml-5 text-[15px] font-semibold text-neutral-950">
-                      Avoid bad lighting or
-                      <br /> less light in the users'
-                      <br /> background
+                    <p className="ml-5 text-[15px] font-semibold text-neutral-950 whitespace-pre-line">
+                    {t('rule3-paragraph3')}
                     </p>
                   </div>
                   <div>
@@ -153,9 +135,8 @@ export default function GuidelinesPage() {
                       alt="Colorful Background"
                       className="mt-2 w-53 h-26"
                     />
-                    <p className="ml-5 text-[15px] font-semibold text-neutral-950">
-                      Avoid backgrounds <br /> with a lot of <br /> artwork of
-                      colours.
+                    <p className="ml-5 text-[15px] font-semibold text-neutral-950 whitespace-pre-line">
+                     {t('rule3-paragraph4')}
                     </p>
                   </div>
                   <div>
@@ -164,9 +145,8 @@ export default function GuidelinesPage() {
                       alt="Good background"
                       className="mt-2 w-50 h-25"
                     />
-                    <p className="ml-5 text-[15px] font-semibold text-neutral-950">
-                      Play in front of a <br /> plain background so <br /> the
-                      camera detects <br /> you properly
+                    <p className="ml-5 text-[15px] font-semibold text-neutral-950 whitespace-pre-line">
+                     {t('rule3-paragraph5')}
                     </p>
                   </div>
                   <div>
@@ -175,10 +155,8 @@ export default function GuidelinesPage() {
                       alt="Clothing Restrictions"
                       className="mt-2 w-53 h-26"
                     />
-                    <p className="ml-5 text-[15px] font-semibold text-neutral-950">
-                      Avoid wearing clothing <br /> that cover your hands
-                      <br /> like shawls, open
-                      <br /> jackets.
+                    <p className="ml-5 text-[15px] font-semibold text-neutral-950 whitespace-pre-line">
+                    {t('rule3-paragraph6')}
                     </p>
                   </div>
                 </div>
@@ -188,26 +166,23 @@ export default function GuidelinesPage() {
 
           {activeTab === "faq" && (
             <div className="mt-6 p-4 bg-white rounded-lg shadow-md">
-              <h3 className="text-xl font-bold">Frequently Asked Questions</h3>
+              <h3 className="text-xl font-bold">{t('title2')}</h3>
               <ul className="mt-2 space-y-2 ">
                 <li>
-                  <strong>Q:</strong> What devices are supported? <br />{" "}
-                  <strong>A:</strong> You can play on laptops and PCs with a
-                  webcam.
+                  <strong>{t('question_letter')}:</strong> {t('question1')}<br />{" "}
+                  <strong>{t('answer_letter')}:</strong> {t('answer1')}
                 </li>
                 <li>
-                  <strong>Q:</strong> What internet speed is required? <br />{" "}
-                  <strong>A:</strong> A stable broadband connection is
-                  recommended.
+                  <strong>{t('question_letter')}:</strong> {t('question2')}<br />{" "}
+                  <strong>{t('answer_letter')}:</strong> {t('answer2')}
                 </li>
                 <li>
-                  <strong>Q:</strong> Can I use an external webcam? <br />{" "}
-                  <strong>A:</strong> Yes, as long as it provides a clear image.
+                  <strong>{t('question_letter')}:</strong>{t('question3')}<br />{" "}
+                  <strong>{t('answer_letter')}</strong> {t('answer3')}
                 </li>
                 <li>
-                  <strong>Q:</strong> Why is my movement not being detected?{" "}
-                  <br /> <strong>A:</strong> Ensure good lighting and a clear
-                  background.
+                  <strong>{t('question_letter')}:</strong>{t('question1')} {" "}
+                  <br /> <strong>{t('answer_letter')}:</strong> {t('answer1')}
                 </li>
               </ul>
             </div>

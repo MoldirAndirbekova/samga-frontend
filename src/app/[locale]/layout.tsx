@@ -13,7 +13,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: Locale };
 }) {
-  const { locale } = params;
+  const { locale } = await params;
 
   if (!routing.locales.includes(locale)) {
     notFound();

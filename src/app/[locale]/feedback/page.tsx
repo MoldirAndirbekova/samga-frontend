@@ -1,30 +1,33 @@
-'use client'
+"use client";
 import { SetStateAction, useState } from "react";
 import { FaStar } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/navigation';
 
 export default function Feedback() {
+  const [error, setError] = useState(false);
+  const [feedback, setFeedback] = useState("");
   const t = useTranslations('Feedback');
   const [rating, setRating] = useState(4);
 
+  const handleSubmit = () => {
+    if (!feedback.trim()) {
+      setError(true);
+    } else {
+      setError(false);
+      console.log(
+        `Feedback submitted! Rating: ${rating}, Comment: ${feedback}`
+      );
+    }
+  };
   const handleRating = async (newRating: SetStateAction<number>) => {
     setRating(newRating);
   };
   return (
     <div className="flex">
-      <main className="flex-1 p-10 bg-[#FFF8E1] flex   text-[#694800]">
+      <main className="flex-1 p-10 bg-[#FFF8E1] flex text-[#694800]">
         <div>
-          <h2 className="text-3xl font-bold mb-7">Feedback</h2>
-          <p className="mt-2 text-xl font-bold">
-            Go by{" "}
-            <Link href="#" className="text-blue-600 underline">
-              link
-            </Link>{" "}
-            and give us feedback!
-          </p>
-        </div>
-        <div className="ml-16 flex flex-col items-center mt-6">
+          <h2 className="text-3xl font-bold mb-7"> { t('title')}</h2>
           <div className="flex gap-2">
             {[...Array(5)].map((_, i) => (
               <FaStar
@@ -36,9 +39,26 @@ export default function Feedback() {
               />
             ))}
           </div>
-          <p className="text-3xl font-bold">
-            {t('rating')}<span className="text-6xl">{rating}.0</span>
-          </p>
+        </div>
+        <div className="ml-16 flex flex-col items-center mt-6">
+          <div className="bg-transparent p-6 rounded-lg">
+            <textarea
+              className="w-full p-4 border-2 border-[#694800] rounded-xl bg-[#FFF3C6] text-[#694800] placeholder-[#A67C00] text-lg h-40 shadow-md"
+              placeholder={t('placeholder')}
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+              style={{ resize: "none" }}
+            />
+            {error && (
+              <p className="text-red-600 mt-2 ">⚠️ {t('error')}</p>
+            )}
+            <Button
+              className="mt-4 bg-[#F9DB63] text-[#694800] px-6 py-3 text-lg font-semibold rounded-lg shadow-md"
+              onClick={handleSubmit}
+            >
+             {t('submit')}
+            </Button>
+          </div>
         </div>
       </main>
     </div>

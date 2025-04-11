@@ -2,7 +2,7 @@ import { NAV_LINKS } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./button";
-import LanguageSwitcher from "@/components/LanguageSwitcher"; // Adjust the path as needed
+import LanguageSwitcher from "@/components/LanguageSwitcher"; 
 
 const Navbar = () => {
   return (

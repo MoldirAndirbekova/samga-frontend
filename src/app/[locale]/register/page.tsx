@@ -2,19 +2,18 @@
 
 import '@ant-design/v5-patch-for-react-19';
 import { useState } from "react";
-import Image from "next/image";
 import { Button, Input, Form } from "antd";
 import { GoogleOutlined } from "@ant-design/icons";
-import { ChevronDown } from "lucide-react";
 import { APIRegister } from "@/components/actions/register-action";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher2 from '@/components/LanguageSwitcher2';
 
 export default function SignupPage() {
+  const t = useTranslations("SignupPage");
   const router = useRouter();
-  const [language, setLanguage] = useState("RU");
-  const [isLangOpen, setIsLangOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const formik = useFormik({
@@ -49,34 +48,17 @@ export default function SignupPage() {
       <div className="flex flex-col sm:flex-row w-full max-w-5xl rounded-xl shadow-lg overflow-hidden bg-white">
         <div className="w-full sm:w-1/2 p-6 sm:p-8">
           <div className="relative flex justify-end mb-4">
-            <button
-              onClick={() => setIsLangOpen(!isLangOpen)}
-              className="flex items-center border px-2 py-1 rounded-md"
-            >
-              {language} <ChevronDown className="ml-1 w-3 h-3" />
-            </button>
-            {isLangOpen && (
-              <div className="absolute top-full right-0 mt-1 bg-white border rounded shadow-md w-16">
-                {["KZ", "RU", "EN"].map((lang) => (
-                  <div
-                    key={lang}
-                    onClick={() => {
-                      setLanguage(lang);
-                      setIsLangOpen(false);
-                    }}
-                    className="px-2 py-1 cursor-pointer hover:bg-gray-200"
-                  >
-                    {lang}
-                  </div>
-                ))}
-              </div>
-            )}
+        <LanguageSwitcher2/>
+           
+          
+          
+          
           </div>
           <Button
             className="w-full sm:w-1/2 flex items-center justify-center gap-2 mb-6"
             icon={<GoogleOutlined />}
           >
-            Sign up with Google
+           {t('sign-up-google')}
           </Button>
           <Form
             layout="vertical"
@@ -87,37 +69,37 @@ export default function SignupPage() {
             {error && <p className="text-red-500">{error}</p>}
             <Form.Item
               name="fullName"
-              label="Full Name"
+              label={t('full-name')}
               rules={[
-                { required: true, message: "Please input your full name!" },
+                { required: true, message: t('full-name-required') },
               ]}
             >
-              <Input placeholder="Full Name" {...formik.getFieldProps("fullName")} />
+              <Input placeholder={t('full-name-placeholder')} {...formik.getFieldProps("fullName")} />
             </Form.Item>
             <Form.Item
               name="email"
-              label="Email"
-              rules={[{ required: true, message: "Please input your email!" }]}
+              label={t('email')}
+              rules={[{ required: true, message: t('email-required') }]}
             >
-              <Input type="email" placeholder="Email" {...formik.getFieldProps("email")} />
+              <Input type="email" placeholder={t('email-placeholder')} {...formik.getFieldProps("email")} />
             </Form.Item>
             <Form.Item
               name="password"
-              label="Password"
+              label={t('password')}
               rules={[
-                { required: true, message: "Please input your password!" },
+                { required: true, message: t('password-required') },
               ]}
             >
-              <Input.Password placeholder="Password" {...formik.getFieldProps("password")} />
+              <Input.Password placeholder={t('password-placeholder')} {...formik.getFieldProps("password")} />
             </Form.Item>
             <Form.Item className="flex justify-center">
               <Button htmlType="submit" className="w-full">
-                Sign up
+               {t('sign-up')}
               </Button>
             </Form.Item>
             <Form.Item>
               <Link href="/login" className="text-blue-500 text-sm">
-                Back to Login
+               {t('back-login')}
               </Link>
             </Form.Item>
           </Form>
@@ -125,7 +107,7 @@ export default function SignupPage() {
         <div className="hidden sm:flex w-1/2 flex-col justify-center items-center relative p-6">
           <div className="absolute inset-0 bg-yellow-200/60"></div>
           <h2 className="text-6xl font-bold text-[#694800] relative z-10">
-            WELCOME TO
+          {t('welcome-message')}
           </h2>
           <img
             src="/auth/logo_brown.png"
@@ -133,7 +115,7 @@ export default function SignupPage() {
             className="relative z-10 w-56 h-auto mt-2"
           />
           <p className="text-[#694800] relative z-10 mt-1">
-            Active minds, moving bodies!
+          {t('welcome-message-p')}
           </p>
           <img
             src="/auth/registration_welcome.png"

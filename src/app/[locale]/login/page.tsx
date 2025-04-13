@@ -1,20 +1,19 @@
 "use client";
 
-import '@ant-design/v5-patch-for-react-19';
+import "@ant-design/v5-patch-for-react-19";
 import { useState } from "react";
 import { Button, Input, Form } from "antd";
 import { GoogleOutlined } from "@ant-design/icons";
-import { ChevronDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { APILogin } from "@/components/actions/login-action";
 import Link from "next/link";
 import { useFormik } from "formik";
-
+import { useTranslations } from "next-intl";
+import LanguageSwitcher2 from "@/components/LanguageSwitcher2";
 
 export default function LoginPage() {
+  const t = useTranslations("LoginPage");
   const router = useRouter();
-  const [language, setLanguage] = useState("RU");
-  const [isLangOpen, setIsLangOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const formik = useFormik({
@@ -24,13 +23,12 @@ export default function LoginPage() {
     },
     onSubmit: async (values) => {
       const res = await APILogin(values);
-      
+
       if (res.status === 200) {
         router.push("/games");
         console.log("Login successful");
-      }
-      else {
-        setError("Неправильный email или пароль");
+      } else {
+        setError(t("error"));
       }
     },
   });
@@ -47,29 +45,9 @@ export default function LoginPage() {
       <div className="flex flex-col sm:flex-row w-full max-w-5xl rounded-xl shadow-lg overflow-hidden bg-white">
         <div className="w-full sm:w-1/2 p-6 sm:p-8">
           <div className="relative flex justify-end mb-10 sm:mb-20">
-            <button
-              onClick={() => setIsLangOpen(!isLangOpen)}
-              className="flex items-center border px-2 py-1 rounded-md"
-            >
-              {language} <ChevronDown className="ml-1 w-3 h-3" />
-            </button>
-            {isLangOpen && (
-              <div className="absolute top-full right-0 mt-1 bg-white border rounded shadow-md w-16">
-                {["KZ", "RU", "EN"].map((lang) => (
-                  <div
-                    key={lang}
-                    onClick={() => {
-                      setLanguage(lang);
-                      setIsLangOpen(false);
-                    }}
-                    className="px-2 py-1 cursor-pointer hover:bg-gray-200"
-                  >
-                    {lang}
-                  </div>
-                ))}
-              </div>
-            )}
+            <LanguageSwitcher2 />
           </div>
+
           <Form
             layout="vertical"
             className="font-semibold"
@@ -79,42 +57,49 @@ export default function LoginPage() {
             {error && <p className="text-red-500">{error}</p>}
             <Form.Item
               name="username"
-              label="Email Address"
-              rules={[{ required: true, message: "Please input your email!" }]}
+              label={t('email')}
+              rules={[{ required: true, message: t('email-required') }]}
             >
-              <Input type="email" placeholder="Type your email" {...formik.getFieldProps("email")} />
+              <Input
+                type="email"
+                placeholder={t('email-placeholder')}
+                {...formik.getFieldProps("email")}
+              />
             </Form.Item>
             <Form.Item
               name="password"
-              label="Password"
+              label={t('password')}
               rules={[
-                { required: true, message: "Please input your password!" },
+                { required: true, message: t('password-required') },
               ]}
             >
-              <Input.Password placeholder="Type your password" {...formik.getFieldProps("password")}/>
+              <Input.Password
+                placeholder={t('password-placeholder')}
+                {...formik.getFieldProps("password")}
+              />
             </Form.Item>
             <div className="flex justify-between mb-4">
               <Link href="/password-recovery" className="text-blue-500 text-sm">
-                Forgot password?
+                {t("forget_password")}
               </Link>
             </div>
             <div>
               <p className="mb-2">
-                Don't have an account?{" "}
+               {t('register')}{" "}
                 <Link href="/register" className="underline text-black text-sm">
-                  Sign up here
+                  {t('register-link')}
                 </Link>
               </p>
               <Button
                 className="w-full sm:w-1/2 flex items-center justify-center gap-2 mb-6"
                 icon={<GoogleOutlined />}
               >
-                Sign up with Google
+               {t('sign-with-google')}
               </Button>
             </div>
             <Form.Item className="flex justify-center">
               <Button htmlType="submit" className="w-full">
-                Sign in
+              {t('sign-in')}
               </Button>
             </Form.Item>
           </Form>
@@ -122,7 +107,7 @@ export default function LoginPage() {
         <div className="hidden sm:flex w-1/2 flex-col justify-center items-center relative p-6">
           <div className="absolute inset-0 bg-yellow-200/60"></div>
           <h2 className="text-6xl font-bold text-[#FFF5E1] relative z-10">
-            WELCOME TO
+            {t('welcome-message')}
           </h2>
           <img
             src="/auth/logo_white.png"
@@ -130,7 +115,7 @@ export default function LoginPage() {
             className="relative z-10 w-56 h-auto mt-2"
           />
           <p className="text-[#FFF5E1] relative z-10 mt-1">
-            Active minds, moving bodies!
+            {t('welcome-message-p')}
           </p>
           <img
             src="/auth/login_welcome.png"
@@ -142,6 +127,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
-
-    

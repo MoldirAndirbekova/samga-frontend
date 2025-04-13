@@ -4,8 +4,10 @@ import { useState } from "react";
 import { Button, Input, Form } from "antd";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function ForgotPasswordPage() {
+    const t = useTranslations("ForgotPasswordPage");
   const [language, setLanguage] = useState("RU");
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [form] = Form.useForm();
@@ -45,9 +47,9 @@ export default function ForgotPasswordPage() {
               </div>
             )}
           </div>
-          <h2 className="text-2xl font-bold text-[#1A54AF]">FORGOT PASSWORD</h2>
+          <h2 className="text-2xl font-bold text-[#1A54AF]">{t('title')}</h2>
           <p className="text-gray-600 mb-4">
-            Enter your email and we’ll send you a link to reset your password.
+           {t('title-paragraph')}
           </p>
           <Form
             form={form}
@@ -57,18 +59,18 @@ export default function ForgotPasswordPage() {
           >
             <Form.Item
               name="email"
-              label="Email Address"
-              rules={[{ required: true, message: "Please input your email!" }]}
+              label={t('email')}
+              rules={[{ required: true, message: t('email-required') }]}
             >
-              <Input placeholder="Type your email" />
+              <Input placeholder={t('email-placeholder')} />
             </Form.Item>
             <div className="flex flex-col sm:flex-row gap-4 mb-10 sm:mb-20">
               <Button className="bg-yellow-400 text-black border-none px-6 w-full sm:w-auto">
-                Send Email
+                {t('send-email')}
               </Button>
               <Link href="/login">
                 <Button className="border-black w-full sm:w-auto">
-                  Back to Login
+                   {t('back-login')}
                 </Button>
               </Link>
             </div>
@@ -77,7 +79,7 @@ export default function ForgotPasswordPage() {
         <div className="hidden sm:flex w-1/2 flex-col justify-center items-center relative p-6">
           <div className="absolute inset-0 bg-blue-500/70"></div>
           <h2 className="text-6xl font-bold text-[#FFF5E1] relative z-10">
-            WELCOME TO
+          {t('welcome-message')}
           </h2>
           <img
             src="/auth/logo_white.png"
@@ -85,7 +87,7 @@ export default function ForgotPasswordPage() {
             className="relative z-10 w-56 h-auto mt-2"
           />
           <p className="text-[#FFF5E1] relative z-10 mt-1">
-            Active minds, moving bodies!
+          {t('welcome-message-p')}
           </p>
           <img
             src="/auth/forget_pass_welcome.png"

@@ -4,8 +4,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export default function Dashboard() {
+  const t = useTranslations("Dashboard");
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("All Games");
   const [games, setGames] = useState<{ id: string; name: string; image_url: string }[]>([]);
@@ -63,7 +65,7 @@ export default function Dashboard() {
               onChange={(e) => setSelectedCategory(e.target.value)}
               className="px-3 py-2 rounded-2xl bg-transparent shadow-md font-bold border-1 ms-163.5 text-[#694800]"
             >
-              <option key="all-games" value="All Games">All Games</option>
+              <option key="all-games" value="All Games">{t('all-games')}</option>
               {categories.length > 0 ? (
                 categories.map((category) => (
                   <option key={category.id} value={category.name}>
@@ -71,7 +73,7 @@ export default function Dashboard() {
                   </option>
                 ))
               ) : (
-                <option disabled>Loading...</option>
+                <option disabled>{t('loading')}</option>
               )}
             </select>   
         </div>
@@ -99,7 +101,7 @@ export default function Dashboard() {
                 height={20}
                 className="mr-2"
               />
-              PLAY
+              {t('play')}
             </button>
           </div>
         ))}
@@ -107,24 +109,24 @@ export default function Dashboard() {
         </section>
 
         <aside className="w-1/5 bg-[#F9DB63] p-6 shadow-md rounded-lg border-[#694800] text-[#694800] h-min m-6 mr-7 border-2 ">
-          <h4 className="text-3xl font-bold ">Let's start playing</h4>
+          <h4 className="text-3xl font-bold ">{t('title')}</h4>
           <ol className="mt-4 list-inside space-y-2 text-xl">
-            <h4>Make sure to follow all these steps</h4>
-            <h3 className="font-bold">STEP 1</h3>
+            <h4>{t('title-p')}</h4>
+            <h3 className="font-bold">{t('step1')}</h3>
             <div className="flex items-center space-x-2">
               <img src="/icons/webcam.png" alt="PC" className="w-9 h-9" />
               <img src="/icons/mackbook.png" alt="Camera" className="w-9 h-9" />
               <img src="/icons/wifi.png" alt="Wi-Fi" className="w-9 h-9" />
             </div>
-            <li>Connect your webcam and check your internet.</li>
-            <h3 className="font-bold">STEP 2</h3>
+            <li>{t('step1-text')}</li>
+            <h3 className="font-bold">  {t('step2')}</h3>
             <div className="flex items-center space-x-2">
               <img src="/icons/wired_net.png" alt="PC" className="w-9 h-9" />
               <img src="/icons/traners.png" alt="Camera" className="w-9 h-9" />
               <img src="/icons/arms_up.png" alt="Wi-Fi" className="w-9 h-9" />
             </div>
-            <li>Use a computer screen and stand 3-4 feet away.</li>
-            <h3 className="font-bold">STEP 3</h3>
+            <li>{t('step2-text')}</li>
+            <h3 className="font-bold">{t('step3')}</h3>
             <div className="flex items-center space-x-2">
               <img
                 src="/icons/game_controller.png"
@@ -137,7 +139,7 @@ export default function Dashboard() {
                 className="w-9 h-9"
               />
             </div>
-            <li>Time to play!</li>
+            <li>{t('step3-text')}</li>
           </ol>
         </aside>
       </main>

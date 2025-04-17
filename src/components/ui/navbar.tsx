@@ -1,40 +1,46 @@
+"use client";
+
 import { NAV_LINKS } from "@/constants";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "./button";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [languageOpen, setLanguageOpen] = useState(false);
+
+  const toggleLanguageMenu = () => setLanguageOpen(!languageOpen);
+
   return (
-    <nav className="flex items-center justify-between px-6 lg:px-20 3xl:px-0 relative z-30 bg-orange-500 rounded-xl p-3 mt-3 mb-4 mx-3 border border-blue-400 shadow-md">
-      <Link href="/">
-        <Image src="/logo.png" alt="logo" width={100} height={29} />
-      </Link>
-      <ul className="hidden h-full gap-12 lg:flex">
+    <nav className="w-full flex justify-center bg-[#A2DBF4] py-2">
+      <ul className="flex items-center justify-center gap-16 px-16 py-4 bg-[#89DBFC] rounded-full shadow-md">
         {NAV_LINKS.map((link) => (
-          <Link
-            href={link.href}
-            key={link.key}
-            className="text-[16px] font-[400] text-gray-50 flex items-center justify-center 
-                cursor-pointer pb-1.5 transition-all hover:font-bold"
-          >
-            {link.label}
-          </Link>
+          <li key={link.key}>
+            <Link
+              href={link.href}
+              className="text-white font-bold text-sm sm:text-base hover:underline transition-all"
+            >
+              {link.label}
+            </Link>
+          </li>
         ))}
+        <li className="relative">
+          <button
+            onClick={toggleLanguageMenu}
+            className="text-white font-bold text-sm sm:text-base flex items-center gap-1"
+          >
+            EN
+            <span className={`transition-transform duration-200 ${languageOpen ? "rotate-180" : "rotate-0"}`}>▼</span>
+          </button>
+          {languageOpen && (
+            <ul className="absolute top-full mt-2 right-0 bg-white text-black rounded-md shadow-lg overflow-hidden z-50">
+              <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">EN</li>
+              <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">RU</li>
+              <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">KZ</li>
+            </ul>
+          )}
+        </li>
       </ul>
-      <div className="lg:flex items-center justify-center hidden">
-      <Link href="/login">
-          <Button className="px-8 py-4 text-xl font-semibold rounded-full shadow-lg bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600 focus:ring-4 focus:ring-blue-300">
-            Login
-          </Button>
-        </Link>
-      </div>
-      <Image
-        src="/images/menu.svg"
-        alt="menu"
-        width={32}
-        height={32}
-        className="inline-block cursor-pointer lg:hidden"
-      />
     </nav>
   );
 };

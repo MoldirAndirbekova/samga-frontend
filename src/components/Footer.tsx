@@ -69,7 +69,7 @@ export default function Footer() {
       {/* Banner */}
       <div className="absolute top-12 left-1/2 transform -translate-x-1/2 z-20">
         <div className="bg-[#FFA400] text-white text-4xl sm:text-5xl font-bold px-8 py-4 rounded-xl shadow-xl rotate-[-2deg] animate-bounce-slow">
-          It’s Samga time!
+          IT'S SAMGA TIME!
         </div>
       </div>
 
@@ -80,9 +80,9 @@ export default function Footer() {
           <Image
             src="/icons/samga_blue.png"
             alt="Samga logo"
-            width={160}
-            height={50}
-            className="h-12 w-auto"
+            width={100}
+            height={30}
+            className="h-20 w-70"
           />
           <p className="text-lg leading-relaxed text-white/90">
             Inclusive platform that helps kids with motor and cognitive disabilities.

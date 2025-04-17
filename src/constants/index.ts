@@ -1,12 +1,14 @@
 // NAVIGATION
 export const NAV_LINKS = [
-    { href: "/", key: "home", label: "About us" },
-    { href: "/", key: "how_hilink_work", label: "Skills we develop" },
-    { href: "/", key: "services", label: "Who we help" },
-    { href: "/", key: "pricing ", label: "Product " },
-    { href: "/", key: "contact_us", label: "Contact Us" },
-  ];
-  
+  { key: "about", label: "About Us", href: "/about" },
+  { key: "who", label: "Who We Help", href: "/who-we-help" },
+  { key: "skills", label: "Skills We Develop", href: "/skills" },
+  { key: "contact", label: "Contact Us", href: "/contact" },
+  { key: "signup", label: "Sign Up", href: "/signup" },
+  { key: "login", label: "Log In", href: "/login" },
+
+];
+
   // CAMP SECTION
   export const PEOPLE_URL = [
     "/person-1.png",

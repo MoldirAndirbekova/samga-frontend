@@ -8,12 +8,13 @@ import "@/styles/globals.css";
 import { usePathname } from "next/navigation";
 import { Nerko_One } from 'next/font/google';
 
+
 const nerkoOne = Nerko_One({ subsets: ['latin'], weight: ['400'] });
 
 
 const routes = ["/", "/login", "/register"];
 const authRoutes = ["/login", "/register"];
-const noSidebarRoutes = ["/cognitive", "/skills"];
+const noSidebarRoutes = ["/cognitive", "/skills", "/product"];
 
 export default function RootLayout({
   children,
@@ -33,18 +34,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen bg-[#FFF5E1]">
-        {isHome ? (
-          <HeaderHome />
-        ) : !isAuth && !isGameDetailPage ? (
-          <Header />
-        ) : null}
+      {!isHome && !isAuth && !isGameDetailPage ? (
+  <Header />
+) : null}
+
 
         <div className="flex flex-1">
           {!shouldHideSidebar && <Sidebar />}
           <main className="flex-1">{children}</main>
         </div>
 
-        {isHome && <Footer />}
+        {(isHome || pathname === "/product") && <Footer />}
+
       </body>
     </html>
   );

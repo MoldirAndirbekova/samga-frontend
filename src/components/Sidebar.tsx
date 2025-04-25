@@ -18,12 +18,12 @@ export default function Sidebar() {
 
   return (
     <aside className="w-1/5 bg-transparent p-4 h-screen text-[#694800] ml-3 flex flex-col items-start">
-      {/* Product Logo */}
+      
       <div className="mb-6 flex justify-center w-full">
         <Image src="/logo.png" alt="Product Logo" width={64} height={64} />
       </div>
 
-      {/* Navigation Menu */}
+      
       <nav className="w-full">
         <ul className="space-y-3">
           {menuItems.map((item) => {

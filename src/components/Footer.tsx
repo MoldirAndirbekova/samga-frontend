@@ -28,7 +28,6 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-gradient-to-b from-[#8DD7FF] to-[#B5EDFF] pt-48 pb-20 px-8 overflow-hidden text-white">
-      {/* Cloud top wave */}
       <div className="absolute top-0 left-0 w-full z-10">
         <svg
           viewBox="0 0 1440 320"
@@ -42,22 +41,21 @@ export default function Footer() {
         </svg>
       </div>
 
-      {/* Parallax clouds */}
+    
       <div className="parallax-cloud absolute w-[200px] h-[80px] bg-white opacity-40 rounded-full top-[120px] left-[5%] blur-xl z-10" />
       <div className="parallax-cloud absolute w-[350px] h-[120px] bg-white opacity-20 rounded-full top-[100px] left-[25%] blur-2xl z-10" />
       <div className="parallax-cloud absolute w-[300px] h-[100px] bg-white opacity-30 rounded-full top-[80px] left-[50%] blur-xl z-10" />
 
-      {/* Animated Lottie Butterflies */}
       {animationData && (
         <>
-          {/* Left to right butterfly (starts from left, goes right) */}
+         
           <Lottie
             animationData={animationData}
             loop
             className="absolute w-64 h-64 right-[900px] top-[100px] animate-fly-left z-20 scale-x-[-1]"
           />
 
-          {/* Right to left butterfly (starts from right, goes left and mirrored) */}
+          
           <Lottie
             animationData={animationData}
             loop
@@ -66,16 +64,16 @@ export default function Footer() {
         </>
       )}
 
-      {/* Banner */}
+    
       <div className="absolute top-12 left-1/2 transform -translate-x-1/2 z-20">
         <div className="bg-[#FFA400] text-white text-4xl sm:text-5xl font-bold px-8 py-4 rounded-xl shadow-xl rotate-[-2deg] animate-bounce-slow">
           IT'S SAMGA TIME!
         </div>
       </div>
 
-      {/* Content */}
+    
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16 relative z-20 mt-24">
-        {/* Logo & Social */}
+        
         <div className="flex flex-col gap-6 max-w-xs">
           <Image
             src="/icons/samga_blue.png"
@@ -101,7 +99,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Quick Links */}
+        
         <div className="text-lg">
           <h3 className="text-white font-bold mb-3 text-xl">QUICK LINKS</h3>
           <ul className="space-y-2 text-white/90">
@@ -113,7 +111,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Skills */}
+       
         <div className="text-lg">
           <h3 className="text-white font-bold mb-3 text-xl">SKILLS WE DEVELOP</h3>
           <ul className="space-y-2 text-white/90">
@@ -130,7 +128,6 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Email Box */}
         <div className="bg-white text-[#2F63D3] rounded-3xl px-6 py-6 w-[320px] shadow-2xl transition-transform hover:scale-105">
           <h2 className="text-lg font-bold mb-3">
             DO YOU HAVE QUESTIONS OR SUGGESTIONS?

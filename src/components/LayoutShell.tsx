@@ -33,13 +33,19 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
   const isHome = cleanPath === '/';
   const isAuth = baseRoutes.includes(cleanPath);
   const isGameDetailPage = cleanPath.startsWith("/games/") && cleanPath.split("/").length > 2;
-  const needSidebar = !isAuth && !isGameDetailPage && !isHome;
+  const isMotoricPage = cleanPath === '/skills/motoric';
+  const isCognitivePage = cleanPath === '/skills/cognitive';
+  const isProductPage = cleanPath.startsWith('/product');
+
+  const showHeaderHome = (isMotoricPage || isCognitivePage || isProductPage); // индекс не включаем!
+  const needSidebar = !isAuth && !isGameDetailPage && !showHeaderHome && !isHome;
+  const showFooter = isHome || isMotoricPage || isCognitivePage || isProductPage;
 
   return (
     <>
-      {isHome ? (
+      {showHeaderHome ? (
         <HeaderHome />
-      ) : !isAuth && !isGameDetailPage ? (
+      ) : (!isAuth && !isGameDetailPage && !isHome) ? (
         <Header />
       ) : null}
 
@@ -48,7 +54,7 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
         <main className="flex-1">{children}</main>
       </div>
 
-      {isHome && <Footer />}
+      {showFooter && <Footer />}
     </>
   );
 }

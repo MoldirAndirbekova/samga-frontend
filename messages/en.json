@@ -122,5 +122,346 @@
     "step2-text": "Use a computer screen and stand 3-4 feet away.",
     "step3": "STEP 3",
     "step3-text": "Time to play!"
+  },
+  "ProductPage": {
+    "why_us_title": "WHY US?",
+
+    "clinically_title": "Clinically Proven Excellence",
+    "clinically_text": "Our platform is based on peer-reviewed research and designed with input from occupational therapists and educators to ensure your child receives the best support possible.",
+
+    "community_title": "By the Community, For the Community",
+    "community_text": "We work closely with families and professionals to continuously improve our content and ensure it remains engaging, effective, and inclusive for all children.",
+
+    "accessible_title": "Accessible Skill Development",
+    "accessible_text": "With gamified exercises and adaptive levels, kids can develop essential cognitive and motor skills from the comfort of their home—on any device.",
+
+    "how_help": "HOW CAN \n SAMGA HELP YOU?",
+
+    "help_text_0": "If you are a parent or educator",
+    "help_button_0": "Start Now",
+
+    "help_text_1": "If you are interested in Samga for Institutions",
+    "help_button_1": "Book Now",
+
+    "help_text_2": "If you wish to help Samga please send an email",
+    "help_button_2": "Email",
+
+    "help_text_3": "If you want to help expand the research",
+    "help_button_3": "Book a meeting now",
+
+    "motor_title": "MOTOR GAMES",
+    "motor_text": "Motor games support children in developing essential physical coordination skills, preparing them for everyday activities like writing, buttoning shirts, or tying shoelaces.",
+    "motor_skill_0": "Hand-eye coordination",
+    "motor_skill_1": "Bilateral coordination",
+    "motor_skill_2": "Finger isolation",
+    "motor_skill_3": "Grip strength",
+    "motor_skill_4": "Fine motor precision",
+    "motor_skill_5": "Gross motor control",
+    "motor_skill_6": "Reaction time",
+
+    "cognitive_title": "COGNITIVE GAMES",
+    "cognitive_text": "Cognitive games help children enhance their mental processing, attention span, and problem-solving abilities in a fun and interactive environment.",
+    "cognitive_skill_0": "Memory",
+    "cognitive_skill_1": "Attention",
+    "cognitive_skill_2": "Problem solving",
+    "cognitive_skill_3": "Sequencing",
+    "cognitive_skill_4": "Planning",
+    "cognitive_skill_5": "Flexibility"
+  },
+  "CognitiveSkills": {
+    "heading": "SKILLS WE DEVELOP",
+    "main_title": "COGNITIVE SKILLS",
+    "subtitle": "REFINEMENT OF MENTAL PROCESSES",
+
+    "section1": {
+      "title": "Samga’s Online Cognitive Games",
+      "text": "Online cognitive games for children with special needs are more than just entertainment—they are a powerful tool for enhancing learning and development in an engaging and enjoyable way. From basic memory exercises to intricate puzzles, these interactive games offer children the opportunity to build key life skills, such as cognitive and motor abilities, at their own pace."
+    },
+
+    "section2": {
+      "title": "Samga’s Interactive Cognitive Games – A Powerful Tool for Learning",
+      "text": "If you're seeking interactive online cognitive games for your child, Samga's cognitive games provide a comprehensive solution. Thoughtfully designed with the needs of children with special needs in mind, these games offer more than just fun—they provide unique learning experiences that foster skill development. Explore Samga’s diverse collection of cognitive games, discover how each game promotes growth, and find the perfect match for your child’s needs!"
+    },
+
+    "section3": {
+      "title": "Skills Samga’s Cognitive Games Help Improve in Children with Special Needs",
+      "text": "Samga’s cognitive games for children with special needs are specifically designed to make learning both fun and impactful, while supporting the development of vital life skills in a playful, interactive environment. Here’s how Samga’s cognitive games promote growth in crucial areas:"
+    },
+
+    "skills": {
+      "skill0": {
+        "title": "Attention and Focus",
+        "text": "Samga’s cognitive games help improve children’s attention span by encouraging sustained engagement with tasks. Games that require focus and perseverance help enhance their concentration skills and the ability to stay on track."
+      },
+      "skill1": {
+        "title": "Critical Thinking and Decision-Making Skills",
+        "text": "Samga’s cognitive games provide valuable opportunities for sharpening cognitive skills like critical thinking and decision-making. Through entertaining challenges, children learn to manage problems independently and make decisions on the fly, which helps strengthen their cognitive abilities."
+      },
+      "skill2": {
+        "title": "Motor Skills and Visual Perception",
+        "text": "Samga’s cognitive games are an excellent resource for improving movement coordination and visual responses. By engaging in various game activities, children practice coordination and visual skills in a supportive and enjoyable environment."
+      },
+      "skill3": {
+        "title": "Memory Enhancement",
+        "text": "Effective memory skills are essential for learning, and Samga’s cognitive games aim to enhance memory in children with special needs. The interactive and fun nature of the games encourages children to retain and recall information, sharpening their memory while enjoying the process."
+      },
+      "skill4": {
+        "title": "Object and Concept Recognition",
+        "text": "From shapes and numbers to letters and symbols, Samga’s games help children improve their object recognition skills. The hands-on, interactive approach helps children better identify and understand objects, making learning enjoyable and effective."
+      }
+    },
+
+    "conclusion": "Samga’s online cognitive games offer a modern, technology-driven approach to learning that empowers children with special needs to grow, learn, and succeed in a fun, interactive way."
+  },
+  "MotoricSkills": {
+    "heading": "SKILLS WE DEVELOP",
+    "main_title": "MOTOR SKILLS",
+    "subtitle": "IMPROVING COORDINATION AND MOVEMENT",
+
+    "section1": {
+      "title": "Samga’s Motor Skills Games",
+      "text": "Samga's online games are designed to develop and improve motor functions in children with special needs. These games target both fine and gross motor skills, helping children to strengthen coordination, balance, and physical awareness."
+    },
+
+    "section2": {
+      "title": "Fun Meets Physical Development",
+      "text": "Through interactive and fun challenges, children can practice movements such as tracing shapes, dragging objects, pressing keys, or imitating motions—supporting the development of essential motor functions in a supportive environment."
+    },
+
+    "section3": {
+      "title": "Skills Samga’s Motor Games Help Improve:"
+    },
+
+    "skills": {
+      "skill0": {
+        "title": "Fine Motor Skills",
+        "text": "Activities that involve precision using fingers and hands."
+      },
+      "skill1": {
+        "title": "Gross Motor Skills",
+        "text": "Larger movements involving arms, legs, and body coordination."
+      },
+      "skill2": {
+        "title": "Balance and Posture",
+        "text": "Games that train body awareness and control."
+      },
+      "skill3": {
+        "title": "Hand-Eye Coordination",
+        "text": "Challenges that combine visual cues with precise actions."
+      },
+      "skill4": {
+        "title": "Reaction Time",
+        "text": "Stimulus-response games to improve timing and decision-making."
+      }
+    },
+
+    "conclusion": "These games provide an inclusive, low-pressure, and engaging way for kids to develop confidence in their physical abilities."
+  },
+  "BalloonPop": {
+    "back": "Back",
+    "title": "Balloon Pop",
+    "subtitle": "Step Into The Colorful World Of Balloon Pop!",
+    "description": "Step into the colorful world of Balloon Pop! Get ready to pop as many balloons as you can before the clock runs out. But watch out for those sneaky fireballs and bombs in red — they'll burst your balloon in no time!\n\nWith a party-time theme, this game is the perfect way to add some excitement to your daily routine. So, grab your balloon wand and let’s get popping!",
+    "skillsTitle": "The skills being developed by: Balloon Pop",
+    "motor": {
+      "title": "Motor Skills",
+      "upperBody": "Upper Body Strength",
+      "range": "Range of Motion and Response Time",
+      "posture": "Posture Control",
+      "core": "Core Strength"
+    },
+    "cognitive": {
+      "title": "Cognitive Skills",
+      "focus": "Visualisation and Focus"
+    }
+  },
+  "DrawIt": {
+    "back": "Back",
+    "title": "Draw It",
+    "subtitle": "Use Your Body to Draw Letters!",
+    "description": "✍️ Welcome to **Draw It** — a creative game where you draw letters in the air using your body!\nWith real-time motion tracking, you trace the shape of letters and receive feedback based on form, size, and accuracy.\n\nGreat for developing precision, balance, and creative thinking — all while having fun writing letters in space!",
+    "skillsTitle": "The skills being developed by: Draw It",
+    "motor": {
+      "title": "Motor Skills",
+      "fine": "Fine Motor Control",
+      "coord": "Arm and Shoulder Coordination",
+      "balance": "Postural Balance",
+      "precision": "Precision of Movement"
+    },
+    "cognitive": {
+      "title": "Cognitive Skills",
+      "recognition": "Letter Recognition",
+      "memory": "Shape Memory",
+      "focus": "Attention and Focus",
+      "integration": "Visual-Motor Integration"
+    }
+  },
+  "FruitSlicer": {
+    "back": "Back",
+    "title": "Fruit Slicer",
+    "subtitle": "Slice Fruits with Your Nose — Seriously!",
+    "description": "🥝 Welcome to Fruit Slicer — where you don’t need hands or swords, just your nose! 🍍 This hilarious and high-energy game uses computer vision to track your head movements so you can slice fruits as they fly across the screen. Tilt, nod, and ninja your way through juicy chaos!It's fun, it's fast, and it secretly boosts your balance, reaction time, and mental focus. Who knew your nose could be this powerful?",
+    "skillsTitle": "The skills being developed by: Fruit Slicer",
+    "motorTitle": "Motor Skills",
+    "motor1": "Neck & Head Coordination",
+    "motor2": "Balance and Posture",
+    "motor3": "Timing and Accuracy",
+    "motor4": "Upper Body Awareness",
+    "cognitiveTitle": "Cognitive Skills",
+    "cognitive1": "Focus and Anticipation",
+    "cognitive2": "Spatial Awareness",
+    "cognitive3": "Impulse Control",
+    "cognitive4": "Fast Decision-Making"
+  },
+  "Tennis": {
+    "back": "Back",
+    "title": "Tennis",
+    "subtitle": "Play Tennis Using Only Your Hands!",
+    "description": "🎾 Welcome to Tennis — a motion-controlled game where your hands become the racket! Using our advanced computer vision system, your hand movements are tracked in real-time to simulate the excitement of real tennis.Swing, react, and strategize — while building your coordination and sharpening your mind. Whether you're training or just playing for fun, Tennis brings the court to your screen!",
+    "skillsTitle": "The skills being developed by: Tennis",
+    "motorTitle": "Motor Skills",
+    "motor1": "Hand-Eye Coordination",
+    "motor2": "Arm Range of Motion",
+    "motor3": "Reaction Speed",
+    "motor4": "Gross Motor Control",
+    "cognitiveTitle": "Cognitive Skills",
+    "cognitive1": "Focus and Concentration",
+    "cognitive2": "Decision-Making Under Pressure",
+    "cognitive3": "Visual Tracking & Prediction",
+    "cognitive4": "Mental Agility"
   }
+  ,"Footer":{
+    "itsSamgaTime": "IT'S SAMGA TIME!",
+    "inclusivePlatform": "Inclusive platform that helps kids with motor and cognitive disabilities.",
+    "quickLinks": "QUICK LINKS",
+    "home": "Home",
+    "aboutUs": "About Us",
+    "reviews": "Reviews",
+    "contactUs": "Contact Us",
+    "terms": "Terms and Conditions",
+    "skillsWeDevelop": "SKILLS WE DEVELOP",
+    "cognitiveSkills": "Cognitive skills",
+    "motorSkills": "Motor skills",
+    "haveQuestions": "DO YOU HAVE QUESTIONS OR SUGGESTIONS?",
+    "enterEmail": "Enter your email address",
+    "weWillContact": "We will contact you!"
+  }
+  
+  ,"Home":{
+
+    "whyUs1title":"💡 Engaging Games",
+  
+  "whyUs1text":"Research-backed activities designed to keep kids excited.",
+  
+  "whyUs2title":"📈 Adaptive Challenges",
+  
+  "whyUs2text":"Exercises scale with the child's learning curve.",
+  
+  "whyUs3title":"🛡️ Safe Digital Space",
+  
+  "whyUs3text":"Privacy-focused, calming, and child-friendly interface.",
+  
+  "whyUs4title":"🤝 Expert Collaboration",
+  
+  "whyUs4text":"Built with therapists, educators, and parents.",
+  
+  "review1text":"This platform has been a game-changer for my son. He enjoys every session, and I've seen noticeable improvement in his coordination and attention span. The characters and challenges are delightful!",
+  
+  "review1author":"Rayon",
+  
+  "review2text":"So pretty much the better game. It's colorful, intuitive, and my daughter is always asking to play it again. She feels included and empowered — and so do we as parents.",
+  
+  "review2author":"Mimoy Qoeh",
+  
+  "review3text":"The best game ever. It allows children with cognitive difficulties to interact, play, and grow. The learning curve is gentle and full of encouragement.",
+  
+  "review3author":"Amrita Singh",
+  
+  "review4text":"My two-year-old daughter loves this because she thinks it’s magical. She says she 'learns everything' through games. A fun and educational tool that we now use daily.",
+  
+  "review4author":"Melody Wisk",
+  
+  "review5text":"Samga is an amazing project. I’ve personally seen children light up with excitement while using it. The interface is designed with care and heart.",
+  
+  "review5author":"Danelia Nauryz",
+  
+  "features1title":"Play & Explore",
+  
+  "features1text":"From math and literacy to science and empathy, our games spark curiosity and engage your child's intellect and emotional intelligence. Each game is designed to turn learning into an adventure — fun, meaningful, and full of discovery.",
+  
+  "features2title":"Move with Joy",
+  
+  "features2text":"We believe in the power of movement — not just for fitness, but for learning too. Our games get kids up and active, blending physical play with cognitive challenges that energize both body and brain.",
+  
+  "features3title":"Learn Together",
+  
+  "features3text":"Our platform fosters meaningful interactions. Whether it's solving puzzles as a team or sharing creative ideas, kids build essential real-world skills like memory, focus, collaboration, and innovation — all through playful exploration.",
+  
+  "features4title":"Grow Confident",
+  
+  "features4text":"Confidence grows with every small victory. Our games celebrate effort, creativity, and individuality, empowering children to take the lead, express themselves, and feel proud of what they achieve — no matter how big or small.",
+  
+  "navbar_about":"About Us",
+  
+  "navbar_whohelp":"Who We Help",
+  
+  "skills_devolop":"Skills We Develop",
+  
+  "contact_us":"Contact Us",
+  
+  "signup":"Sign Up",
+  
+  "login":"Log In",
+  
+  "header1":"WHERE PLAY",
+  
+  "header2":"MEETS PROGRESS",
+  
+  "header_paragraph":" Samga offers a gamified platform with proven exercises and materials to support children with diverse needs.",
+  
+  "try_now":"TRY NOW",
+  
+  "whyUs_title":"WHY US?",
+  
+  "card1_title":"Discover Samga Games",
+  
+  "card1_text":"Explore playful activities that nurture learning, emotional growth, and fun at every stage.",
+  
+  "card2_title":"Inclusive Play for All",
+  
+  "card2_text":"Our games adapt to all abilities, supporting every child through joyful, accessible experiences.",
+  
+  "card3_title":"Real-Time Progress",
+  
+  "card3_text":"Track your child’s growth with instant feedback designed for parents, educators, and therapists.",
+  
+  "card4_title":"Samga for Institutions",
+  
+  "card4_text":"Custom solutions for schools and clinics to integrate inclusive learning with outcomes.",
+  
+  "learn_more":"  Learn More →",
+  
+  "enjoy_move":" ⭐ ENJOY ⭐ MOVE ⭐ PLAY ⭐ ENJOY ⭐ MOVE ⭐ PLAY ⭐ ENJOY ⭐ MOVE ⭐ PLAY ⭐ ENJOY ⭐ MOVE ⭐ PLAY ⭐ ENJOY ⭐ MOVE ⭐ PLAY",
+  
+  "reviews_title":" Trusted by families all \n around the country",
+  
+  "help_you_title":"HOW CAN \n SAMGA HELP YOU?",
+  
+  "help1_text":"If you are a parent or educator",
+  
+  "button1_text":"Start Now",
+  
+  "help2_text":"If you are interested in Samga for Institutions",
+  
+  "button2_text":"Book Now",
+  
+  "help3_text":"If you wish to help Samga please send an email",
+  
+  "button3_text":"Email",
+  
+  "help4_text":"If you want to help expand the research",
+  
+  "button4_text":"Book a meeting now"
+  
+    }
 }

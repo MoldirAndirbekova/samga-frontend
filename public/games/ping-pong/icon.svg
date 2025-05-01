@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#f3f4f6" rx="32" ry="32" />
+  
+  <!-- Table -->
+  <rect x="56" y="126" width="400" height="260" fill="#4681f4" rx="8" ry="8" />
+  
+  <!-- Center line -->
+  <line x1="256" y1="126" x2="256" y2="386" stroke="#ffffff" stroke-width="5" stroke-dasharray="15,15" />
+  
+  <!-- Net -->
+  <rect x="252" y="126" width="8" height="260" fill="#555555" />
+  
+  <!-- Ball -->
+  <circle cx="186" cy="236" r="20" fill="#ff6b6b" />
+  
+  <!-- Paddles -->
+  <rect x="96" y="186" width="16" height="100" fill="#ffffff" rx="4" ry="4" />
+  <rect x="400" y="226" width="16" height="100" fill="#ffffff" rx="4" ry="4" />
+  
+  <!-- Game title -->
+  <text x="256" y="470" text-anchor="middle" font-family="Arial" font-size="40" font-weight="bold" fill="#333333">Ping Pong</text>
+</svg> 

@@ -21,14 +21,14 @@ export default function SignupPage() {
     initialValues: {
       email: "",
       password: "",
-      fullName: "",
+      full_name: "",
     },
     onSubmit: async (values) => {
       console.log(values);
       const res = await APIRegister(values);
 
       if (res.status === 200) {
-        router.push("/login");
+        // router.push("/login");
         console.log("Register successful");
       }
       else {
@@ -86,13 +86,13 @@ export default function SignupPage() {
           >
             {error && <p className="text-red-500">{error}</p>}
             <Form.Item
-              name="fullName"
+              name="full_name"
               label="Full Name"
               rules={[
                 { required: true, message: "Please input your full name!" },
               ]}
             >
-              <Input placeholder="Full Name" {...formik.getFieldProps("fullName")} />
+              <Input placeholder="Full Name" {...formik.getFieldProps("full_name")} />
             </Form.Item>
             <Form.Item
               name="email"
@@ -111,7 +111,7 @@ export default function SignupPage() {
               <Input.Password placeholder="Password" {...formik.getFieldProps("password")} />
             </Form.Item>
             <Form.Item className="flex justify-center">
-              <Button htmlType="submit" className="w-full">
+              <Button htmlType="submit" className="w-full" onClick={() => formik.handleSubmit()}>
                 Sign up
               </Button>
             </Form.Item>

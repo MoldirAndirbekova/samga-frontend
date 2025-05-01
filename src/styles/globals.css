@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFF5E1;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #FFF5E1;
+    --foreground: #FFF5E1;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  white-space: nowrap;
+  gap: 2.5rem; 
+  animation: marquee 10s linear infinite;
+}
+@keyframes marqueeWord {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+}
+
+.marquee-container {
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.marquee-item {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 1.875rem; 
+  margin-right: 2rem; 
+  animation: marqueeWord 10s linear infinite;
+}
+
+.marquee-item:nth-child(1) { animation-delay: 0s; }
+.marquee-item:nth-child(2) { animation-delay: 2s; }
+.marquee-item:nth-child(3) { animation-delay: 6s; }
+.marquee-item:nth-child(4) { animation-delay: 9s; }
+.marquee-item:nth-child(5) { animation-delay: 12s; }
+.marquee-item:nth-child(6) { animation-delay: 15s; }
+.marquee-item:nth-child(7) { animation-delay: 18s; }
+

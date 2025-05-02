@@ -10,6 +10,7 @@ import dynamic from 'next/dynamic';
 const PingPongGame = dynamic(() => import('../../games/components/PingPongGame'), { ssr: false });
 const BubblePopGame = dynamic(() => import('../../games/components/BubblePopGame'), { ssr: false });
 const LetterTracingGame = dynamic(() => import('../../games/components/LetterTracingGame'), { ssr: false });
+const FruitSlicerGame = dynamic(() => import('../../games/components/FruitSlicerGame'), { ssr: false });
 
 // Game type interface
 interface Game {
@@ -223,6 +224,9 @@ export default function GamePage() {
             )}
             {game.name.toLowerCase() === 'letter tracing' && (
               <LetterTracingGame onGameOver={handleGameOver} difficulty={selectedDifficulty} />
+            )}
+            {game.name.toLowerCase() === 'fruit slicer' && (
+              <FruitSlicerGame onGameOver={handleGameOver} difficulty={selectedDifficulty} />
             )}
           </div>
         )}

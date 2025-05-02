@@ -118,7 +118,7 @@ export default function Dashboard() {
             className="border rounded-lg p-4 shadow-lg bg-transparent hover:shadow-xl transition border-[#7E6396] relative"
           >
             <Image
-              src={game.image_url || `/ping-pong.png`}
+              src={`/${game.id}.png` || `/ping-pong.png`}
               alt={game.name}
               width={360}
               height={230}

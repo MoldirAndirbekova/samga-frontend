@@ -2,6 +2,7 @@ import { NAV_LINKS } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./button";
+import LanguageSwitcher from "@/components/LanguageSwitcher"; 
 
 const Navbar = () => {
   return (
@@ -21,6 +22,9 @@ const Navbar = () => {
           </Link>
         ))}
       </ul>
+      <div className="text-white">
+      <LanguageSwitcher/> 
+      </div>
       <div className="lg:flex items-center justify-center hidden">
       <Link href="/login">
           <Button className="px-8 py-4 text-xl font-semibold rounded-full shadow-lg bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600 focus:ring-4 focus:ring-blue-300">

@@ -5,33 +5,28 @@ import api from "@/features/page";
 import { registerWebSocket, unregisterWebSocket } from "@/features/websocket";
 import { useChild } from "@/contexts/ChildContext";
 
-interface PingPongGameProps {
+interface LetterTracingGameProps {
   onGameOver: (score: number) => void;
   difficulty: 'EASY' | 'MEDIUM' | 'HARD';
 }
 
-export default function PingPongGame({ onGameOver, difficulty: initialDifficulty }: PingPongGameProps) {
+export default function LetterTracingGame({ onGameOver, difficulty: initialDifficulty }: LetterTracingGameProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [gameState, setGameState] = useState({
-    score: 0,
-    leftScore: 0,
-    rightScore: 0,
+    currentLetter: 'A',
+    progress: 0,
+    lettersCompleted: 0,
     gameActive: false,
     gameOver: false,
-    currentSpeed: 1
+    showCongrats: false
   });
   const [gameId, setGameId] = useState<string | null>(null);
   const [socketConnected, setSocketConnected] = useState(false);
-  const [difficulty, setDifficulty] = useState<'EASY' | 'MEDIUM' | 'HARD'>(initialDifficulty);
-  const [isProcessingFrame, setIsProcessingFrame] = useState(false);
-  const [detectedHands, setDetectedHands] = useState<{
-    left: { x: number, y: number } | null,
-    right: { x: number, y: number } | null
-  }>({ left: null, right: null });
-  const [frameImage, setFrameImage] = useState<string | null>(null);
   const [connectionId, setConnectionId] = useState<string | null>(null);
+  const [isProcessingFrame, setIsProcessingFrame] = useState(false);
+  const [frameImage, setFrameImage] = useState<string | null>(null);
+  const [difficulty, setDifficulty] = useState<'EASY' | 'MEDIUM' | 'HARD'>(initialDifficulty);
   const wsRef = useRef<WebSocket | null>(null);
   const gameCreatedRef = useRef(false);
   const processingGameOverRef = useRef(false);
@@ -58,7 +53,7 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
         return;
       }
 
-      console.log("Creating new PingPong game with difficulty:", difficulty);
+      console.log("Creating new Letter Tracing game with difficulty:", difficulty);
       
       if (wsRef.current) {
         console.log("Cleaning up existing WebSocket connection");
@@ -78,18 +73,18 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
 
       setFrameImage(null);
       setGameState({
-        score: 0,
-        leftScore: 0,
-        rightScore: 0,
+        currentLetter: 'A',
+        progress: 0,
+        lettersCompleted: 0,
         gameActive: false,
         gameOver: false,
-        currentSpeed: 1
+        showCongrats: false
       });
       
       gameCreatedRef.current = true;
 
       const response = await api.post('/games/game/start', {
-        game_type: 'ping_pong',
+        game_type: 'letter_tracing',
         difficulty: difficulty,
         child_id: selectedChildId
       });
@@ -108,7 +103,6 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
       }
     } catch (error) {
       console.error('Error creating game:', error);
-      
       setSocketConnected(false);
       wsRef.current = null;
       gameCreatedRef.current = false;
@@ -131,7 +125,7 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
     }
     
     setGameId(id);
-    localStorage.setItem("ping_pong_game_id", id);
+    localStorage.setItem("letter_tracing_game_id", id);
     setSocketConnected(false);
     
     const token = localStorage.getItem("access_token");
@@ -158,30 +152,28 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
       const data = JSON.parse(event.data);
       
       if (data.type === 'game_state') {
-        setFrameImage(data.data.frame);
-        const newGameState = {
-          score: data.data.score,
-          leftScore: data.data.left_score,
-          rightScore: data.data.right_score,
-          gameActive: data.data.game_active,
-          gameOver: data.data.game_over,
-          currentSpeed: data.data.current_speed
-        };
+        if (data.data.frame) {
+          setFrameImage(data.data.frame);
+        }
         
+        const newGameState = {
+          currentLetter: data.data.current_letter || 'A',
+          progress: data.data.fill_progress || 0,
+          lettersCompleted: data.data.letters_completed || 0,
+          gameActive: data.data.game_active || false,
+          gameOver: data.data.game_over || false,
+          showCongrats: data.data.show_congrats || false
+        };
+
         if (newGameState.gameOver && !gameState.gameOver) {
-          console.log("Game just ended - calling onGameOver with score:", newGameState.score);
+          console.log("Game just ended - calling onGameOver with score:", newGameState.lettersCompleted);
           setTimeout(() => {
-            onGameOver(newGameState.score);
+            onGameOver(newGameState.lettersCompleted);
             closeWebSocketConnection();
           }, 1000);
         }
         
         setGameState(newGameState);
-      } else if (data.type === 'hand_tracking_result') {
-        setDetectedHands({
-          left: data.data.left ? { x: data.data.left.position.x, y: data.data.left.position.y } : null,
-          right: data.data.right ? { x: data.data.right.position.x, y: data.data.right.position.y } : null
-        });
       }
     };
     
@@ -206,7 +198,7 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
     wsRef.current = ws;
     
     const cleanupCallback = () => {
-      console.log("Cleaning up PingPong game resources");
+      console.log("Cleaning up Letter Tracing game resources");
     };
     
     const newConnectionId = registerWebSocket(ws, cleanupCallback);
@@ -225,6 +217,25 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
       }));
     }
   };
+  
+  const closeWebSocketConnection = useCallback(() => {
+    console.log("Cleaning up WebSocket connection after game over");
+    
+    if (connectionId) {
+      unregisterWebSocket(connectionId);
+      setConnectionId(null);
+    }
+    
+    if (wsRef.current) {
+      if (wsRef.current.readyState === WebSocket.OPEN || 
+          wsRef.current.readyState === WebSocket.CONNECTING) {
+        wsRef.current.close(1000, "Game over, cleaning up");
+      }
+      wsRef.current = null;
+    }
+    
+    setSocketConnected(false);
+  }, [connectionId]);
   
   // Initialize camera and create game
   useEffect(() => {
@@ -293,10 +304,11 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
         const ctx = canvas.getContext('2d');
         
         if (ctx) {
-          ctx.translate(canvas.width, 0);
+          ctx.save();
           ctx.scale(-1, 1);
+          ctx.translate(-canvas.width, 0);
           ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.restore();
           
           const imageData = canvas.toDataURL('image/jpeg', 0.7);
           
@@ -315,31 +327,12 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
         setIsProcessingFrame(false);
         processingActive = false;
       }
-    }, 100); 
+    }, 100);
     
     return () => {
       clearInterval(intervalId);
     };
-  }, [socketConnected, gameId, difficulty]);
-  
-  const closeWebSocketConnection = useCallback(() => {
-    console.log("Cleaning up WebSocket connection after game over");
-    
-    if (connectionId) {
-      unregisterWebSocket(connectionId);
-      setConnectionId(null);
-    }
-    
-    if (wsRef.current) {
-      if (wsRef.current.readyState === WebSocket.OPEN || 
-          wsRef.current.readyState === WebSocket.CONNECTING) {
-        wsRef.current.close(1000, "Game over, cleaning up");
-      }
-      wsRef.current = null;
-    }
-    
-    setSocketConnected(false);
-  }, [connectionId]);
+  }, [socketConnected, gameId]);
   
   return (
     <div className="fixed inset-0 h-screen w-screen overflow-hidden">
@@ -356,7 +349,7 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
         {frameImage ? (
           <img 
             src={frameImage} 
-            alt="Ping Pong Game" 
+            alt="Letter Tracing Game" 
             className="w-full h-full object-cover"
           />
         ) : (
@@ -366,18 +359,18 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
         )}
       </div>
       
-      {/* Score display - overlay on top */}
+      {/* Score and progress display - overlay on top */}
       <div className="absolute top-4 left-4 right-4 flex justify-between z-50">
-        <div className="bg-red-100 bg-opacity-90 text-red-800 p-3 rounded-lg">
-          <p className="text-lg font-bold">Left: {gameState.leftScore}</p>
-        </div>
-        
         <div className="bg-blue-100 bg-opacity-90 text-blue-800 p-3 rounded-lg">
-          <p className="text-lg font-bold">Total: {gameState.score}</p>
+          <p className="text-lg font-bold">Letter: {gameState.currentLetter}</p>
         </div>
         
         <div className="bg-green-100 bg-opacity-90 text-green-800 p-3 rounded-lg">
-          <p className="text-lg font-bold">Right: {gameState.rightScore}</p>
+          <p className="text-lg font-bold">Progress: {Math.round(gameState.progress * 100)}%</p>
+        </div>
+        
+        <div className="bg-purple-100 bg-opacity-90 text-purple-800 p-3 rounded-lg">
+          <p className="text-lg font-bold">Completed: {gameState.lettersCompleted}/26</p>
         </div>
       </div>
       

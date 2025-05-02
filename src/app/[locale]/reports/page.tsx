@@ -5,6 +5,7 @@ import { FaInfoCircle, FaPlusCircle, FaTable, FaChartBar, FaBrain, FaHandPaper, 
 // import api from "@/features/page";
 import api from "@/lib/api";
 import { useChild } from "@/contexts/ChildContext";
+import { useTranslations } from 'next-intl';
 
 // Types for game report data
 interface GameResult {
@@ -53,6 +54,7 @@ interface GameReport {
 }
 
 export default function Reports() {
+    const t = useTranslations('Reports1');
 
   const [gameReport, setGameReport] = useState<GameReport | null>(null);
   const [loading, setLoading] = useState(true);
@@ -160,7 +162,7 @@ export default function Reports() {
       <main className="flex-1">
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center">
-            <h2 className="text-3xl font-bold">Game Reports</h2>
+            <h2 className="text-3xl font-bold">{t('game_reports')}</h2>
             {currentChild && (
               <div className="ml-4 bg-blue-100 px-3 py-1 rounded-full flex items-center">
                 <FaChild className="mr-2 text-blue-500" />
@@ -187,7 +189,7 @@ export default function Reports() {
               className={`px-4 py-2 rounded-md ${viewMode === 'skills' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
               onClick={() => setViewMode('skills')}
             >
-              <FaBrain className="inline mr-2" /> Skills Report
+              <FaBrain className="inline mr-2" /> {t('skills_reports')}
             </button>
           </div>
         </div>
@@ -195,22 +197,22 @@ export default function Reports() {
         {loadingChildren ? (
           <div className="text-center py-10">
             <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
-            <p className="mt-2">Loading children data...</p>
+            <p className="mt-2">{t('loading')}</p>
           </div>
         ) : children.length === 0 ? (
           <div className="bg-red-100 text-red-700 p-4 rounded-md text-center">
-            <p className="font-bold mb-2">No children found</p>
-            <p>Please add a child to view game reports</p>
+            <p className="font-bold mb-2">{t('no_children')}</p>
+            <p>{'add_child'}</p>
           </div>
         ) : !selectedChildId ? (
           <div className="bg-yellow-100 text-yellow-700 p-4 rounded-md text-center">
-            <p className="font-bold mb-2">No child selected</p>
-            <p>Please select a child from the header menu to view reports</p>
+            <p className="font-bold mb-2">{t('no_child_select')}</p>
+            <p>{t('select_child')}</p>
           </div>
         ) : loading ? (
           <div className="text-center py-10">
             <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
-            <p className="mt-2">Loading game reports...</p>
+            <p className="mt-2">{t('loading_reports')}</p>
           </div>
         ) : error ? (
           <div className="bg-red-100 text-red-700 p-4 rounded-md">
@@ -218,27 +220,27 @@ export default function Reports() {
           </div>
         ) : !gameReport ? (
           <div className="bg-yellow-100 text-yellow-700 p-4 rounded-md">
-            <p className="font-bold">No game data available for {currentChild?.full_name}</p>
-            <p>Play some games with this child to see reports!</p>
+            <p className="font-bold">{t('no_date')} {currentChild?.full_name}</p>
+            <p>{t("play_game")}</p>
           </div>
         ) : (
           <>
             {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
               <div className="bg-blue-100 p-6 rounded-xl shadow-md">
-                <h3 className="text-lg font-bold mb-2">Total Games</h3>
+                <h3 className="text-lg font-bold mb-2">{t("total_games")}</h3>
                 <p className="text-3xl">{gameReport.total_games}</p>
               </div>
               <div className="bg-green-100 p-6 rounded-xl shadow-md">
-                <h3 className="text-lg font-bold mb-2">Average Score</h3>
+                <h3 className="text-lg font-bold mb-2">{t("average")}</h3>
                 <p className="text-3xl">{gameReport.average_score}</p>
               </div>
               <div className="bg-purple-100 p-6 rounded-xl shadow-md">
-                <h3 className="text-lg font-bold mb-2">Average Duration</h3>
+                <h3 className="text-lg font-bold mb-2">{t("avg_duration")}</h3>
                 <p className="text-3xl">{formatDuration(Math.round(gameReport.average_duration))}</p>
               </div>
               <div className="bg-orange-100 p-6 rounded-xl shadow-md">
-                <h3 className="text-lg font-bold mb-2">Games by Difficulty</h3>
+                <h3 className="text-lg font-bold mb-2">{t("game-select")}</h3>
                 <div className="flex flex-col space-y-1">
                   {Object.entries(gameReport.games_by_difficulty).map(([difficulty, count]) => (
                     <div key={difficulty} className="flex justify-between">
@@ -256,7 +258,7 @@ export default function Reports() {
                 {gameReport.skill_metrics ? (
                   <div className="bg-white rounded-xl shadow-md overflow-hidden mb-6">
                     <div className="p-4 bg-purple-500 text-white">
-                      <h3 className="text-lg font-bold">Skills Assessment</h3>
+                      <h3 className="text-lg font-bold">{t("skills")}</h3>
                     </div>
                     <div className="p-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -275,7 +277,7 @@ export default function Reports() {
                               ></div>
                             </div>
                             <div className="flex justify-between text-sm text-gray-600">
-                              <span>Score: {Math.round(score)}/100</span>
+                              <span>{t('score')}: {Math.round(score)}/100</span>
                               <span>{score < 40 ? 'Needs Practice' : score < 70 ? 'Good' : 'Excellent'}</span>
                             </div>
                           </div>
@@ -285,7 +287,7 @@ export default function Reports() {
                   </div>
                 ) : (
                   <div className="bg-yellow-100 text-yellow-700 p-4 rounded-md mb-6">
-                    No skill metrics available yet. Play more games to see your skill assessment!
+                    {t("no_skills")}
                   </div>
                 )}
 
@@ -294,7 +296,7 @@ export default function Reports() {
                   Object.values(gameReport.skill_progress).some(arr => arr.length > 0) ? (
                   <div className="bg-white rounded-xl shadow-md overflow-hidden">
                     <div className="p-4 bg-blue-500 text-white">
-                      <h3 className="text-lg font-bold">Skills Progress Over Time</h3>
+                      <h3 className="text-lg font-bold">{t("skills_progress")}</h3>
                     </div>
                     <div className="p-6">
                       <div className="space-y-8">
@@ -332,8 +334,7 @@ export default function Reports() {
                   </div>
                 ) : (
                   <div className="bg-yellow-100 text-yellow-700 p-4 rounded-md">
-                    Not enough data to show skills progress. Play more games over time to track your improvement!
-                  </div>
+                   {t("no_date_1")}   </div>
                 )}
               </>
             ) : (
@@ -341,7 +342,7 @@ export default function Reports() {
                 {/* Recent Games */}
                 <div className="bg-white rounded-xl shadow-md overflow-hidden">
                   <div className="p-4 bg-purple-500 text-white">
-                    <h3 className="text-lg font-bold">Recent Ping Pong Games</h3>
+                    <h3 className="text-lg font-bold">{t("recent")}</h3>
                   </div>
                   
                   {viewMode === 'table' ? (
@@ -349,14 +350,14 @@ export default function Reports() {
                       <table className="min-w-full bg-white">
                         <thead>
                           <tr className="bg-gray-100 text-gray-700 text-left">
-                            <th className="py-2 px-4 border-b">Game ID</th>
-                            <th className="py-2 px-4 border-b">Difficulty</th>
-                            <th className="py-2 px-4 border-b">Score</th>
-                            <th className="py-2 px-4 border-b">Left Score</th>
-                            <th className="py-2 px-4 border-b">Right Score</th>
-                            <th className="py-2 px-4 border-b">Duration</th>
-                            <th className="py-2 px-4 border-b">Timestamp</th>
-                            <th className="py-2 px-4 border-b">Skills</th>
+                            <th className="py-2 px-4 border-b">{t("game_id")}</th>
+                            <th className="py-2 px-4 border-b">{t("Difficulty")}</th>
+                            <th className="py-2 px-4 border-b">{t("Score")}</th>
+                            <th className="py-2 px-4 border-b">{t("LeftScore")}</th>
+                            <th className="py-2 px-4 border-b">{t("RightScore")}</th>
+                            <th className="py-2 px-4 border-b">{t("Duration")}Duration</th>
+                            <th className="py-2 px-4 border-b">{t("Timestamp")}Timestamp</th>
+                            <th className="py-2 px-4 border-b">{t("game_id")}Skills</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -394,7 +395,7 @@ export default function Reports() {
                     </div>
                   ) : (
                     <div className="p-4">
-                      <h4 className="text-lg mb-4">Score Distribution</h4>
+                      <h4 className="text-lg mb-4">{t("score_dist")}</h4>
                       <div className="h-64 flex items-end space-x-2">
                         {gameReport.recent_games.map((game) => (
                           <div 

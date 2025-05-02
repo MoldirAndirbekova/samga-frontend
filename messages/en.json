@@ -463,5 +463,36 @@
   
   "button4_text":"Book a meeting now"
   
+},
+  "Reports1":{
+      "game_reports":"Game Reports",
+      "skills_reports":"Skills Report",
+      "loading":"Loading children data...",
+      "no_children":"No children found",
+      "add_child":"Please add a child to view game reports",
+      "no_child_select":"No child selected",
+      "select_child":"Please select a child from the header menu to view reports",
+      "loading_reports":"Loading game reports...",
+      "no_date":"No game data available for",
+      "play_game":"Play some games with this child to see reports!",
+      "total_games":"Total Games",
+      "average":"Average Score",
+      "avg_duration":"Average Duration",
+      "game-select":"Games by Difficulty",
+      "skills":"Skills Assessment",
+      "score":"Score",
+      "no_skills":"No skill metrics available yet. Play more games to see your skill assessment!",
+      "skills_progress":"Skills Progress Over Time",
+      "no_date_1":"Not enough data to show skills progress. Play more games over time to track your improvement! ",
+      "recent":"Recent Ping Pong Games",
+      "game_id":"Game ID",
+      "Difficulty":"Difficulty",
+      "Score":"Score",
+      "LeftScore":"Left Score",
+      "RightScore":"Right Score",
+      "Duration":"Duration",
+      "Timestamp":"Timestamp",
+      "Skills":"Skills",
+      "score_dist":"Score Distribution"
     }
 }

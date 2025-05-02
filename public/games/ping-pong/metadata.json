@@ -1,0 +1,29 @@
+{
+  "id": "ping-pong",
+  "name": "Ping Pong",
+  "description": "Use your hands to control the paddles and keep the ball in play as long as possible. Test your agility, focus and hand-eye coordination.",
+  "category": "Hand-Eye Coordination",
+  "image_url": "/games/ping-pong/icon.svg",
+  "skills": [
+    {
+      "name": "Agility",
+      "description": "Measured by how quickly the player repositions their paddle",
+      "maxScore": 100
+    },
+    {
+      "name": "Focus",
+      "description": "Measured by duration of continuous gameplay without missing",
+      "maxScore": 100
+    },
+    {
+      "name": "Hand-Eye Coordination",
+      "description": "Measured by successfully hitting the ball at various speeds",
+      "maxScore": 100
+    },
+    {
+      "name": "Reaction Time",
+      "description": "Measured by successful hits when ball changes direction quickly",
+      "maxScore": 100
+    }
+  ]
+} 

@@ -2,9 +2,9 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { routing } from '@/i18n/routing';
 import type { Locale } from '@/i18n/routing';
-import LayoutShell from '@/components/LayoutShell';
-import '@/styles/globals.css';
 import { getMessages } from 'next-intl/server';
+import '@/styles/globals.css';
+import LayoutShell from '../../components/LayoutShell';
 
 export default async function RootLayout({
   children,

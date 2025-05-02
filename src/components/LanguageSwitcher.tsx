@@ -1,23 +1,23 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLocale } from "next-intl";
 import { useRouter, usePathname, Locale } from "@/i18n/routing";
 
 export default function LanguageSwitcher() {
-  const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const locale = useLocale();
-  const [language, setLanguage] = useState(locale.toUpperCase()); 
+  const [language, setLanguage] = useState(locale.toUpperCase());
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const router = useRouter();
   const pathname = usePathname();
 
-
   const handleLangChange = (lang: string) => {
-    const nextLocale = lang.toLowerCase(); 
+    const nextLocale = lang.toLowerCase();
     setLanguage(lang);
-    setIsLangOpen(false);
+    setIsOpen(false);
 
     router.replace(
       { pathname },
@@ -25,24 +25,38 @@ export default function LanguageSwitcher() {
     );
   };
 
+  // Закрытие по клику вне меню
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
-        onClick={() => setIsLangOpen(!isLangOpen)}
-        className="flex items-center border-2 border-white px-3 py-1 rounded-full"
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center border border-white px-3 py-1 rounded-full text-white hover:bg-white hover:text-blue-600 transition"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
       >
         {language} <ChevronDown className="ml-1 w-4 h-4" />
       </button>
-      {isLangOpen && (
-        <div className="absolute right-0 mt-2 bg-white text-black rounded shadow-md w-24">
+
+      {isOpen && (
+        <div className="absolute right-0 mt-2 bg-white text-black rounded shadow-lg w-24 z-50">
           {["KZ", "RU", "EN"].map((lang) => (
-            <div
+            <button
               key={lang}
               onClick={() => handleLangChange(lang)}
-              className="px-4 py-2 cursor-pointer hover:bg-gray-200"
+              className="w-full text-left px-4 py-2 hover:bg-gray-200"
             >
               {lang}
-            </div>
+            </button>
           ))}
         </div>
       )}

@@ -25,17 +25,16 @@ export default function SignupPage() {
     onSubmit: async (values) => {
       console.log(values);
       const res = await APIRegister(values);
-
+  
       if (res.status === 200) {
         router.push("/login");
         console.log("Register successful");
-      }
-      else {
-        setError("Пользователь с таким email уже существует");
+      } else {
+        // Use the error message from the API instead of hardcoded message
+        setError(res.error || "Registration failed. Please try again.");
       }
     },
   });
-
   return (
     <div
       className="flex h-screen w-full items-center justify-center px-4 sm:px-0"

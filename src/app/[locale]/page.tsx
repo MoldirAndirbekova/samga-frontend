@@ -184,9 +184,9 @@ useEffect(() => {
   
   const gameImages = [
     "/draw_it.png",
-    "/bubble_pop.png",
+    "/bubble-pop.png",
     "/tennis.png",
-    "/friut_slice.png",    
+    "/fruit-slicer.png",    
   ];
   const [familyAnim, setFamilyAnim] = useState(null);
 

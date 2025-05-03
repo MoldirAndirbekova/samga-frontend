@@ -235,12 +235,47 @@ export default function WhoWeHelpPage() {
   return (
     <main className="min-h-screen bg-[#FFF6E2]">
       {/* Intro rectangle */}
-      <section className="bg-[#F9DB63] max-w-7xl mx-auto mt-10 rounded-3xl px-8 py-10">
-        <h1 className="text-4xl sm:text-5xl font-bold text-[#2959BF] mb-6 text-left">WHO WE HELP</h1>
-        <p className="text-lg sm:text-xl text-[#2959BF] leading-relaxed text-left max-w-3xl">
-          Samğa supports children with various neurodevelopmental conditions and in early learning. Through engaging AR games, we help improve physical, cognitive, and emotional well-being.
+      
+      <section className="w-full flex flex-col items-center px-4 py-16">
+  <div className="bg-[#2959BF] rounded-[25px] max-w-7xl w-full px-6 sm:px-12 py-14 shadow-2xl">
+    <h2 className="text-4xl sm:text-6xl font-extrabold text-white text-center drop-shadow-lg mb-16">
+      WHO WE HELP
+    </h2>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 text-white text-center items-stretch">
+      
+      {/* Card 1 */}
+      <div className="flex flex-col items-center w-full max-w-[280px] mx-auto">
+        <Image src="/svg/brain.svg" alt="Neurodivergent" width={64} height={64} className="mb-5" />
+        <h3 className="text-xl font-bold mb-3">Neurodivergent Children</h3>
+        <p className="text-sm leading-relaxed">
+          Children with ADHD, autism, Down syndrome, and other developmental conditions benefit from therapeutic games that improve attention, social skills, and motor control — all while keeping them engaged and motivated to play and learn.
         </p>
-      </section>
+      </div>
+
+      {/* Card 2 */}
+      <div className="flex flex-col items-center w-full max-w-[280px] mx-auto">
+        <Image src="/svg/growth.svg" alt="Early Learners" width={64} height={64} className="mb-5" />
+        <h3 className="text-xl font-bold mb-3">Early Childhood Learners</h3>
+        <p className="text-sm leading-relaxed">
+          Our platform supports holistic growth in young children, combining AR technology with movement and cognition-based games that enhance early literacy, numeracy, creativity, and problem-solving abilities.
+        </p>
+      </div>
+
+      {/* Card 3 */}
+      <div className="flex flex-col items-center w-full max-w-[280px] mx-auto">
+        <Image src="/svg/support.svg" alt="Parents & Therapists" width={64} height={64} className="mb-5" />
+        <h3 className="text-xl font-bold mb-3">Parents & Therapists</h3>
+        <p className="text-sm leading-relaxed">
+          Samğa provides caregivers and specialists with measurable insights, adaptive challenges, and enjoyable tools that extend therapy beyond the clinic — making learning consistent, interactive, and goal-driven at home or in care settings.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
 
       {/* Accordion */}
       <section className="max-w-7xl mx-auto px-6 py-14">

@@ -75,3 +75,33 @@ body {
 .marquee-item:nth-child(6) { animation-delay: 15s; }
 .marquee-item:nth-child(7) { animation-delay: 18s; }
 
+@keyframes fly-left {
+  0% {
+    transform: translateX(120vw) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-20vw) scale(1.05);
+    opacity: 0;
+  }
+}
+.animate-fly-left {
+  animation: fly-left 18s linear infinite;
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-2deg);
+  }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
+

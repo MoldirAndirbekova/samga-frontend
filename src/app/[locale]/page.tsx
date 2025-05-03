@@ -235,30 +235,67 @@ const [isLangOpen, setIsLangOpen] = useState(false);
     <div className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-4">
   
   <div>
-    <Image src="/logo.png" alt="Samga Logo" width={120} height={40} />
+    <Image src="/svg/samga_bj.svg" alt="Samga Logo" width={120} height={40} />
   </div>
 
   
-  <ul className="flex gap-16 px-6 py-4 bg-white rounded-full shadow-lg items-center">
-  {[
-    { label: t("navbar_about"), href: "/product" },
-    { label: t("navbar_whohelp"), href: "/product" },
-    { label: t("skills_devolop"), href: "/skills/cognitive" },
-    { label: t("contact_us"), href: "/feedback" },
-    { label: t("signup"), href: "/register" },
-    { label: t("login"), href: "/login" },
-    ].map((item) => (
-      <li key={item.label}>
-        <Link
-          href={item.href}
-          className={` className="text-white font-medium text-lg sm:text-xl hover:underline transition-all  "text-[#F49B00]" : "text-black"
-          } hover:text-[#F49B00] transition`}
-        >
-          {item.label}
-        </Link>
-      </li>
-    ))}
+  <ul className="flex gap-6 px-6 py-4 bg-white rounded-full shadow-lg items-center relative text-black">
+  <li>
+  <Link href="#why-us" scroll={true} className="hover:underline">
+  About Us
+</Link>
+
+  </li>
+  <li>
+    <Link href="/whowehelp" className="hover:underline">
+      Who We Help
+    </Link>
+  </li>
+
+  {/* Dropdown Start */}
+  <li className="relative group">
+  <div className="cursor-pointer hover:underline">
+    Skills We Develop
+  </div>
+  <ul className="absolute left-0 mt-2 w-56 bg-white border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+    <li>
+      <Link
+        href="/skills/cognitive"
+        className="block px-4 py-2 hover:bg-gray-100"
+      >
+        Cognitive Skills
+      </Link>
+    </li>
+    <li>
+      <Link
+        href="/skills/motoric"
+        className="block px-4 py-2 hover:bg-gray-100"
+      >
+        Motor Skills
+      </Link>
+    </li>
   </ul>
+</li>
+
+  {/* Dropdown End */}
+
+  <li>
+  <Link href="#footer" scroll={true} className="hover:underline">
+      Contact Us
+    </Link>
+  </li>
+  <li>
+    <Link href="/register" className="hover:underline">
+      Sign Up
+    </Link>
+  </li>
+  <li>
+    <Link href="/login" className="hover:underline">
+      Log In
+    </Link>
+  </li>
+</ul>
+
 
   
   <div className="flex items-center gap-3">
@@ -340,7 +377,7 @@ const [isLangOpen, setIsLangOpen] = useState(false);
   
       
     
-<div className="bg-[#FFF5E1] py-24 px-6 sm:px-10">
+<div id = 'why-us' className=" bg-[#FFF5E1] py-24 px-6 sm:px-10">
         <h2 className="text-4xl sm:text-6xl font-bold text-center text-[#5C3E00] mb-12">{t("whyUs_title")}</h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {whyUs.map((item, index) => (
@@ -405,36 +442,33 @@ const [isLangOpen, setIsLangOpen] = useState(false);
       </section>
       </div>
      
-      <section className="w-full">
+      <section className="w-full font-quicksand">
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0">
     {[
       {
         title: t("card1_title"),
         text: t("card1_text"),
-        image: "/games.png",
-        icon: "/svg/game_controller.svg",
+        image: "/1.png",
       },
       {
         title: t("card2_title"),
         text: t("card2_text"),
-        image: "/child.png",
-        icon: "/svg/puzzle.svg",
+        image: "/2.png",
       },
       {
         title: t("card3_title"),
         text: t("card3_text"),
-        image: "/report.png",
-        icon: "/svg/bar_graph.svg",
+        image: "/3.png",
       },
       {
-        title:t("card4_title"),
+        title: t("card4_title"),
         text: t("card4_text"),
-        image: "/games.png",
-        icon: "/svg/building.svg",
+        image: "/4.png",
       },
     ].map((card, idx) => (
-      <div key={idx} className="flex flex-col w-full h-full">
-        <div className="relative w-full h-[500px]">
+      <div key={idx} className="flex flex-col items-center text-center w-full">
+        {/* Image Section */}
+        <div className="relative w-full h-[600px]">
           <Image
             src={card.image}
             alt={card.title}
@@ -442,23 +476,27 @@ const [isLangOpen, setIsLangOpen] = useState(false);
             objectFit="cover"
             className="w-full h-full object-cover"
           />
-          <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 z-10">
-            <Image src={card.icon} alt="icon" width={80} height={80} />
-          </div>
         </div>
 
+        
         <div
-          className={`flex flex-col justify-between flex-grow w-full px-6 pt-16 pb-10 ${
-            idx % 2 === 0 ? "bg-[#E6EEFF]" : "bg-[#FFFFFF]"
+          className={`w-full px-6 pt-16 pb-10 ${
+            idx % 2 === 0 ? "bg-[#2959BF] text-white" : "bg-white text-[#2959BF]"
           }`}
+          style={{ transform: "none", scale: "1" ,  height: "350px"}}
         >
-          <div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-[#000000] mb-4">{card.title}</h3>
-            <p className="text-base sm:text-lg text-[#000000] mb-6 leading-relaxed">{card.text}</p>
-          </div>
+          <h3 className="text-2xl sm:text-3xl font-bold mb-4">{card.title}</h3>
+          <p className="text-base sm:text-lg mb-6 leading-relaxed">{card.text}</p>
+
           <Link href="/product">
-            <button className="bg-[#38BDF8] hover:bg-[#0EA5E9] text-white px-6 py-3 text-base rounded-full font-semibold transition">
-            {t("learn_more")}
+            <button
+              className={`px-6 py-3 text-base rounded-full font-semibold transition ${
+                idx % 2 === 0
+                  ? "bg-[#F9DB63] hover:bg-yellow-400 text-[#2959BF]"
+                  : "bg-[#2959BF] hover:bg-[#1e4da6] text-white"
+              }`}
+            >
+              {t("learn_more")}
             </button>
           </Link>
         </div>
@@ -528,7 +566,7 @@ const [isLangOpen, setIsLangOpen] = useState(false);
 
 
 
-<div className="py-20 bg-[#FFF6E2] w-full mb-24">
+<div id='reviews' className="py-20 bg-[#FFF6E2] w-full mb-24">
   <h2 className="text-3xl sm:text-7xl font-bold text-center text-[#694800] mb-2 whitespace-pre-line">
     {t("reviews_title")}
   </h2>

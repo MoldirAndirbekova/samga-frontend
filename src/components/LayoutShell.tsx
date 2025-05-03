@@ -10,8 +10,8 @@ import { ChildProvider } from "@/contexts/ChildContext";
 
 const authRoutes = ["/login", "/register", "/reset-password"];
 const noNavbarRoutes = ["/", ]; // только эти без навбара
-const noSidebarRoutes = ["/", "/product", "/skills/cognitive", "/skills/motoric","/product"];
-const footerRoutes = ["/", "/product", "/skills/cognitive", "/skills/motoric"];
+const noSidebarRoutes = ["/", "/product", "/skills/cognitive", "/skills/motoric","/product", "/whowehelp","/terms"];
+const footerRoutes = ["/", "/product", "/skills/cognitive", "/skills/motoric","/whowehelp","/terms"];
 
 // Убираем локаль из пути
 function stripLocale(pathname: string): string {

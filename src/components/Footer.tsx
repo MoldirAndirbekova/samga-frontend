@@ -29,7 +29,8 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="relative bg-gradient-to-b from-[#8DD7FF] to-[#B5EDFF] pt-48 pb-20 px-8 overflow-hidden text-white">
+    <footer id ='footer' className="relative bg-[#3894FB] pt-48 pb-20 px-8 overflow-hidden text-white">
+
       <div className="absolute top-0 left-0 w-full z-10">
         <svg viewBox="0 0 1440 320" className="w-full h-[120px]" preserveAspectRatio="none">
           <path fill="#ffffff" d="M0,160 C360,320 1080,0 1440,160 L1440,0 L0,0 Z" />
@@ -55,7 +56,13 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16 relative z-20 mt-24">
         <div className="flex flex-col gap-6 max-w-xs">
-          <Image src="/icons/samga_blue.png" alt="Samga logo" width={100} height={30} className="h-20 w-70" />
+        <Image
+            src="/svg/logo_white.svg"
+            alt="Samga logo"
+            width={240}
+            height={60}
+            className="w-auto h-[100px] object-contain"
+          />
           <p className="text-lg leading-relaxed text-white/90">
             {t("inclusivePlatform")}
           </p>
@@ -73,16 +80,26 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="text-lg">
-          <h3 className="text-white font-bold mb-3 text-xl">{t("quickLinks")}</h3>
-          <ul className="space-y-2 text-white/90">
-            <li className="hover:underline cursor-pointer">{t("home")}</li>
-            <li className="hover:underline cursor-pointer">{t("aboutUs")}</li>
-            <li className="hover:underline cursor-pointer">{t("reviews")}</li>
-            <li className="hover:underline cursor-pointer">{t("contactUs")}</li>
-            <li className="hover:underline cursor-pointer">{t("terms")}</li>
-          </ul>
-        </div>
+<div className="text-lg"> 
+  <h3 className="text-white font-bold mb-3 text-xl">{t("quickLinks")}</h3>
+  <ul className="space-y-2 text-white/90">
+    <li className="hover:underline cursor-pointer">
+      <Link href="/#top">{t("home")}</Link>
+    </li>
+    <li className="hover:underline cursor-pointer">
+      <Link href="/#whyus">{t("aboutUs")}</Link>
+    </li>
+    <li className="hover:underline cursor-pointer">
+      <Link href="/#reviews">{t("reviews")}</Link>
+    </li>
+    <li className="hover:underline cursor-pointer">
+      <Link href="/#footer">{t("contactUs")}</Link>
+    </li>
+    <li className="hover:underline cursor-pointer">
+      <Link href="/terms">{t("terms")}</Link>
+    </li>
+  </ul>
+</div>
 
         <div className="text-lg">
           <h3 className="text-white font-bold mb-3 text-xl">{t("skillsWeDevelop")}</h3>

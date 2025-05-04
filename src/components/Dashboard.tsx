@@ -54,6 +54,30 @@ export default function Dashboard() {
               name: "Bubble Pop", 
               image_url: "/bubble_pop.png",
               description: "Pop as many bubbles as you can in 60 seconds!"
+            },
+            { 
+              id: "letter-tracing", 
+              name: "Letter Tracing", 
+              image_url: "/letter-tracing.png",
+              description: "Learn to trace letters with your finger!"
+            },
+            { 
+              id: "fruit-slicer", 
+              name: "Fruit Slicer", 
+              image_url: "/fruit-slicer.png",
+              description: "Slice fruits in the air using your head movements!"
+            },
+            { 
+              id: "snake", 
+              name: "Snake", 
+              image_url: "/snake.png",
+              description: "Control the snake with your hand movements!"
+            },
+            { 
+              id: "constructor", 
+              name: "Constructor", 
+              image_url: "/constructor.png",
+              description: "Build objects by assembling pieces with your hands!"
             }
           ]);
         } else {
@@ -74,6 +98,30 @@ export default function Dashboard() {
             name: "Bubble Pop", 
             image_url: "/bubble_pop.png",
             description: "Pop as many bubbles as you can in 60 seconds!"
+          },
+          { 
+            id: "letter-tracing", 
+            name: "Letter Tracing", 
+            image_url: "/letter-tracing.png",
+            description: "Learn to trace letters with your finger!"
+          },
+          { 
+            id: "fruit-slicer", 
+            name: "Fruit Slicer", 
+            image_url: "/fruit-slicer.png",
+            description: "Slice fruits in the air using your head movements!"
+          },
+          { 
+            id: "snake", 
+            name: "Snake", 
+            image_url: "/snake.png",
+            description: "Control the snake with your hand movements!"
+          },
+          { 
+            id: "constructor", 
+            name: "Constructor", 
+            image_url: "/constructor.png",
+            description: "Build objects by assembling pieces with your hands!"
           }
         ]);
       }

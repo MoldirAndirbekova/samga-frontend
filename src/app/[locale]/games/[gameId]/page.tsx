@@ -12,7 +12,7 @@ const BubblePopGame = dynamic(() => import('../../games/components/BubblePopGame
 const LetterTracingGame = dynamic(() => import('../../games/components/LetterTracingGame'), { ssr: false });
 const FruitSlicerGame = dynamic(() => import('../../games/components/FruitSlicerGame'), { ssr: false });
 const SnakeGame = dynamic(() => import('../../games/components/SnakeGame'), { ssr: false });
-
+const ConstructorGame = dynamic(() => import('../../games/components/ConstructorGame'), { ssr: false });
 
 // Game type interface
 interface Game {
@@ -51,7 +51,7 @@ export default function GamePage() {
 
   // Initialize camera when in play mode
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && game?.name !== 'Constructor') {
       const startCamera = async () => {
         try {
           const stream = await navigator.mediaDevices.getUserMedia({ 
@@ -79,7 +79,7 @@ export default function GamePage() {
         }
       };
     }
-  }, [isPlaying]);
+  }, [isPlaying, game]);
 
   // Control background music
   useEffect(() => {
@@ -97,7 +97,12 @@ export default function GamePage() {
 
   const handlePlay = () => {
     setIsPlaying(true);
-    setShowLevelSelect(true);
+    // Constructor game doesn't need difficulty selection
+    if (game?.name === 'Constructor') {
+      setGameStarted(true);
+    } else {
+      setShowLevelSelect(true);
+    }
   };
 
   const handleExit = () => {
@@ -198,20 +203,20 @@ export default function GamePage() {
           priority
           quality={100}
         />
-      ) : (
-        // Show camera feed during actual gameplay
+      ) : game.name !== 'Constructor' ? (
+        // Show camera feed during actual gameplay (except for Constructor)
         <video
           ref={videoRef}
           autoPlay
           playsInline
           className="absolute inset-0 w-full h-full object-cover transform -scale-x-100"
         />
-      )}
+      ) : null}
       
       {/* Game content overlay */}
       <div className="absolute inset-0 z-10">
-        {/* Difficulty selection modal */}
-        {showLevelSelect && !gameStarted && (
+        {/* Difficulty selection modal (not for Constructor) */}
+        {showLevelSelect && !gameStarted && game.name !== 'Constructor' && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/50">
             <div className="p-8 rounded-lg max-w-md w-full">
               <h2 className="text-2xl font-bold text-center mb-6">Select Level</h2>
@@ -228,6 +233,8 @@ export default function GamePage() {
                   Easy {game.name === 'Bubble Pop' && '- Bubbles last 8 seconds'}
                   {game.name === 'Ping Pong' && '- Larger paddles, slower ball'}
                   {game.name === 'Letter Tracing' && '- Larger tracing area'}
+                  {game.name === 'Fruit Slicer' && '- Fewer bombs, slower fruits'}
+                  {game.name === 'Snake' && '- Slower speed, more food'}
                 </button>
                 <button
                   onClick={() => setSelectedDifficulty('MEDIUM')}
@@ -240,6 +247,8 @@ export default function GamePage() {
                   Medium {game.name === 'Bubble Pop' && '- Bubbles last 5 seconds'}
                   {game.name === 'Ping Pong' && '- Medium paddles, faster ball'}
                   {game.name === 'Letter Tracing' && '- Medium tracing area'}
+                  {game.name === 'Fruit Slicer' && '- Normal bombs, medium speed'}
+                  {game.name === 'Snake' && '- Medium speed, standard food'}
                 </button>
                 <button
                   onClick={() => setSelectedDifficulty('HARD')}
@@ -252,6 +261,8 @@ export default function GamePage() {
                   Hard {game.name === 'Bubble Pop' && '- Bubbles last 3 seconds'}
                   {game.name === 'Ping Pong' && '- Small paddles, fastest ball'}
                   {game.name === 'Letter Tracing' && '- Smaller tracing area'}
+                  {game.name === 'Fruit Slicer' && '- More bombs, fastest fruits'}
+                  {game.name === 'Snake' && '- Fast speed, sparse food'}
                 </button>
               </div>
               
@@ -283,6 +294,9 @@ export default function GamePage() {
             {game.name.toLowerCase() === 'snake' && (
               <SnakeGame onGameOver={handleGameOver} difficulty={selectedDifficulty} />
             )}
+            {game.name.toLowerCase() === 'constructor' && (
+              <ConstructorGame onGameOver={handleGameOver} difficulty={selectedDifficulty} />
+            )}
           </div>
         )}
         
@@ -292,7 +306,9 @@ export default function GamePage() {
             <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full text-center">
               <h2 className="text-3xl font-bold mb-6">Game Over!</h2>
               <p className="text-4xl font-bold text-blue-600 mb-8">Score: {finalScore}</p>
-              <p className="text-xl mb-8">Difficulty: {selectedDifficulty}</p>
+              {game.name !== 'Constructor' && (
+                <p className="text-xl mb-8">Difficulty: {selectedDifficulty}</p>
+              )}
               
               <button
                 onClick={handleBackToHome}

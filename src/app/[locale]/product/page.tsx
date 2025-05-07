@@ -28,7 +28,7 @@ export default function ProductPage() {
       <div className="bg-[#8B5CF6] rounded-[25px] max-w-7xl w-full px-6 sm:px-12 py-12">
         <h2 className="text-4xl sm:text-8xl font-extrabold text-white drop-shadow-lg mb-10">
           {t("why_us_title")}
-        </h2>
+        </h2> 
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-white mb-16">
           <div className="flex flex-col items-start">

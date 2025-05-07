@@ -34,6 +34,7 @@ export default function Home() {
   const [arrowAnim, setArrowAnim] = useState(null);
   const [languageOpen, setLanguageOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState("EN");
+  
 
 useEffect(() => {
   fetch("/lottie/arrow.json")
@@ -183,10 +184,11 @@ useEffect(() => {
   ];
   
   const gameImages = [
-    "/draw_it.png",
+  
     "/bubble-pop.png",
     "/tennis.png",
-    "/fruit-slicer.png",    
+    "/fruit-slicer.png",  
+    "/rockpaper.png",  
   ];
   const [familyAnim, setFamilyAnim] = useState(null);
 
@@ -239,62 +241,60 @@ const [isLangOpen, setIsLangOpen] = useState(false);
   </div>
 
   
-  <ul className="flex gap-6 px-6 py-4 bg-white rounded-full shadow-lg items-center relative text-black">
-  <li>
-  <Link href="#why-us" scroll={true} className="hover:underline">
-  About Us
-</Link>
+  <ul className="flex gap-15 px-15 py-3 bg-white rounded-full shadow-lg items-center relative text-black text-xl">
+      <li>
+        <Link href="#why-us" scroll={true} className="hover:underline">
+          {t("navbar_about")}
+        </Link>
+      </li>
+      <li>
+        <Link href="/whowehelp" className="hover:underline">
+          {t("navbar_whohelp")}
+        </Link>
+      </li>
 
-  </li>
-  <li>
-    <Link href="/whowehelp" className="hover:underline">
-      Who We Help
-    </Link>
-  </li>
+      {/* Dropdown Start */}
+      <li className="relative group">
+        <div className="cursor-pointer hover:underline">
+          {t("skills_devolop")}
+        </div>
+        <ul className="absolute left-0 mt-2 w-56 bg-white border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+          <li>
+            <Link
+              href="/skills/cognitive"
+              className="block px-4 py-2 hover:bg-gray-100"
+            >
+              {t("skills_cognitive")}
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/skills/motoric"
+              className="block px-4 py-2 hover:bg-gray-100"
+            >
+              {t("skills_motoric")}
+            </Link>
+          </li>
+        </ul>
+      </li>
+      {/* Dropdown End */}
 
-  {/* Dropdown Start */}
-  <li className="relative group">
-  <div className="cursor-pointer hover:underline">
-    Skills We Develop
-  </div>
-  <ul className="absolute left-0 mt-2 w-56 bg-white border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-    <li>
-      <Link
-        href="/skills/cognitive"
-        className="block px-4 py-2 hover:bg-gray-100"
-      >
-        Cognitive Skills
-      </Link>
-    </li>
-    <li>
-      <Link
-        href="/skills/motoric"
-        className="block px-4 py-2 hover:bg-gray-100"
-      >
-        Motor Skills
-      </Link>
-    </li>
-  </ul>
-</li>
-
-  {/* Dropdown End */}
-
-  <li>
-  <Link href="#footer" scroll={true} className="hover:underline">
-      Contact Us
-    </Link>
-  </li>
-  <li>
-    <Link href="/register" className="hover:underline">
-      Sign Up
-    </Link>
-  </li>
-  <li>
-    <Link href="/login" className="hover:underline">
-      Log In
-    </Link>
-  </li>
-</ul>
+      <li>
+        <Link href="#footer" scroll={true} className="hover:underline">
+          {t("contact_us")}
+        </Link>
+      </li>
+      <li>
+        <Link href="/register" className="hover:underline">
+          {t("signup")}
+        </Link>
+      </li>
+      <li>
+        <Link href="/login" className="hover:underline">
+          {t("login")}
+        </Link>
+      </li>
+    </ul>
 
 
   
@@ -365,13 +365,15 @@ const [isLangOpen, setIsLangOpen] = useState(false);
         >
          {t("header_paragraph")}
         </p>
+        <Link href="/login">
         <button
-          className={`mt-10 px-6 py-3 bg-white text-[#F49B00] rounded-full text-lg font-semibold hover:bg-gray-200 transition-all duration-700 ease-out delay-1000 ${
+          className={`mt-10 px-6 py-3 bg-white text-[#F49B00] rounded-full text-lg font-semibold hover:bg-gray-200 transition-all duration-700 ease-out delay-1000 transition-transform transform hover:scale-110 hover:bg-blue-700 duration-300${
             subTextVisible ? "opacity-100" : "opacity-0"
           }`}
         >
           {t("try_now")}
         </button>
+        </Link>
       </div>
     </div>
   
@@ -660,38 +662,58 @@ const [isLangOpen, setIsLangOpen] = useState(false);
 
     
     <div className="w-full md:w-1/2 space-y-6">
-      {[
-        {
-          text: t("help1_text"),
-          button: t("button1_text"),
-          color: "bg-[#3B82F6] text-white",
-        },
-        {
-          text: t("help2_text"),
-          button: t("button2_text"),
-          color: "bg-[#3B82F6] text-white",
-        },
-        {
-          text: t("help3_text"),
-          button: t("button3_text"),
-          color: "bg-white text-black border border-black",
-        },
-        {
-          text: t("help4_text"),
-          button: t("button4_text"),
-          color: "bg-white text-black border border-black",
-        },
-      ].map((item, idx) => (
-        <div key={idx} className="flex justify-between items-center border-b border-[#5C3E00] pb-4">
-          <p className="text-md sm:text-lg font-medium text-[#5C3E00] w-2/3">{item.text}</p>
+  {[
+    {
+      text: t("help1_text"),
+      button: t("button1_text"),
+      color: "bg-[#3B82F6] text-white",
+      link: "/login",
+    },
+    {
+      text: t("help2_text"),
+      button: t("button2_text"),
+      color: "bg-[#3B82F6] text-white",
+      link: "mailto:merei.zhazitova@gmail.com",
+    },
+    {
+      text: t("help3_text"),
+      button: t("button3_text"),
+      color: "bg-white text-black border border-black",
+      link: "mailto:merei.zhazitova@gmail.com", // example email
+    },
+    {
+      text: t("help4_text"),
+      button: t("button4_text"),
+      color: "bg-white text-black border border-black",
+      link: "mailto:merei.zhazitova@gmail.com", // or whatever your route is
+    },
+  ].map((item, idx) => (
+    <div
+      key={idx}
+      className="flex justify-between items-center border-b border-[#5C3E00] pb-4"
+    >
+      <p className="text-md sm:text-lg font-medium text-[#5C3E00] w-2/3">
+        {item.text}
+      </p>
+      {item.link?.startsWith("mailto:") ? (
+        <a
+          href={item.link}
+          className={`ml-4 px-4 py-2 rounded-full font-semibold whitespace-nowrap ${item.color} hover:scale-105 transition`}
+        >
+          {item.button} →
+        </a>
+      ) : (
+        <Link href={item.link ?? "#"}>
           <button
             className={`ml-4 px-4 py-2 rounded-full font-semibold whitespace-nowrap ${item.color} hover:scale-105 transition`}
           >
             {item.button} →
           </button>
-        </div>
-      ))}
+        </Link>
+      )}
     </div>
+  ))}
+</div>
   </div>
 </section>
 

@@ -7,11 +7,15 @@ import WebSocketCleanup from "@/components/WebSocketCleanup";
 import { usePathname } from "next/navigation";
 import { SidebarProvider } from "@/lib/context/SidebarContext";
 import { ChildProvider } from "@/contexts/ChildContext";
+import Navbar2 from "@/components/Navbar2";
+
 
 const authRoutes = ["/login", "/register", "/reset-password"];
 const noNavbarRoutes = ["/", ]; // только эти без навбара
 const noSidebarRoutes = ["/", "/product", "/skills/cognitive", "/skills/motoric","/product", "/whowehelp","/terms"];
 const footerRoutes = ["/", "/product", "/skills/cognitive", "/skills/motoric","/whowehelp","/terms"];
+const navbar2Routes = ["/skills/cognitive", "/skills/motoric","/whowehelp","/terms","/product"];
+
 
 // Убираем локаль из пути
 function stripLocale(pathname: string): string {
@@ -36,6 +40,7 @@ export default function LayoutContent({
   const isGameDetail = cleanPath.startsWith("/games/") && cleanPath !== "/games";
   const hideSidebar = noSidebarRoutes.includes(cleanPath) || isGameDetail;  
   const showFooter = footerRoutes.includes(cleanPath);
+  const useNavbar2 = navbar2Routes.includes(cleanPath);
 
   return (
     <SidebarProvider>
@@ -45,8 +50,10 @@ export default function LayoutContent({
         </div>
       ) : (
         <ChildProvider>
-          {!hideNavbar && <Header />}
+         {!hideNavbar && (useNavbar2 ? <Navbar2 /> : <Header />)}
+
           <div className="flex flex-1">
+            
             {!hideSidebar && <Sidebar />}
             <main className="flex-1 transition-all duration-300">{children}</main>
           </div>

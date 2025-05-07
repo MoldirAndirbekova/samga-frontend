@@ -2,226 +2,172 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { Globe, ChevronDown } from "lucide-react";
+import { useLocale } from "next-intl";
+import { useRouter, usePathname, Locale } from "@/i18n/routing";
 
 const disabilities = [
   {
-    title: "Attention Deficit Hyperactive Disorder (ADHD)",
-    description: (
+    titleKey: "adhd_title",
+    descriptionComponent: (t) => (
       <div className="space-y-4 bg-[#F5C400] p-6 rounded-none">
         <div className="flex justify-center">
           <Image
             src="/ADHD.png"
-            alt="Child with ADHD"
+            alt={t("adhd_title")}
             width={800}
             height={300}
             className="rounded-none"
           />
         </div>
-        <p className="text-black">
-          In the world of special needs education and support, it is crucial to find approaches and
-          informational resources that help each child's unique learning style and way of engaging
-          with the world. Samğa stands out in this area with its ADHD-sensitive game design,
-          offering innovative and personalized solutions.
-        </p>
-        <h3 className="font-bold text-lg text-black">What is ADHD?</h3>
-        <p className="text-black">
-          Attention Deficit Hyperactivity Disorder, more commonly known as ADHD, is a
-          neurodevelopmental disorder characterized by inattention and hyperactivity in individuals.
-        </p>
-        <h3 className="font-bold text-lg text-black">Symptoms of ADHD:</h3>
+        <p className="text-black">{t("adhd_intro_text")}</p>
+        <h3 className="font-bold text-lg text-black">{t("adhd_what")}</h3>
+        <p className="text-black">{t("adhd_text")}</p>
+        <h3 className="font-bold text-lg text-black">{t("adhd_symptoms")}</h3>
         <ul className="list-disc list-inside text-black">
-          <li>Inattention</li>
-          <li>Hyperactivity</li>
-          <li>Impulsivity</li>
-          <li>Disorganization</li>
-          <li>Poor time management</li>
-          <li>Trouble multitasking</li>
-          <li>Frequent mood swings</li>
-          <li>Difficulty following through on tasks</li>
-          <li>Fidgeting</li>
-          <li>Forgetfulness</li>
+          <li>{t("adhd_symptom_1")}</li>
+          <li>{t("adhd_symptom_2")}</li>
+          <li>{t("adhd_symptom_3")}</li>
+          <li>{t("adhd_symptom_4")}</li>
+          <li>{t("adhd_symptom_5")}</li>
+          <li>{t("adhd_symptom_6")}</li>
+          <li>{t("adhd_symptom_7")}</li>
+          <li>{t("adhd_symptom_8")}</li>
+          <li>{t("adhd_symptom_9")}</li>
+          <li>{t("adhd_symptom_10")}</li>
         </ul>
       </div>
     ),
     color: "#F5C400"
   },
   {
-    title: "Autism Spectrum Disorder (ASD)",
-    description: (
+    titleKey: "asd_title",
+    descriptionComponent: (t) => (
       <div className="space-y-4 bg-[#4A90F6] p-6 rounded-none text-black">
         <div className="flex justify-center">
           <Image
             src="/ADHD.png"
-            alt="Child with ASD"
+            alt={t("asd_title")}
             width={800}
             height={300}
             className="rounded-none"
           />
         </div>
-        <h3 className="font-bold text-lg">Interactive Therapy and Sensory Play Games for Children with Autism</h3>
-        <p>
-          Samğa offers an engaging platform that encourages children with ASD to actively participate and respond
-          to their environment with purpose and intention by offering fun online games for Autism Spectrum Disorder.
-        </p>
-        <p>
-          Our sensory games allow children to improve core skills such as action-reaction, hand-eye coordination,
-          spatial awareness, and body awareness.
-        </p>
-        <h3 className="font-bold text-lg">How Samğa helps children with Autism Spectrum Disorder (ASD):</h3>
-        <p>
-          Kids with ASD can develop vital skills crucial for daily living. Samğa motivates and supplements
-          traditional treatments, improving communication, creativity, and joint attention.
-        </p>
-        <h3 className="font-bold text-lg">Social Skills Activities:</h3>
-        <p>
-          These activities ensure autistic individuals understand social cues, communicate effectively,
-          and build new relationships with confidence.
-        </p>
-        <h3 className="font-bold text-lg">Therapeutic Activities for Autistic Teenagers:</h3>
-        <p>
-          Creative, tailored games help teenagers build motor and communication skills, manage sensory sensitivities,
-          and stay motivated through fun.
-        </p>
-        <h3 className="font-bold text-lg">Skills Children with ASD Develop:</h3>
+        <h3 className="font-bold text-lg">{t("asd_intro")}</h3>
+        <p>{t("asd_intro_text_1")}</p>
+        <p>{t("asd_intro_text_2")}</p>
+        <h3 className="font-bold text-lg">{t("asd_support_title")}</h3>
+        <p>{t("asd_support_text")}</p>
+        <h3 className="font-bold text-lg">{t("asd_social_skills_title")}</h3>
+        <p>{t("asd_social_skills_text")}</p>
+        <h3 className="font-bold text-lg">{t("asd_teen_therapy_title")}</h3>
+        <p>{t("asd_teen_therapy_text")}</p>
+        <h3 className="font-bold text-lg">{t("asd_skills_developed_title")}</h3>
         <ul className="list-disc list-inside">
-          <li>Active participation</li>
-          <li>Visual stimulus recognition</li>
-          <li>Motor skill coordination</li>
-          <li>Communication skills and joint attention</li>
-          <li>Sensory integration (visual, auditory, tactile)</li>
-          <li>Cognitive development (classification, retention, organization)</li>
+          <li>{t("asd_skill_1")}</li>
+          <li>{t("asd_skill_2")}</li>
+          <li>{t("asd_skill_3")}</li>
+          <li>{t("asd_skill_4")}</li>
+          <li>{t("asd_skill_5")}</li>
+          <li>{t("asd_skill_6")}</li>
         </ul>
-        <h3 className="font-bold text-lg">Games for All Ages:</h3>
-        <p>
-          Samğa games are accessible for all age groups, supporting developmental needs across the autism spectrum.
-        </p>
+        <h3 className="font-bold text-lg">{t("asd_games_title")}</h3>
+        <p>{t("asd_games_text")}</p>
       </div>
     ),
     color: "#4A90F6"
   },  
   {
-    title: "Down Syndrome",
-    description: (
+    titleKey: "down_title",
+    descriptionComponent: (t) => (
       <div className="space-y-4 bg-[#FF6B6B] p-6 rounded-none text-black">
         <div className="flex justify-center">
           <Image
             src="/ADHD.png" // You can replace this with a dedicated image for Down Syndrome if desired
-            alt="Child with Down Syndrome"
+            alt={t("down_title")}
             width={800}
             height={300}
             className="rounded-none"
           />
         </div>
-        <h3 className="font-bold text-lg">Sensory Activities and Therapy Games for Kids with Down Syndrome</h3>
-        <p>
-          Children with Down Syndrome need help improving their fine and gross motor skills.
-          Samğa’s interactive games support them in achieving developmental goals that positively impact their daily lives.
-        </p>
-        <p>
-          Games that require hand-eye coordination help strengthen visual-motor integration,
-          while balance-based games improve postural stability.
-        </p>
+        <h3 className="font-bold text-lg">{t("down_intro_title")}</h3>
+        <p>{t("down_intro_text_1")}</p>
+        <p>{t("down_intro_text_2")}</p>
   
-        <h3 className="font-bold text-lg">How Samğa Helps Children with Down Syndrome:</h3>
-        <p>
-          Samğa provides a variety of online activities that challenge cognitive abilities.
-          Memory games assist in improving both short-term and long-term memory,
-          and attention-based tasks enhance focus and sustained engagement.
-        </p>
-        <p>
-          Games using visual and auditory aids help boost language acquisition and support clearer speech development.
-        </p>
+        <h3 className="font-bold text-lg">{t("down_support_title")}</h3>
+        <p>{t("down_support_text_1")}</p>
+        <p>{t("down_support_text_2")}</p>
   
-        <h3 className="font-bold text-lg">Skills and Abilities Developed:</h3>
+        <h3 className="font-bold text-lg">{t("down_skills_title")}</h3>
         <ul className="list-disc list-inside">
-          <li>Enhanced motor control, accuracy, and efficiency</li>
-          <li>Improved clarity of language and speech</li>
-          <li>Encouraged expressive communication skills</li>
-          <li>Boosted cognitive performance in memory and numeracy</li>
+          <li>{t("down_skill_1")}</li>
+          <li>{t("down_skill_2")}</li>
+          <li>{t("down_skill_3")}</li>
+          <li>{t("down_skill_4")}</li>
         </ul>
       </div>
     ),
     color: "#FF6B6B"
   },
   {
-    title: "Developmental Coordination Disorder (DCD)",
-    description: (
+    titleKey: "dcd_title",
+    descriptionComponent: (t) => (
       <div className="space-y-4 bg-[#6BCB77] p-6 rounded-none text-black">
-        <h3 className="font-bold text-lg">Interactive Therapy and Sensory Games for Children with Cerebral Palsy</h3>
-        <p>
-          Samğa’s online games for cerebral palsy can supplement in-clinic occupational therapy for children with
-          Cerebral Palsy. These games provide therapeutic activities for developing both gross and fine motor skills,
-          making them an ideal addition to physical and occupational therapy.
-        </p>
-        <p>
-          These games are not only fun but can also be customized to suit children with varying conditions and
-          levels of capabilities, offering a great solution for parents and therapists looking for enjoyable
-          and effective ways to encourage motor skill development.
-        </p>
-        <h3 className="font-bold text-lg">How Samğa helps children with Cerebral Palsy</h3>
-        <p>
-          Games allow adjustment of difficulty levels according to each child’s ability, challenging them to
-          expand their range of motion and improve bilateral coordination. Continued practice helps children
-          with cerebral palsy develop upper body strength and body awareness, boosting their confidence.
-        </p>
-        <h3 className="font-bold text-lg">Skills and Abilities Developed:</h3>
+        <h3 className="font-bold text-lg">{t("dcd_intro_title")}</h3>
+        <p>{t("dcd_intro_text_1")}</p>
+        <p>{t("dcd_intro_text_2")}</p>
+        <h3 className="font-bold text-lg">{t("dcd_support_title")}</h3>
+        <p>{t("dcd_support_text")}</p>
+        <h3 className="font-bold text-lg">{t("dcd_skills_title")}</h3>
         <ul className="list-disc list-inside">
-          <li>Improve upper body muscle strength and expand range of motion</li>
-          <li>Enhance synchronized movements with greater precision</li>
-          <li>Enhance motor control, accuracy and efficiency</li>
-          <li>Boost cognitive performance in areas such as classification, retention and arrangement</li>
-          <li>Encourage and refine planning and organization of movements, and help regulate balance</li>
+          <li>{t("dcd_skill_1")}</li>
+          <li>{t("dcd_skill_2")}</li>
+          <li>{t("dcd_skill_3")}</li>
+          <li>{t("dcd_skill_4")}</li>
+          <li>{t("dcd_skill_5")}</li>
         </ul>
       </div>
     ),
     color: "#6BCB77"
   },
   {
-    title: "Cerebral Palsy (CP)",
-    description: (
+    titleKey: "cp_title",
+    descriptionComponent: (t) => (
       <div className="space-y-4 bg-[#FFA600] p-6 rounded-none text-black">
-        <h3 className="font-bold text-lg">Interactive Therapy and Sensory Games for Children with Cerebral Palsy</h3>
-        <p>
-          Samğa’s online games for cerebral palsy can supplement in-clinic occupational therapy. These therapeutic activities help develop both gross and fine motor skills and can be tailored to each child's ability level.
-        </p>
-        <h3 className="font-bold text-lg">How Samğa helps children with Cerebral Palsy:</h3>
-        <p>
-          Our games help improve bilateral coordination, expand the range of motion, and develop upper body strength. They also support children with limited mobility, including those in wheelchairs, through adaptive design.
-        </p>
-        <h3 className="font-bold text-lg">Skills and abilities developed with Samğa:</h3>
+        <h3 className="font-bold text-lg">{t("cp_intro_title")}</h3>
+        <p>{t("cp_intro_text")}</p>
+        <h3 className="font-bold text-lg">{t("cp_support_title")}</h3>
+        <p>{t("cp_support_text")}</p>
+        <h3 className="font-bold text-lg">{t("cp_skills_title")}</h3>
         <ul className="list-disc list-inside">
-          <li>Improve upper body muscle strength and expand the range of motion</li>
-          <li>Enhance synchronized movements with greater precision</li>
-          <li>Enhance motor control, accuracy and efficiency</li>
-          <li>Boost cognitive performance in classification, retention and arrangement</li>
-          <li>Encourage motor planning, balance regulation, and movement organization</li>
+          <li>{t("cp_skill_1")}</li>
+          <li>{t("cp_skill_2")}</li>
+          <li>{t("cp_skill_3")}</li>
+          <li>{t("cp_skill_4")}</li>
+          <li>{t("cp_skill_5")}</li>
         </ul>
       </div>
     ),
     color: "#FFA600"
   },
   {
-    title: "Early Childhood Education",
-    description: (
+    titleKey: "ece_title",
+    descriptionComponent: (t) => (
       <div className="space-y-4 bg-[#9B51E0] p-6 rounded-none text-black">
-        <h3 className="font-bold text-lg">Early Childhood Education</h3>
-        <p>
-          Early childhood is a crucial stage in a child's life, shaping cognitive, physical, and emotional development. Samğa enhances early childhood education through interactive, science-backed learning experiences using AR and AI technologies.
-        </p>
-        <h3 className="font-bold text-lg">What is Early Childhood Education?</h3>
-        <p>
-          ECE focuses on foundational learning and development for children from birth to around age eight, preparing them for lifelong learning.
-        </p>
-        <h3 className="font-bold text-lg">Why is Early Childhood Education Important?</h3>
-        <p>
-          It lays the foundation for success, improves brain development and social adaptability, and nurtures curiosity and critical thinking.
-        </p>
-        <h3 className="font-bold text-lg">Benefits of ECE with Samğa:</h3>
+        <h3 className="font-bold text-lg">{t("ece_intro_title")}</h3>
+        <p>{t("ece_intro_text")}</p>
+        <h3 className="font-bold text-lg">{t("ece_definition_title")}</h3>
+        <p>{t("ece_definition_text")}</p>
+        <h3 className="font-bold text-lg">{t("ece_importance_title")}</h3>
+        <p>{t("ece_importance_text")}</p>
+        <h3 className="font-bold text-lg">{t("ece_benefits_title")}</h3>
         <ul className="list-disc list-inside">
-          <li><strong>Cognitive Development:</strong> Enhances memory, attention, problem-solving, and critical thinking.</li>
-          <li><strong>Physical Growth:</strong> Improves motor skills, coordination, and overall physical health.</li>
-          <li><strong>Social and Emotional Skills:</strong> Builds confidence, communication, and emotional regulation.</li>
-          <li><strong>Special Education Support:</strong> Adapts to children’s needs with inclusive game design and real-time tracking for educators and parents.</li>
+          <li>{t("ece_benefit_1")}</li>
+          <li>{t("ece_benefit_2")}</li>
+          <li>{t("ece_benefit_3")}</li>
+          <li>{t("ece_benefit_4")}</li>
         </ul>
       </div>
     ),
@@ -231,51 +177,67 @@ const disabilities = [
 
 export default function WhoWeHelpPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const t = useTranslations("WhoWeHelp");
+  
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const locale = useLocale();
+  const [language, setLanguage] = useState(locale.toUpperCase());
+
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleLangChange = (lang: string) => {
+    const nextLocale = lang.toLowerCase();
+    setLanguage(lang);
+    setIsLangOpen(false);
+
+    router.replace(
+      { pathname },
+      { locale: nextLocale as Locale }
+    );
+  };
 
   return (
     <main className="min-h-screen bg-[#FFF6E2]">
       {/* Intro rectangle */}
       
       <section className="w-full flex flex-col items-center px-4 py-16">
-  <div className="bg-[#2959BF] rounded-[25px] max-w-7xl w-full px-6 sm:px-12 py-14 shadow-2xl">
-    <h2 className="text-4xl sm:text-6xl font-extrabold text-white text-center drop-shadow-lg mb-16">
-      WHO WE HELP
-    </h2>
+        <div className="bg-[#2959BF] rounded-[25px] max-w-7xl w-full px-6 sm:px-12 py-14 shadow-2xl">
+          <h2 className="text-4xl sm:text-6xl font-extrabold text-white text-center drop-shadow-lg mb-16">
+            {t("page_title")}
+          </h2>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 text-white text-center items-stretch">
-      
-      {/* Card 1 */}
-      <div className="flex flex-col items-center w-full max-w-[280px] mx-auto">
-        <Image src="/svg/brain.svg" alt="Neurodivergent" width={64} height={64} className="mb-5" />
-        <h3 className="text-xl font-bold mb-3">Neurodivergent Children</h3>
-        <p className="text-sm leading-relaxed">
-          Children with ADHD, autism, Down syndrome, and other developmental conditions benefit from therapeutic games that improve attention, social skills, and motor control — all while keeping them engaged and motivated to play and learn.
-        </p>
-      </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 text-white text-center items-stretch">
+            
+            {/* Card 1 */}
+            <div className="flex flex-col items-center w-full max-w-[280px] mx-auto">
+              <Image src="/svg/brain.svg" alt="Neurodivergent" width={64} height={64} className="mb-5" />
+              <h3 className="text-xl font-bold mb-3">{t("card_neurodivergent_title")}</h3>
+              <p className="text-sm leading-relaxed">
+                {t("card_neurodivergent_text")}
+              </p>
+            </div>
 
-      {/* Card 2 */}
-      <div className="flex flex-col items-center w-full max-w-[280px] mx-auto">
-        <Image src="/svg/growth.svg" alt="Early Learners" width={64} height={64} className="mb-5" />
-        <h3 className="text-xl font-bold mb-3">Early Childhood Learners</h3>
-        <p className="text-sm leading-relaxed">
-          Our platform supports holistic growth in young children, combining AR technology with movement and cognition-based games that enhance early literacy, numeracy, creativity, and problem-solving abilities.
-        </p>
-      </div>
+            {/* Card 2 */}
+            <div className="flex flex-col items-center w-full max-w-[280px] mx-auto">
+              <Image src="/svg/growth.svg" alt="Early Learners" width={64} height={64} className="mb-5" />
+              <h3 className="text-xl font-bold mb-3">{t("card_earlylearners_title")}</h3>
+              <p className="text-sm leading-relaxed">
+                {t("card_earlylearners_text")}
+              </p>
+            </div>
 
-      {/* Card 3 */}
-      <div className="flex flex-col items-center w-full max-w-[280px] mx-auto">
-        <Image src="/svg/support.svg" alt="Parents & Therapists" width={64} height={64} className="mb-5" />
-        <h3 className="text-xl font-bold mb-3">Parents & Therapists</h3>
-        <p className="text-sm leading-relaxed">
-          Samğa provides caregivers and specialists with measurable insights, adaptive challenges, and enjoyable tools that extend therapy beyond the clinic — making learning consistent, interactive, and goal-driven at home or in care settings.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
+            {/* Card 3 */}
+            <div className="flex flex-col items-center w-full max-w-[280px] mx-auto">
+              <Image src="/svg/support.svg" alt="Parents & Therapists" width={64} height={64} className="mb-5" />
+              <h3 className="text-xl font-bold mb-3">{t("card_parents_title")}</h3>
+              <p className="text-sm leading-relaxed">
+                {t("card_parents_text")}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Accordion */}
       <section className="max-w-7xl mx-auto px-6 py-14">
@@ -295,12 +257,12 @@ export default function WhoWeHelpPage() {
                 }}
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
-                <span>{item.title}</span>
+                <span>{t(item.titleKey)}</span>
                 <span className="text-7xl">{openIndex === index ? "−" : "+"}</span>
               </button>
               {openIndex === index && (
                 <div className="px-0 py-0 text-[#444] text-base sm:text-lg leading-relaxed">
-                  {item.description}
+                  {item.descriptionComponent(t)}
                 </div>
               )}
             </div>

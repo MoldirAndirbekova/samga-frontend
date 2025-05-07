@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSidebar } from "@/lib/context/SidebarContext";
 
+
+
 export default function Dashboard() {
   const { collapsed } = useSidebar();
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
@@ -78,6 +80,12 @@ export default function Dashboard() {
               name: "Constructor", 
               image_url: "/constructor.png",
               description: "Build objects by assembling pieces with your hands!"
+            },
+            { 
+              id: "rock-paper-scissors", 
+              name: "Rock Paper Scissors", 
+              image_url: "/rock-paper-scissors.png",
+              description: "Play Rock Paper Scissors against the computer using hand gestures!"
             }
           ]);
         } else {

@@ -215,16 +215,53 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
   const startGameWithLevel = (level: number) => {
     if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
       console.log("Starting game with level:", level);
+      
+      // Send a more robust level selection message
       wsRef.current.send(JSON.stringify({
         type: 'start_game',
         data: {
           level: level,
           screen_width: gameDimensions.width,
-          screen_height: gameDimensions.height
+          screen_height: gameDimensions.height,
+          selected_difficulty: difficulty,
+          level_name: levels.find(l => l.level === level)?.name || "",
+          timestamp: new Date().toISOString()
         }
       }));
+      
+      // Set local state for UI
       setGameState(prev => ({ ...prev, selectedLevel: level }));
       setShowLevelSelect(false);
+    } else {
+      console.error("WebSocket not connected! Cannot start game.");
+      
+      // Try to reconnect and then start game
+      if (gameId) {
+        connectWebSocket(gameId);
+        
+        setTimeout(() => {
+          if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+            console.log("Reconnected, starting game with level:", level);
+            
+            wsRef.current.send(JSON.stringify({
+              type: 'start_game',
+              data: {
+                level: level,
+                screen_width: gameDimensions.width,
+                screen_height: gameDimensions.height,
+                selected_difficulty: difficulty,
+                level_name: levels.find(l => l.level === level)?.name || "",
+                timestamp: new Date().toISOString()
+              }
+            }));
+            
+            setGameState(prev => ({ ...prev, selectedLevel: level }));
+            setShowLevelSelect(false);
+          } else {
+            alert("Could not connect to game server. Please try refreshing the page.");
+          }
+        }, 1000);
+      }
     }
   };
   
@@ -239,6 +276,17 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
     if (wsRef.current) {
       if (wsRef.current.readyState === WebSocket.OPEN || 
           wsRef.current.readyState === WebSocket.CONNECTING) {
+        
+        // Send a close game message
+        try {
+          wsRef.current.send(JSON.stringify({
+            type: 'close_game',
+            data: {}
+          }));
+        } catch (e) {
+          console.error("Error sending close game message", e);
+        }
+        
         wsRef.current.close(1000, "Game over, cleaning up");
       }
       wsRef.current = null;

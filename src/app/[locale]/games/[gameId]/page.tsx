@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import api from "@/features/page";
+import api from "@/lib/api";
 import Image from "next/image";
 import dynamic from 'next/dynamic';
 
@@ -254,13 +254,21 @@ export default function GamePage() {
                   {game.name === 'Letter Tracing' && '- Smaller tracing area'}
                 </button>
               </div>
-              
+              <div className="flex gap-4">
               <button
                 onClick={handleStartGame}
                 className="w-full px-6 py-3 bg-yellow-500 text-white font-bold rounded-lg shadow-lg hover:bg-blue-600 transition transform hover:scale-105"
               >
                 Start Game
               </button>
+
+              <button
+                onClick={handleExit}
+                className="w-full px-6 py-3 bg-blue-500 text-white font-bold rounded-lg shadow-lg hover:bg-blue-600 transition transform hover:scale-105"
+              >
+                Exit Game
+              </button>
+              </div>
             </div>
           </div>
         )}

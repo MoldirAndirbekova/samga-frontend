@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import api from "@/features/page";
+import api from "@/lib/api";
 
 // Handler for submitting game statistics
 export async function POST(request: Request) {

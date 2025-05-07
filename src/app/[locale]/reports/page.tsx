@@ -54,7 +54,7 @@ interface GameReport {
 }
 
 export default function Reports() {
-    const t = useTranslations('Reports1');
+  const t = useTranslations('Reports1');
 
   const [gameReport, setGameReport] = useState<GameReport | null>(null);
   const [loading, setLoading] = useState(true);

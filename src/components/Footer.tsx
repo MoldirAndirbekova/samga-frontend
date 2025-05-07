@@ -6,10 +6,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl"; 
 
+
+
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 export default function Footer() {
   const t = useTranslations("Footer"); 
+  const [email, setEmail] = useState("");        
+  const [submitted, setSubmitted] = useState(false); 
   const [animationData, setAnimationData] = useState(null);
 
   useEffect(() => {
@@ -118,14 +122,35 @@ export default function Footer() {
         </div>
 
         <div className="bg-white text-[#2F63D3] rounded-3xl px-6 py-6 w-[320px] shadow-2xl transition-transform hover:scale-105">
-          <h2 className="text-lg font-bold mb-3">{t("haveQuestions")}</h2>
-          <input
-            type="email"
-            placeholder={t("enterEmail")}
-            className="w-full rounded px-3 py-2 text-black bg-[#F0F0F0] mb-3 outline-none focus:ring-2 focus:ring-[#2F63D3]"
-          />
-          <p className="text-sm font-semibold">{t("weWillContact")}</p>
-        </div>
+  <h2 className="text-lg font-bold mb-3">{t("haveQuestions")}</h2>
+  
+  <input
+    type="email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    placeholder={t("enterEmail")}
+    className="w-full rounded px-3 py-2 text-black bg-[#F0F0F0] mb-3 outline-none focus:ring-2 focus:ring-[#2F63D3]"
+  />
+
+  <button
+    onClick={() => {
+      if (!email.includes("@")) {
+        alert("Please enter a valid email.");
+        return;
+      }
+      console.log("Email submitted:", email);
+      setEmail("");
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 2000);
+    }}
+    className="w-full py-2 bg-[#2F63D3] text-white font-bold rounded hover:bg-[#1e4db6] transition mb-2"
+  >
+    {submitted ? t("submitted") : t("submit")}
+  </button>
+
+  <p className="text-sm font-semibold">{t("weWillContact")}</p>
+</div>
+
       </div>
     </footer>
   );

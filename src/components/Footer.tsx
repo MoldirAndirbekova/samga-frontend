@@ -55,7 +55,9 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16 relative z-20 mt-24">
+        
         <div className="flex flex-col gap-6 max-w-xs">
+        <Link href={"/"}>
         <Image
             src="/svg/logo_white.svg"
             alt="Samga logo"
@@ -63,6 +65,7 @@ export default function Footer() {
             height={60}
             className="w-auto h-[100px] object-contain"
           />
+        </Link>
           <p className="text-lg leading-relaxed text-white/90">
             {t("inclusivePlatform")}
           </p>

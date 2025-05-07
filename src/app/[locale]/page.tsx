@@ -236,10 +236,11 @@ const [isLangOpen, setIsLangOpen] = useState(false);
     > 
     <div className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-4">
   
+  <Link href={"/"}>
   <div>
     <Image src="/svg/samga_bj.svg" alt="Samga Logo" width={120} height={40} />
   </div>
-
+  </Link>
   
   <ul className="flex gap-15 px-15 py-3 bg-white rounded-full shadow-lg items-center relative text-black text-xl">
       <li>

@@ -30,9 +30,11 @@ export default function Navbar2() {
     <div className="w-full bg-[#2959BF] text-white z-50">
       <div className="flex items-center justify-between px-2 py-4 max-w-7xl mx-auto">
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <Image src="/svg/samga_bj.svg" alt="Logo" width={120} height={40} />
-        </div>
+        <Link href={"/"}>
+          <div className="flex items-center gap-2">
+            <Image src="/svg/samga_bj.svg" alt="Logo" width={120} height={40} />
+          </div>
+        </Link>
 
         {/* Nav Links */}
         <ul className="hidden md:flex gap-6 items-center text-white font-medium text-lg">

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import api from "@/features/page";
+import api from "@/lib/api";
 import Image from "next/image";
 import dynamic from 'next/dynamic';
 
@@ -11,6 +11,8 @@ const PingPongGame = dynamic(() => import('../../games/components/PingPongGame')
 const BubblePopGame = dynamic(() => import('../../games/components/BubblePopGame'), { ssr: false });
 const LetterTracingGame = dynamic(() => import('../../games/components/LetterTracingGame'), { ssr: false });
 const FruitSlicerGame = dynamic(() => import('../../games/components/FruitSlicerGame'), { ssr: false });
+const SnakeGame = dynamic(() => import('../../games/components/SnakeGame'), { ssr: false });
+
 
 // Game type interface
 interface Game {
@@ -25,6 +27,7 @@ export default function GamePage() {
   const router = useRouter();
   const [game, setGame] = useState<Game | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false); // State for playing mode
   const [showLevelSelect, setShowLevelSelect] = useState(false); // State for difficulty selection
@@ -78,6 +81,20 @@ export default function GamePage() {
     }
   }, [isPlaying]);
 
+  // Control background music
+  useEffect(() => {
+    if (!gameStarted && audioRef.current) {
+      // Play music when on initial screen or level selection
+      audioRef.current.play().catch(error => {
+        console.log("Auto-play was prevented:", error);
+      });
+    } else if (gameStarted && audioRef.current) {
+      // Stop music when game starts
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  }, [gameStarted]);
+
   const handlePlay = () => {
     setIsPlaying(true);
     setShowLevelSelect(true);
@@ -110,35 +127,47 @@ export default function GamePage() {
 
   if (!game) return <p>Loading...</p>;
 
-  // If game hasn't started yet, show the initial page
+  // If game hasn't started yet, show the initial page with full-screen background
   if (!isPlaying) {
     return (
-      <div className="flex flex-col items-center gap-6 p-4">
-        <h1 className="text-3xl font-bold bg-purple-400 px-4 py-2 rounded">{game.name}</h1>
-        <Image 
-          src={game.image_url || "/placeholder-game.png"} 
-          alt={game.name} 
-          width={600} 
-          height={400} 
-          className="rounded-lg shadow" 
+      <div className="relative w-full h-screen">
+        {/* Background music */}
+        <audio
+          ref={audioRef}
+          src="/background-music.mp3"
+          loop
+          autoPlay
         />
         
-        <div className="mt-4 p-6 bg-white rounded-lg shadow-md max-w-2xl">
-          <p className="text-lg mb-6">{game.description || "Use your hands to play this interactive game!"}</p>
+        {/* Full-screen background image */}
+        <Image 
+          src={`/${game.id}.png`}
+          alt={game.name} 
+          fill
+          style={{ objectFit: 'cover' }}
+          priority
+          quality={100}
+        />
+        
+        {/* Content overlay */}
+        <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center gap-6 p-4">
           
-          <div className="flex gap-4 justify-center">
-            <button 
-              onClick={handlePlay}
-              className="px-8 py-4 bg-green-500 text-white font-bold rounded-lg shadow-lg hover:bg-green-600 transition"
-            >
-              Play
-            </button>
-            <button 
-              onClick={handleExit}
-              className="px-8 py-4 bg-red-500 text-white font-bold rounded-lg shadow-lg hover:bg-red-600 transition"
-            >
-              Exit
-            </button>
+          <div className="mt-4 p-6 rounded-lg max-w-2xl">
+            
+            <div className="flex gap-4 justify-center">
+              <button 
+                onClick={handlePlay}
+                className="px-15 py-5 bg-yellow-500 text-white font-bold rounded-lg shadow-lg hover:bg-yellow-600 transition transform hover:scale-105"
+              >
+                Play
+              </button>
+              <button 
+                onClick={handleExit}
+                className="px-15 py-5 bg-yellow-500 text-white font-bold rounded-lg shadow-lg hover:bg-yellow-600 transition transform hover:scale-105"
+              >
+                Exit
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -147,27 +176,50 @@ export default function GamePage() {
 
   // If in play mode, show full-screen game with difficulty selection
   return (
-    <div className="fixed inset-0 bg-black">
-      {/* Camera feed in background */}
-      <video
-        ref={videoRef}
-        autoPlay
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover transform -scale-x-100"
-      />
+    <div className="relative w-full h-screen">
+      {/* Continue playing background music during level selection */}
+      {!gameStarted && (
+        <audio
+          ref={audioRef}
+          src="/background-music.mp3"
+          loop
+          autoPlay
+        />
+      )}
+      
+      {/* Background image for level selection, camera feed for gameplay */}
+      {showLevelSelect && !gameStarted ? (
+        // Show game image as background during level selection
+        <Image 
+          src={`/${game.id}.png`}
+          alt={game.name} 
+          fill
+          style={{ objectFit: 'cover' }}
+          priority
+          quality={100}
+        />
+      ) : (
+        // Show camera feed during actual gameplay
+        <video
+          ref={videoRef}
+          autoPlay
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover transform -scale-x-100"
+        />
+      )}
       
       {/* Game content overlay */}
-      <div className="relative z-10 w-full h-full">
+      <div className="absolute inset-0 z-10">
         {/* Difficulty selection modal */}
         {showLevelSelect && !gameStarted && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75">
-            <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full">
-              <h2 className="text-2xl font-bold text-center mb-6">Select Difficulty</h2>
+          <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+            <div className="p-8 rounded-lg max-w-md w-full">
+              <h2 className="text-2xl font-bold text-center mb-6">Select Level</h2>
               
               <div className="flex flex-col gap-4 mb-6">
                 <button
                   onClick={() => setSelectedDifficulty('EASY')}
-                  className={`px-6 py-3 rounded-lg text-lg font-bold transition ${
+                  className={`px-6 py-3 rounded-lg text-lg font-bold transition transform hover:scale-105 ${
                     selectedDifficulty === 'EASY' 
                       ? 'bg-green-500 text-white' 
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -179,7 +231,7 @@ export default function GamePage() {
                 </button>
                 <button
                   onClick={() => setSelectedDifficulty('MEDIUM')}
-                  className={`px-6 py-3 rounded-lg text-lg font-bold transition ${
+                  className={`px-6 py-3 rounded-lg text-lg font-bold transition transform hover:scale-105 ${
                     selectedDifficulty === 'MEDIUM' 
                       ? 'bg-yellow-500 text-white' 
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -191,7 +243,7 @@ export default function GamePage() {
                 </button>
                 <button
                   onClick={() => setSelectedDifficulty('HARD')}
-                  className={`px-6 py-3 rounded-lg text-lg font-bold transition ${
+                  className={`px-6 py-3 rounded-lg text-lg font-bold transition transform hover:scale-105 ${
                     selectedDifficulty === 'HARD' 
                       ? 'bg-red-500 text-white' 
                       : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -202,13 +254,21 @@ export default function GamePage() {
                   {game.name === 'Letter Tracing' && '- Smaller tracing area'}
                 </button>
               </div>
-              
+              <div className="flex gap-4">
               <button
                 onClick={handleStartGame}
-                className="w-full px-6 py-3 bg-blue-500 text-white font-bold rounded-lg shadow-lg hover:bg-blue-600 transition"
+                className="w-full px-6 py-3 bg-yellow-500 text-white font-bold rounded-lg shadow-lg hover:bg-blue-600 transition transform hover:scale-105"
               >
                 Start Game
               </button>
+
+              <button
+                onClick={handleExit}
+                className="w-full px-6 py-3 bg-blue-500 text-white font-bold rounded-lg shadow-lg hover:bg-blue-600 transition transform hover:scale-105"
+              >
+                Exit Game
+              </button>
+              </div>
             </div>
           </div>
         )}
@@ -228,6 +288,9 @@ export default function GamePage() {
             {game.name.toLowerCase() === 'fruit slicer' && (
               <FruitSlicerGame onGameOver={handleGameOver} difficulty={selectedDifficulty} />
             )}
+            {game.name.toLowerCase() === 'snake' && (
+              <SnakeGame onGameOver={handleGameOver} difficulty={selectedDifficulty} />
+            )}
           </div>
         )}
         
@@ -241,7 +304,7 @@ export default function GamePage() {
               
               <button
                 onClick={handleBackToHome}
-                className="px-8 py-4 bg-purple-500 text-white font-bold rounded-lg shadow-lg hover:bg-purple-600 transition"
+                className="px-8 py-4 bg-purple-500 text-white font-bold rounded-lg shadow-lg hover:bg-purple-600 transition transform hover:scale-105"
               >
                 Home
               </button>

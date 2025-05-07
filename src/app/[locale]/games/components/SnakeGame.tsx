@@ -5,56 +5,38 @@ import api from "@/lib/api";
 import { registerWebSocket, unregisterWebSocket } from "@/features/websocket";
 import { useChild } from "@/contexts/ChildContext";
 
-interface LetterTracingGameProps {
+interface SnakeGameProps {
   onGameOver: (score: number) => void;
   difficulty: 'EASY' | 'MEDIUM' | 'HARD';
 }
 
-export default function LetterTracingGame({ onGameOver, difficulty: initialDifficulty }: LetterTracingGameProps) {
+export default function SnakeGame({ onGameOver, difficulty }: SnakeGameProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [gameState, setGameState] = useState({
-    currentLetter: 'A',
-    progress: 0,
-    lettersCompleted: 0,
+    score: 0,
     gameActive: false,
     gameOver: false,
-    showCongrats: false
+    timeRemaining: 120
   });
   const [gameId, setGameId] = useState<string | null>(null);
   const [socketConnected, setSocketConnected] = useState(false);
   const [connectionId, setConnectionId] = useState<string | null>(null);
-  const [isProcessingFrame, setIsProcessingFrame] = useState(false);
   const [frameImage, setFrameImage] = useState<string | null>(null);
-  const [difficulty, setDifficulty] = useState<'EASY' | 'MEDIUM' | 'HARD'>(initialDifficulty);
   const wsRef = useRef<WebSocket | null>(null);
   const gameCreatedRef = useRef(false);
-  const processingGameOverRef = useRef(false);
   const { selectedChildId } = useChild();
-  const [savedGameResult, setSavedGameResult] = useState(false);
-  const [saveError, setSaveError] = useState<string | null>(null);
-  const [gameDimensions, setGameDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
-  
-  // Update game dimensions on resize
-  useEffect(() => {
-    const handleResize = () => {
-      setGameDimensions({ width: window.innerWidth, height: window.innerHeight });
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
   
   const createGame = async () => {
     try {
       if (!selectedChildId) {
         console.error("No child selected");
-        setSaveError("No child selected. Please select a child from the header menu first.");
         return;
       }
 
-      console.log("Creating new Letter Tracing game with difficulty:", difficulty);
+      console.log("Creating new Snake game with difficulty:", difficulty);
       
+      // Clean up existing connection
       if (wsRef.current) {
         console.log("Cleaning up existing WebSocket connection");
         if (connectionId) {
@@ -71,20 +53,19 @@ export default function LetterTracingGame({ onGameOver, difficulty: initialDiffi
         setSocketConnected(false);
       }
 
+      // Reset game state
       setFrameImage(null);
       setGameState({
-        currentLetter: 'A',
-        progress: 0,
-        lettersCompleted: 0,
+        score: 0,
         gameActive: false,
         gameOver: false,
-        showCongrats: false
+        timeRemaining: 120
       });
       
       gameCreatedRef.current = true;
 
       const response = await api.post('/games/game/start', {
-        game_type: 'letter_tracing',
+        game_type: 'snake',
         difficulty: difficulty,
         child_id: selectedChildId
       });
@@ -125,7 +106,7 @@ export default function LetterTracingGame({ onGameOver, difficulty: initialDiffi
     }
     
     setGameId(id);
-    localStorage.setItem("letter_tracing_game_id", id);
+    localStorage.setItem("snake_game_id", id);
     setSocketConnected(false);
     
     const token = localStorage.getItem("access_token");
@@ -157,18 +138,16 @@ export default function LetterTracingGame({ onGameOver, difficulty: initialDiffi
         }
         
         const newGameState = {
-          currentLetter: data.data.current_letter || 'A',
-          progress: data.data.fill_progress || 0,
-          lettersCompleted: data.data.letters_completed || 0,
+          score: data.data.score || 0,
           gameActive: data.data.game_active || false,
           gameOver: data.data.game_over || false,
-          showCongrats: data.data.show_congrats || false
+          timeRemaining: data.data.time_remaining || 120
         };
 
         if (newGameState.gameOver && !gameState.gameOver) {
-          console.log("Game just ended - calling onGameOver with score:", newGameState.lettersCompleted);
+          console.log("Game just ended - calling onGameOver with score:", newGameState.score);
           setTimeout(() => {
-            onGameOver(newGameState.lettersCompleted);
+            onGameOver(newGameState.score);
             closeWebSocketConnection();
           }, 1000);
         }
@@ -198,7 +177,7 @@ export default function LetterTracingGame({ onGameOver, difficulty: initialDiffi
     wsRef.current = ws;
     
     const cleanupCallback = () => {
-      console.log("Cleaning up Letter Tracing game resources");
+      console.log("Cleaning up Snake game resources");
     };
     
     const newConnectionId = registerWebSocket(ws, cleanupCallback);
@@ -207,13 +186,9 @@ export default function LetterTracingGame({ onGameOver, difficulty: initialDiffi
   
   const startGame = () => {
     if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
-      console.log("Sending start_game event to server with dimensions:", gameDimensions);
+      console.log("Sending start_game event to server");
       wsRef.current.send(JSON.stringify({
-        type: 'start_game',
-        data: {
-          screen_width: gameDimensions.width,
-          screen_height: gameDimensions.height
-        }
+        type: 'start_game'
       }));
     }
   };
@@ -295,7 +270,6 @@ export default function LetterTracingGame({ onGameOver, difficulty: initialDiffi
       }
       
       processingActive = true;
-      setIsProcessingFrame(true);
       
       try {
         const canvas = document.createElement('canvas');
@@ -324,7 +298,6 @@ export default function LetterTracingGame({ onGameOver, difficulty: initialDiffi
       } catch (error) {
         console.error('Error processing frame:', error);
       } finally {
-        setIsProcessingFrame(false);
         processingActive = false;
       }
     }, 100);
@@ -344,12 +317,12 @@ export default function LetterTracingGame({ onGameOver, difficulty: initialDiffi
         className="absolute inset-0 w-full h-full object-cover transform -scale-x-100"
       />
       
-      {/* Game overlay - full screen without border */}
+      {/* Game overlay - full screen */}
       <div className="absolute inset-0 w-full h-full">
         {frameImage ? (
           <img 
             src={frameImage} 
-            alt="Letter Tracing Game" 
+            alt="Snake Game" 
             className="w-full h-full object-cover"
           />
         ) : (
@@ -359,18 +332,14 @@ export default function LetterTracingGame({ onGameOver, difficulty: initialDiffi
         )}
       </div>
       
-      {/* Score and progress display - overlay on top */}
+      {/* Score and time display - overlay on top */}
       <div className="absolute top-4 left-4 right-4 flex justify-between z-50">
-        <div className="bg-blue-100 bg-opacity-90 text-blue-800 p-3 rounded-lg">
-          <p className="text-lg font-bold">Letter: {gameState.currentLetter}</p>
-        </div>
-        
         <div className="bg-green-100 bg-opacity-90 text-green-800 p-3 rounded-lg">
-          <p className="text-lg font-bold">Progress: {Math.round(gameState.progress * 100)}%</p>
+          <p className="text-lg font-bold">Score: {gameState.score}</p>
         </div>
         
-        <div className="bg-purple-100 bg-opacity-90 text-purple-800 p-3 rounded-lg">
-          <p className="text-lg font-bold">Completed: {gameState.lettersCompleted}/26</p>
+        <div className="bg-red-100 bg-opacity-90 text-red-800 p-3 rounded-lg">
+          <p className="text-lg font-bold">Time: {gameState.timeRemaining}s</p>
         </div>
       </div>
       

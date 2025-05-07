@@ -36,8 +36,8 @@ export default function LayoutContent({
   const cleanPath = stripLocale(pathname);
 
   const isAuth = authRoutes.includes(cleanPath);
-  const hideNavbar = noNavbarRoutes.includes(cleanPath);
   const isGameDetail = cleanPath.startsWith("/games/") && cleanPath !== "/games";
+  const hideNavbar = noNavbarRoutes.includes(cleanPath);
   const hideSidebar = noSidebarRoutes.includes(cleanPath) || isGameDetail;  
   const showFooter = footerRoutes.includes(cleanPath);
   const useNavbar2 = navbar2Routes.includes(cleanPath);
@@ -50,7 +50,7 @@ export default function LayoutContent({
         </div>
       ) : (
         <ChildProvider>
-         {!hideNavbar && (useNavbar2 ? <Navbar2 /> : <Header />)}
+         {!hideNavbar && !isGameDetail && (useNavbar2 ? <Navbar2 /> : <Header />)}
 
           <div className="flex flex-1">
             

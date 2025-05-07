@@ -406,7 +406,8 @@
   "navbar_whohelp":"Who We Help",
   
   "skills_devolop":"Skills We Develop",
-  
+  "skills_cognitive": "Cognitive Skills",
+  "skills_motoric": "Motor Skills",  
   "contact_us":"Contact Us",
   
   "signup":"Sign Up",
@@ -494,5 +495,138 @@
       "Timestamp":"Timestamp",
       "Skills":"Skills",
       "score_dist":"Score Distribution"
-    }
+    },
+    "WhoWeHelp":      {
+        "page_title": "Who We Help",
+        "card_neurodivergent_title": "Neurodivergent Children",
+        "card_neurodivergent_text": "Children with ADHD, autism, Down syndrome, and other developmental conditions benefit from therapeutic games that improve attention, social skills, and motor control — all while keeping them engaged and motivated to play and learn.",
+        "card_earlylearners_title": "Early Childhood Learners",
+        "card_earlylearners_text": "Our platform supports holistic growth in young children, combining AR technology with movement and cognition-based games that enhance early literacy, numeracy, creativity, and problem-solving abilities.",
+        "card_parents_title": "Parents & Therapists",
+        "card_parents_text": "Samğa provides caregivers and specialists with measurable insights, adaptive challenges, and enjoyable tools that extend therapy beyond the clinic — making learning consistent, interactive, and goal-driven at home or in care settings.",
+      
+        "adhd_title": "Attention Deficit Hyperactive Disorder (ADHD)",
+        "adhd_what": "What is ADHD?",
+        "adhd_text": "Attention Deficit Hyperactivity Disorder, more commonly known as ADHD, is a neurodevelopmental disorder characterized by inattention and hyperactivity in individuals.",
+        "adhd_symptoms": "Symptoms of ADHD:",
+        "adhd_symptom_1": "Inattention",
+        "adhd_symptom_2": "Hyperactivity",
+        "adhd_symptom_3": "Impulsivity",
+        "adhd_symptom_4": "Disorganization",
+        "adhd_symptom_5": "Poor time management",
+        "adhd_symptom_6": "Trouble multitasking",
+        "adhd_symptom_7": "Frequent mood swings",
+        "adhd_symptom_8": "Difficulty following through on tasks",
+        "adhd_symptom_9": "Fidgeting",
+        "adhd_symptom_10": "Forgetfulness",
+        "adhd_intro_text": "In the world of special needs education and support, it is crucial to find approaches and informational resources that help each child's unique learning style and way of engaging with the world. Samğa stands out in this area with its ADHD-sensitive game design, offering innovative and personalized solutions.",
+      
+        "asd_title": "Autism Spectrum Disorder (ASD)",
+        "asd_intro": "Interactive Therapy and Sensory Play Games for Children with Autism",
+        "asd_intro_text_1": "Samğa offers an engaging platform that encourages children with ASD to actively participate and respond to their environment with purpose and intention by offering fun online games for Autism Spectrum Disorder.",
+        "asd_intro_text_2": "Our sensory games allow children to improve core skills such as action-reaction, hand-eye coordination, spatial awareness, and body awareness.",
+        "asd_support_title": "How Samğa helps children with Autism Spectrum Disorder (ASD):",
+        "asd_support_text": "Kids with ASD can develop vital skills crucial for daily living. Samğa motivates and supplements traditional treatments, improving communication, creativity, and joint attention.",
+        "asd_social_skills_title": "Social Skills Activities:",
+        "asd_social_skills_text": "These activities ensure autistic individuals understand social cues, communicate effectively, and build new relationships with confidence.",
+        "asd_teen_therapy_title": "Therapeutic Activities for Autistic Teenagers:",
+        "asd_teen_therapy_text": "Creative, tailored games help teenagers build motor and communication skills, manage sensory sensitivities, and stay motivated through fun.",
+        "asd_skills_developed_title": "Skills Children with ASD Develop:",
+        "asd_skill_1": "Active participation",
+        "asd_skill_2": "Visual stimulus recognition",
+        "asd_skill_3": "Motor skill coordination",
+        "asd_skill_4": "Communication skills and joint attention",
+        "asd_skill_5": "Sensory integration (visual, auditory, tactile)",
+        "asd_skill_6": "Cognitive development (classification, retention, organization)",
+        "asd_games_title": "Games for All Ages:",
+        "asd_games_text": "Samğa games are accessible for all age groups, supporting developmental needs across the autism spectrum.",
+      
+        "down_title": "Down Syndrome",
+        "down_intro_title": "Sensory Activities and Therapy Games for Kids with Down Syndrome",
+        "down_intro_text_1": "Children with Down Syndrome need help improving their fine and gross motor skills. Samğa’s interactive games support them in achieving developmental goals that positively impact their daily lives.",
+        "down_intro_text_2": "Games that require hand-eye coordination help strengthen visual-motor integration, while balance-based games improve postural stability.",
+        "down_support_title": "How Samğa Helps Children with Down Syndrome:",
+        "down_support_text_1": "Samğa provides a variety of online activities that challenge cognitive abilities. Memory games assist in improving both short-term and long-term memory, and attention-based tasks enhance focus and sustained engagement.",
+        "down_support_text_2": "Games using visual and auditory aids help boost language acquisition and support clearer speech development.",
+        "down_skills_title": "Skills and Abilities Developed:",
+        "down_skill_1": "Enhanced motor control, accuracy, and efficiency",
+        "down_skill_2": "Improved clarity of language and speech",
+        "down_skill_3": "Encouraged expressive communication skills",
+        "down_skill_4": "Boosted cognitive performance in memory and numeracy",
+      
+        "dcd_title": "Developmental Coordination Disorder (DCD)",
+        "dcd_intro_title": "Interactive Therapy and Sensory Games for Children with Cerebral Palsy",
+        "dcd_intro_text_1": "Samğa’s online games for cerebral palsy can supplement in-clinic occupational therapy for children with Cerebral Palsy. These games provide therapeutic activities for developing both gross and fine motor skills, making them an ideal addition to physical and occupational therapy.",
+        "dcd_intro_text_2": "These games are not only fun but can also be customized to suit children with varying conditions and levels of capabilities, offering a great solution for parents and therapists looking for enjoyable and effective ways to encourage motor skill development.",
+        "dcd_support_title": "How Samğa helps children with Cerebral Palsy",
+        "dcd_support_text": "Games allow adjustment of difficulty levels according to each child’s ability, challenging them to expand their range of motion and improve bilateral coordination. Continued practice helps children with cerebral palsy develop upper body strength and body awareness, boosting their confidence.",
+        "dcd_skills_title": "Skills and Abilities Developed:",
+        "dcd_skill_1": "Improve upper body muscle strength and expand range of motion",
+        "dcd_skill_2": "Enhance synchronized movements with greater precision",
+        "dcd_skill_3": "Enhance motor control, accuracy and efficiency",
+        "dcd_skill_4": "Boost cognitive performance in areas such as classification, retention and arrangement",
+        "dcd_skill_5": "Encourage and refine planning and organization of movements, and help regulate balance",
+      
+        "cp_title": "Cerebral Palsy (CP)",
+        "cp_intro_title": "Interactive Therapy and Sensory Games for Children with Cerebral Palsy",
+        "cp_intro_text": "Samğa’s online games for cerebral palsy can supplement in-clinic occupational therapy. These therapeutic activities help develop both gross and fine motor skills and can be tailored to each child's ability level.",
+        "cp_support_title": "How Samğa helps children with Cerebral Palsy:",
+        "cp_support_text": "Our games help improve bilateral coordination, expand the range of motion, and develop upper body strength. They also support children with limited mobility, including those in wheelchairs, through adaptive design.",
+        "cp_skills_title": "Skills and abilities developed with Samğa:",
+        "cp_skill_1": "Improve upper body muscle strength and expand the range of motion",
+        "cp_skill_2": "Enhance synchronized movements with greater precision",
+        "cp_skill_3": "Enhance motor control, accuracy and efficiency",
+        "cp_skill_4": "Boost cognitive performance in classification, retention and arrangement",
+        "cp_skill_5": "Encourage motor planning, balance regulation, and movement organization",
+      
+        "ece_title": "Early Childhood Education",
+        "ece_intro_title": "Early Childhood Education",
+        "ece_intro_text": "Early childhood is a crucial stage in a child's life, shaping cognitive, physical, and emotional development. Samğa enhances early childhood education through interactive, science-backed learning experiences using AR and AI technologies.",
+        "ece_definition_title": "What is Early Childhood Education?",
+        "ece_definition_text": "ECE focuses on foundational learning and development for children from birth to around age eight, preparing them for lifelong learning.",
+        "ece_importance_title": "Why is Early Childhood Education Important?",
+        "ece_importance_text": "It lays the foundation for success, improves brain development and social adaptability, and nurtures curiosity and critical thinking.",
+        "ece_benefits_title": "Benefits of ECE with Samğa:",
+        "ece_benefit_1": "Cognitive Development: Enhances memory, attention, problem-solving, and critical thinking.",
+        "ece_benefit_2": "Physical Growth: Improves motor skills, coordination, and overall physical health.",
+        "ece_benefit_3": "Social and Emotional Skills: Builds confidence, communication, and emotional regulation.",
+        "ece_benefit_4": "Special Education Support: Adapts to children’s needs with inclusive game design and real-time tracking for educators and parents."
+      
+
+    },
+    "Terms": {
+    "title": "Terms and Conditions",
+    "welcome_intro": "Welcome! These Terms and Conditions govern your use of our website, applications, and related services. By accessing or using any part of our platform, you accept and agree to be bound by these terms. If you disagree with any part, you must not use our services.",
+    
+    "section1_title": "1. Acceptance of Terms",
+    "section1_text": "By using Samga, you agree that you have read and understood these terms. If you're accessing on behalf of a minor or organization, you are responsible for their compliance as well.",
+    
+    "section2_title": "2. Modifications",
+    "section2_text": "We may revise these Terms occasionally. You will be notified of any significant changes. Continued use after updates signifies your acceptance of the modified Terms.",
+    
+    "section3_title": "3. User Accounts",
+    "section3_text": "You are responsible for your account credentials. You must notify us of unauthorized use. Samga is not responsible for any loss due to your failure to protect credentials.",
+    
+    "section4_title": "4. Subscription Plans",
+    "section4_text": "We offer both free and premium plans. Features vary between them. By subscribing, you agree to the plan's pricing, billing cycles, and cancellation terms.",
+    
+    "section5_title": "5. Intellectual Property",
+    "section5_text": "All site content, trademarks, visuals, and AR elements belong to Samga and may not be copied, reused, or distributed without written permission.",
+    
+    "section6_title": "6. User Conduct",
+    "section6_text": "You agree not to misuse the platform in any way, including spamming, hacking, distributing malware, or infringing on others' rights. Violations may result in suspension or legal action.",
+    
+    "section7_title": "7. Privacy Policy",
+    "section7_text": "Please refer to our Privacy Policy to understand how your data is collected and used. Use of the platform implies your consent to those practices.",
+    
+    "section8_title": "8. Limitation of Liability",
+    "section8_text": "We are not liable for indirect, incidental, or consequential damages. Our services are provided 'as is' without warranties of any kind.",
+    
+    "section9_title": "9. Governing Law",
+    "section9_text": "These Terms are governed by the laws of the Republic of Kazakhstan. All disputes shall be handled in local competent courts.",
+    
+    "section10_title": "10. Contact Us",
+    "section10_text": "For questions, please contact us at {email}."
+  }
+
 }

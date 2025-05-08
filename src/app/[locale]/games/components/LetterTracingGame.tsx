@@ -359,7 +359,7 @@ export default function LetterTracingGame({ onGameOver, difficulty: initialDiffi
         )}
       </div>
       
-      {/* Score and progress display - overlay on top */}
+      {/* Score and progress display - overlay on top
       <div className="absolute top-4 left-4 right-4 flex justify-between z-50">
         <div className="bg-blue-100 bg-opacity-90 text-blue-800 p-3 rounded-lg">
           <p className="text-lg font-bold">Letter: {gameState.currentLetter}</p>
@@ -372,7 +372,7 @@ export default function LetterTracingGame({ onGameOver, difficulty: initialDiffi
         <div className="bg-purple-100 bg-opacity-90 text-purple-800 p-3 rounded-lg">
           <p className="text-lg font-bold">Completed: {gameState.lettersCompleted}/26</p>
         </div>
-      </div>
+      </div> */}
       
       {/* Error display */}
       {cameraError && (

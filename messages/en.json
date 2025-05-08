@@ -344,7 +344,9 @@
     "motorSkills": "Motor skills",
     "haveQuestions": "DO YOU HAVE QUESTIONS OR SUGGESTIONS?",
     "enterEmail": "Enter your email address",
-    "weWillContact": "We will contact you!"
+    "weWillContact": "We will contact you!",
+    "submit": "Submit",
+    "submitted": "Submitted!"
   }
   
   ,"Home":{

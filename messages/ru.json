@@ -345,7 +345,10 @@
     "motorSkills": "Моторные навыки",
     "haveQuestions": "У ВАС ЕСТЬ ВОПРОСЫ ИЛИ ПРЕДЛОЖЕНИЯ?",
     "enterEmail": "Введите ваш email",
-    "weWillContact": "Мы свяжемся с вами!"
+    "weWillContact": "Мы свяжемся с вами!",
+    "submit": "Отправить",
+    "submitted": "Отправлено!"
+
   }
   ,"Home":{
 

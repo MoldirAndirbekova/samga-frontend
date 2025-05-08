@@ -12,6 +12,7 @@ const BubblePopGame = dynamic(() => import('../../games/components/BubblePopGame
 const LetterTracingGame = dynamic(() => import('../../games/components/LetterTracingGame'), { ssr: false });
 const FruitSlicerGame = dynamic(() => import('../../games/components/FruitSlicerGame'), { ssr: false });
 const SnakeGame = dynamic(() => import('../../games/components/SnakeGame'), { ssr: false });
+const FlappyBirdGame = dynamic(() => import('../../games/components/FlappyBirdGame'), { ssr: false });
 
 
 // Game type interface
@@ -290,6 +291,9 @@ export default function GamePage() {
             )}
             {game.name.toLowerCase() === 'snake' && (
               <SnakeGame onGameOver={handleGameOver} difficulty={selectedDifficulty} />
+            )}
+            {game.name.toLowerCase() === 'flappy bird' && (
+              <FlappyBirdGame onGameOver={handleGameOver} difficulty={selectedDifficulty} />
             )}
           </div>
         )}

@@ -1,6 +1,6 @@
 "use client";
 
-import api from "@/features/page";
+import api from "@/lib/api";
 
 // export async function login(
 //   prevState: any,

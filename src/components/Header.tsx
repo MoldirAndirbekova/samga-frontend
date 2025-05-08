@@ -5,6 +5,7 @@ import { User, LogOut } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ChildSelector from "./ChildSelector";
 import { useChild } from "@/contexts/ChildContext";
+import Link from "next/link";
 
 export default function Header() {
   const [isAccountOpen, setIsAccountOpen] = useState(false);
@@ -51,7 +52,9 @@ export default function Header() {
 
   return (
     <header className="bg-[#2959BF] p-4 flex justify-between items-center text-white shadow-md mb-3 px-10">
-      <Image src="/logo.png" alt="Samga Logo" width={100} height={40} />
+      <Link href="/">
+        <Image src="/logo.png" alt="Samga Logo" width={100} height={40} />
+      </Link>
 
       <div className="flex items-center space-x-4">
         <ChildSelector

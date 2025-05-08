@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import api from "@/features/page";
+import api from "@/lib/api";
 import Image from "next/image";
 import dynamic from 'next/dynamic';
 
@@ -15,6 +15,7 @@ const SnakeGame = dynamic(() => import('../../games/components/SnakeGame'), { ss
 const ConstructorGame = dynamic(() => import('../../games/components/ConstructorGame'), { ssr: false });
 // Add this import with the other dynamic imports at the top of page.tsx
 const RockPaperScissorsGame = dynamic(() => import('../components/RockPaperScissorsGame'), { ssr: false });
+const FlappyBirdGame = dynamic(() => import('../../games/components/FlappyBirdGame'), { ssr: false });
 
 
 // Game type interface
@@ -271,13 +272,21 @@ export default function GamePage() {
                   {game.name === "Snake" && "- Fast speed, sparse food"}
                 </button>
               </div>
-
+              <div className="flex gap-4">
               <button
                 onClick={handleStartGame}
                 className="w-full px-6 py-3 bg-yellow-500 text-white font-bold rounded-lg shadow-lg hover:bg-blue-600 transition transform hover:scale-105"
               >
                 Start Game
               </button>
+
+              <button
+                onClick={handleExit}
+                className="w-full px-6 py-3 bg-blue-500 text-white font-bold rounded-lg shadow-lg hover:bg-blue-600 transition transform hover:scale-105"
+              >
+                Exit Game
+              </button>
+              </div>
             </div>
           </div>
         )}
@@ -328,6 +337,9 @@ export default function GamePage() {
                 onGameOver={handleGameOver}
                 difficulty={selectedDifficulty}
               />
+            )}
+            {game.name.toLowerCase() === 'flappy bird' && (
+              <FlappyBirdGame onGameOver={handleGameOver} difficulty={selectedDifficulty} />
             )}
           </div>
         )}

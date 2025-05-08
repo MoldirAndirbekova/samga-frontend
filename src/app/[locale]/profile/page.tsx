@@ -2,7 +2,7 @@
 
 import { useState, useEffect, FormEvent } from "react";
 import { BiPencil, BiSave, BiTrash, BiX, BiPlus } from "react-icons/bi";
-import api from "@/features/page";
+import api from "@/lib/api";
 import Image from "next/image";
 import { useChild } from "@/contexts/ChildContext";
 import { useRouter } from "next/navigation";

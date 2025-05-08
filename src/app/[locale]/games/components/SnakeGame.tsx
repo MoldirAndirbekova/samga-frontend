@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import api from "@/features/page";
+import api from "@/lib/api";
 import { registerWebSocket, unregisterWebSocket } from "@/features/websocket";
 import { useChild } from "@/contexts/ChildContext";
 

@@ -13,6 +13,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useSidebar } from "@/lib/context/SidebarContext";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 export default function Sidebar() {
   const { collapsed, toggleSidebar } = useSidebar();
@@ -35,10 +36,11 @@ export default function Sidebar() {
       } border-r border-[#694800] bg-transparent p-4 h-screen text-[#694800] ml-3 flex flex-col items-start transition-all duration-300`}
     >
       {/* Product Logo */}
-      <div className="mb-6 flex justify-center w-full">
-        <Image src="/logo.png" alt="Product Logo" width={64} height={64} />
-      </div>
-
+      <Link href={"/"}>
+        <div className="mb-6 flex justify-center w-full">
+          <Image src="/logo.png" alt="Product Logo" width={64} height={64} />
+        </div>
+      </Link>
       {/* Toggle Button */}
       <button
         onClick={toggleSidebar}

@@ -1,5 +1,5 @@
 'use client'
-import api from "@/features/page";
+import api from "@/lib/api";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -145,6 +145,11 @@ export default function Dashboard() {
     router.push(`/games/${gameId}`);
   };
 
+  const handleGameClick = (gameId: string) => {
+    console.log("Game clicked for game ID:", gameId);
+    router.push(`/description/balloonpop`);
+  };
+
   return (
       <main className={`flex flex-1 flex-col md:flex-row w-full gap-4 p-4 transition-all duration-300 ${collapsed ? 'md:ml-4' : ''}`}>
         <section className="flex-1">
@@ -173,15 +178,20 @@ export default function Dashboard() {
             key={game.id}
             className="border rounded-lg p-4 shadow-lg bg-transparent hover:shadow-xl transition border-[#7E6396] relative"
           >
-            <Image
-              src={`/${game.id}.png` || `/ping-pong.png`}
-              alt={game.name}
-              width={360}
-              height={230}
-              className="rounded-md w-full"
-            />
-            <h3 className="mt-2 text-lg font-bold text-[#694800]">{game.name}</h3>
-            <p className="text-[#694800] mb-2">{game.description || "Interactive motion-based game"}</p>
+                        <div 
+              onClick={() => handleGameClick(game.id)}
+              className="cursor-pointer"
+            >
+              <Image
+                src={`/${game.id}.png` || `/ping-pong.png`}
+                alt={game.name}
+                width={360}
+                height={230}
+                className="rounded-md w-full"
+              />
+              <h3 className="mt-2 text-lg font-bold text-[#694800] hover:underline">{game.name}</h3>
+              <p className="text-[#694800] mb-2">{game.description || "Interactive motion-based game"}</p>
+            </div>
             <button onClick={() => handlePlay(game.id)}
             className="mt-2 w-auto md:w-1/3 ml-auto flex items-center justify-center bg-[#F9DB63] text-[#694800] font-bold py-2 px-4 rounded-md shadow-md hover:bg-[#f7c948] transition">
               <Image

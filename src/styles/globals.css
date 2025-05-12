@@ -105,3 +105,586 @@ body {
 }
 
 
+@keyframes ball {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+}
+.animate-ball {
+  animation-name: ball;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes ball-bounce {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-50vh) rotate(90deg);
+  }
+  50% {
+    transform: translateY(0) rotate(180deg);
+  }
+  75% {
+    transform: translateY(-25vh) rotate(270deg);
+  }
+}
+@keyframes racket-swing {
+  0% {
+    transform: rotate(-30deg) translateX(0);
+  }
+  50% {
+    transform: rotate(30deg) translateX(20px);
+  }
+  100% {
+    transform: rotate(-30deg) translateX(0);
+  }
+}
+@keyframes court-line {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+@keyframes star-burst {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+  }
+}
+.animate-ball-bounce {
+  animation-name: ball-bounce;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-racket-swing {
+  animation-name: racket-swing;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-court-line {
+  animation-name: court-line;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 4s;
+}
+.animate-star-burst {
+  animation-name: star-burst;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+  animation-duration: 3s;
+}
+@keyframes letter-float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(10deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+@keyframes draw-path {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+@keyframes trace-line {
+  0% {
+    stroke-dasharray: 0 150;
+  }
+  100% {
+    stroke-dasharray: 150 0;
+  }
+}
+@keyframes tracking-dot {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+.animate-letter-float {
+  animation-name: letter-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-draw-path {
+  animation-name: draw-path;
+  animation-duration: 4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-trace-line {
+  animation-name: trace-line;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-tracking-dot {
+  animation-name: tracking-dot;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-sparkle {
+  animation-name: sparkle;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes bird-fly {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(30vw) translateY(-20px);
+  }
+  50% {
+    transform: translateX(60vw) translateY(20px);
+  }
+  75% {
+    transform: translateX(90vw) translateY(-10px);
+  }
+  100% {
+    transform: translateX(120vw) translateY(0);
+  }
+}
+@keyframes pipe-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-150vw);
+  }
+}
+@keyframes cloud-float {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+.animate-bird-fly {
+  animation-name: bird-fly;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-pipe-scroll {
+  animation-name: pipe-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.animate-cloud-float {
+  animation-name: cloud-float;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes balloon {
+  0% {
+    transform: translateY(100vh) scale(0.8) rotate(-5deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(50vh) scale(1) rotate(5deg);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-20vh) scale(1.1) rotate(-5deg);
+    opacity: 0;
+  }
+}
+@keyframes pop {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes burst {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--rotation)) translateX(0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--rotation)) translateX(40px);
+  }
+}
+@keyframes confetti {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+.animate-balloon {
+  animation-name: balloon;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-pop {
+  animation-name: pop;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+.animate-burst {
+  animation-name: burst;
+  animation-timing-function: ease-out;
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+}
+.animate-confetti {
+  animation-name: confetti;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes float-object {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg);
+  }
+  100% {
+    transform: translateY(-10vh) rotate(360deg);
+  }
+}
+@keyframes pulse-fade {
+  0%, 100% {
+    opacity: 0.1;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+}
+.animate-float-object {
+  animation-name: float-object;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-pulse-fade {
+  animation-name: pulse-fade;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rock-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+@keyframes paper-float {
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(50vh) translateX(30px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(-10vh) translateX(-30px) rotate(360deg);
+  }
+}
+@keyframes scissors-spin {
+  0% {
+    transform: translateY(-100vh) rotate(45deg) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(50vh) rotate(225deg) scale(1);
+  }
+  100% {
+    transform: translateY(100vh) rotate(405deg) scale(0.5);
+    opacity: 0;
+  }
+}
+.animate-rock-fall {
+  animation-name: rock-fall;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+}
+.animate-paper-float {
+  animation-name: paper-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-scissors-spin {
+  animation-name: scissors-spin;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes snake-move {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(100px) translateY(50px);
+  }
+  50% {
+    transform: translateX(50px) translateY(100px);
+  }
+  75% {
+    transform: translateX(-50px) translateY(50px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+@keyframes food-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.6;
+  }
+}
+.animate-snake-move {
+  animation-name: snake-move;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-food-pulse {
+  animation-name: food-pulse;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes gesture-float {
+  0% {
+    transform: translateY(0) rotate(-10deg);
+  }
+  33% {
+    transform: translateY(-20px) rotate(10deg);
+  }
+  66% {
+    transform: translateY(10px) rotate(-5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-10deg);
+  }
+}
+@keyframes battle-spark {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes victory-line {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) rotate(var(--rotation));
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--rotation));
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) rotate(var(--rotation));
+  }
+}
+@keyframes score-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) translateY(-20px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) translateY(-40px);
+  }
+}
+.animate-gesture-float {
+  animation-name: gesture-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-battle-spark {
+  animation-name: battle-spark;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+.animate-victory-line {
+  animation-name: victory-line;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-score-pop {
+  animation-name: score-pop;
+  animation-duration: 2.5s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes snake-move {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(50vw) translateY(20vh);
+  }
+  50% {
+    transform: translateX(50vw) translateY(50vh);
+  }
+  75% {
+    transform: translateX(0) translateY(50vh);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+@keyframes food-float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg) scale(1.2);
+  }
+}
+@keyframes finger-track {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) translateY(-10px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+}
+@keyframes score-burst {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(360deg) translateY(-30px);
+  }
+}
+.animate-snake-move {
+  animation-name: snake-move;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-food-float {
+  animation-name: food-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.animate-finger-track {
+  animation-name: finger-track;
+  animation-duration: 3s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+.animate-score-burst {
+  animation-name: score-burst;
+  animation-duration: 2.5s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}

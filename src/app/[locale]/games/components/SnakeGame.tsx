@@ -117,9 +117,14 @@ export default function SnakeGame({ onGameOver, difficulty }: SnakeGameProps) {
       return;
     }
     
-    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-    const host = window.location.hostname === 'localhost' ? 'localhost:8000' : window.location.host;
-    const ws = new WebSocket(`${protocol}://${host}/games/game/${id}/ws?token=${token}`);
+    // Replace the WebSocket creation with this:
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+    const backendHost = API_URL.replace(/^https?:\/\//, '');
+    const wsProtocol = API_URL.startsWith('https') ? 'wss' : 'ws';
+    
+    console.log(`Connecting to WebSocket: ${wsProtocol}://${backendHost}/games/game/${id}/ws`);
+    
+    const ws = new WebSocket(`${wsProtocol}://${backendHost}/games/game/${id}/ws?token=${token}`);
     
     ws.onopen = () => {
       console.log('WebSocket connected');

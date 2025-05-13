@@ -113,9 +113,14 @@ export default function FlappyBirdGame({ onGameOver, difficulty }: FlappyBirdGam
       return;
     }
     
-    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-    const host = window.location.hostname === 'localhost' ? 'localhost:8000' : window.location.host;
-    const ws = new WebSocket(`${protocol}://${host}/games/game/${id}/ws?token=${token}`);
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+    // Extract host and determine protocol
+    const backendHost = API_URL.replace(/^https?:\/\//, '');
+    const wsProtocol = API_URL.startsWith('https') ? 'wss' : 'ws';
+    
+    // Create WebSocket connection
+    const ws = new WebSocket(`${wsProtocol}://${backendHost}/games/game/${id}/ws?token=${token}`);
     
     ws.onopen = () => {
       console.log('WebSocket connected');

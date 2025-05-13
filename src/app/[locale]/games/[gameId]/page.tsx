@@ -58,18 +58,23 @@ export default function GamePage() {
     if (isPlaying && game?.name !== 'Constructor') {
       const startCamera = async () => {
         try {
-          const stream = await navigator.mediaDevices.getUserMedia({ 
-            video: { 
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: {
               width: 1280,
               height: 720,
               facingMode: 'user'
-            } 
+            }
           });
           if (videoRef.current) {
             videoRef.current.srcObject = stream;
           }
-        } catch (err: any) {
-          setCameraError("Could not access the camera: " + err.message);
+        } catch (err) {
+          // Option 1: Type guard with instanceof
+          if (err instanceof Error) {
+            setCameraError("Could not access the camera: " + err.message);
+          } else {
+            setCameraError("Could not access the camera: Unknown error");
+          }
         }
       };
 
@@ -77,9 +82,13 @@ export default function GamePage() {
       
       // Cleanup camera on component unmount or when exiting play mode
       return () => {
-        if (videoRef.current?.srcObject) {
-          const stream = videoRef.current.srcObject as MediaStream;
+        // Capture the current ref value
+        const videoElement = videoRef.current;
+        
+        if (videoElement?.srcObject) {
+          const stream = videoElement.srcObject as MediaStream;
           stream.getTracks().forEach(track => track.stop());
+          videoElement.srcObject = null;
         }
       };
     }
@@ -294,7 +303,7 @@ export default function GamePage() {
         {/* Game component */}
         {gameStarted && !gameOver && (
           <div className="h-full">
-            {game.name.toLowerCase() === "bubble pop" && (
+            {game.name.toLowerCase() === "balloon pop" && (
               <BubblePopGame
                 onGameOver={handleGameOver}
                 difficulty={selectedDifficulty}

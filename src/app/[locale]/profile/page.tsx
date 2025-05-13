@@ -117,7 +117,7 @@ export default function Profile() {
       setLoading(true);
       setError(null);
       
-      const response = await api.post("/children/", childFormData);
+      const response = await api.post("/children", childFormData);
       
       if (response.data) {
         // Refresh user data to get updated children list

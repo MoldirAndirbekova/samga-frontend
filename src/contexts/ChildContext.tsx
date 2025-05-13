@@ -44,7 +44,7 @@ export function ChildProvider({ children }: ChildProviderProps) {
   const fetchChildren = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await api.get('/children/');
+      const response = await api.get('/children');
       setChildrenList(response.data);
       
       // If no child is selected but we have children, select the first one

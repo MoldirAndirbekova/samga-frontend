@@ -278,8 +278,9 @@ export default function SnakeGame({ onGameOver, difficulty }: SnakeGameProps) {
       
       try {
         const canvas = document.createElement('canvas');
-        canvas.width = videoRef.current.videoWidth;
-        canvas.height = videoRef.current.videoHeight;
+        // Reduce canvas size for performance
+        canvas.width = 320; // Down from videoRef.current.videoWidth
+        canvas.height = 240; // Down from videoRef.current.videoHeight
         const ctx = canvas.getContext('2d');
         
         if (ctx) {
@@ -289,7 +290,8 @@ export default function SnakeGame({ onGameOver, difficulty }: SnakeGameProps) {
           ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
           ctx.restore();
           
-          const imageData = canvas.toDataURL('image/jpeg', 0.7);
+          // Lower quality for smaller file size
+          const imageData = canvas.toDataURL('image/jpeg', 0.5); // Down from 0.7
           
           if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
             wsRef.current.send(JSON.stringify({
@@ -305,7 +307,7 @@ export default function SnakeGame({ onGameOver, difficulty }: SnakeGameProps) {
       } finally {
         processingActive = false;
       }
-    }, 100);
+    }, 200); // Changed from 100ms to 200ms
     
     return () => {
       clearInterval(intervalId);

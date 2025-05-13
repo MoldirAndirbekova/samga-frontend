@@ -833,25 +833,25 @@ export default function Reports() {
                         <thead className="bg-gray-50">
                           <tr>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              {t("game_name") || "Game"}
+                              "Game name"
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              {t("difficulty") || "Difficulty"}
+                              "Difficulty"
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              {t("score") || "Score"}
+                              "Score"
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              {t("left_score") || "Left Score"}
+                              "Left Score"
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              {t("right_score") || "Right Score"}
+                              "Right Score"
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              {t("duration") || "Duration"}
+                              "Duration"
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              {t("date") || "Date"}
+                              "Date"
                             </th>
                           </tr>
                         </thead>

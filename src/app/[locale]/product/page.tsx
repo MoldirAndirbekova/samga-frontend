@@ -16,11 +16,11 @@ export default function ProductPage() {
   }, []);
 
   const gameImages = [
-    "/draw_it.png",
+    "/rockpaper.png",
     "/tennis.png",
-    "/friut_slice.png",
-    "/bubble_pop.png",
-    "/draw_it.png",
+    "/bubble-pop.png",
+    "/constructor.png",
+    "/flappybird.png",
   ];
 
   return (

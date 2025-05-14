@@ -12,21 +12,22 @@ const disabilities = [
   {
     titleKey: "adhd_title",
     descriptionComponent: (t) => (
-      <div className="space-y-4 bg-[#F5C400] p-6 rounded-none">
-        <div className="flex justify-center">
+      <div className="space-y-4 bg-[#F9DB63] p-6 rounded-none"style={{ color: "#694800" }}>
+        <div className="flex justify-center" style={{ color: "#694800" }}>
           <Image
             src="/ADHD.png"
             alt={t("adhd_title")}
             width={800}
             height={300}
             className="rounded-none"
+            style={{ color: "#694800" }}
           />
         </div>
-        <p className="text-black">{t("adhd_intro_text")}</p>
-        <h3 className="font-bold text-lg text-black">{t("adhd_what")}</h3>
-        <p className="text-black">{t("adhd_text")}</p>
-        <h3 className="font-bold text-lg text-black">{t("adhd_symptoms")}</h3>
-        <ul className="list-disc list-inside text-black">
+        <p className=""style={{ color: "#694800" }}>{t("adhd_intro_text")}</p>
+        <h3 className="font-bold text-lg" style={{ color: "#694800" }}>{t("adhd_what")}</h3>
+        <p className="" style={{ color: "#694800" }}>{t("adhd_text")}</p>
+        <h3 className="font-bold" style={{ color: "#694800" }}>{t("adhd_symptoms")}</h3>
+        <ul className="list-disc list-inside" style={{ color: "#694800" }}>
           <li>{t("adhd_symptom_1")}</li>
           <li>{t("adhd_symptom_2")}</li>
           <li>{t("adhd_symptom_3")}</li>
@@ -40,12 +41,12 @@ const disabilities = [
         </ul>
       </div>
     ),
-    color: "#F5C400"
+    color: "#F9DB63"
   },
   {
     titleKey: "asd_title",
     descriptionComponent: (t) => (
-      <div className="space-y-4 bg-[#4A90F6] p-6 rounded-none text-black">
+      <div className="space-y-4 bg-[#FFA722] p-6 rounded-none" style={{ color: "#694800" }}>
         <div className="flex justify-center">
           <Image
             src="/ADHD.png"
@@ -55,7 +56,7 @@ const disabilities = [
             className="rounded-none"
           />
         </div>
-        <h3 className="font-bold text-lg">{t("asd_intro")}</h3>
+        <h3 className="font-bold text-lg"style={{ color: "#694800" }}>{t("asd_intro")}</h3>
         <p>{t("asd_intro_text_1")}</p>
         <p>{t("asd_intro_text_2")}</p>
         <h3 className="font-bold text-lg">{t("asd_support_title")}</h3>
@@ -77,12 +78,12 @@ const disabilities = [
         <p>{t("asd_games_text")}</p>
       </div>
     ),
-    color: "#4A90F6"
+    color: "#FFA722"
   },  
   {
     titleKey: "down_title",
     descriptionComponent: (t) => (
-      <div className="space-y-4 bg-[#FF6B6B] p-6 rounded-none text-black">
+      <div className="space-y-4 bg-[#F9DB63] p-6 rounded-none"style={{ color: "#694800" }}>
         <div className="flex justify-center">
           <Image
             src="/ADHD.png" // You can replace this with a dedicated image for Down Syndrome if desired
@@ -109,12 +110,12 @@ const disabilities = [
         </ul>
       </div>
     ),
-    color: "#FF6B6B"
+    color: "#F9DB63"
   },
   {
     titleKey: "dcd_title",
     descriptionComponent: (t) => (
-      <div className="space-y-4 bg-[#6BCB77] p-6 rounded-none text-black">
+      <div className="space-y-4 bg-[#FFA722] p-6 rounded-none" style={{ color: "#694800" }}>
         <h3 className="font-bold text-lg">{t("dcd_intro_title")}</h3>
         <p>{t("dcd_intro_text_1")}</p>
         <p>{t("dcd_intro_text_2")}</p>
@@ -130,12 +131,12 @@ const disabilities = [
         </ul>
       </div>
     ),
-    color: "#6BCB77"
+    color: "#FFA722"
   },
   {
     titleKey: "cp_title",
     descriptionComponent: (t) => (
-      <div className="space-y-4 bg-[#FFA600] p-6 rounded-none text-black">
+      <div className="space-y-4 bg-[#F9DB63] p-6 rounded-none"style={{ color: "#694800" }}>
         <h3 className="font-bold text-lg">{t("cp_intro_title")}</h3>
         <p>{t("cp_intro_text")}</p>
         <h3 className="font-bold text-lg">{t("cp_support_title")}</h3>
@@ -150,12 +151,12 @@ const disabilities = [
         </ul>
       </div>
     ),
-    color: "#FFA600"
+    color: "#F9DB63"
   },
   {
     titleKey: "ece_title",
     descriptionComponent: (t) => (
-      <div className="space-y-4 bg-[#9B51E0] p-6 rounded-none text-black">
+      <div className="space-y-4 bg-[#FFA722] p-6 rounded-none" style={{ color: "#694800" }}>
         <h3 className="font-bold text-lg">{t("ece_intro_title")}</h3>
         <p>{t("ece_intro_text")}</p>
         <h3 className="font-bold text-lg">{t("ece_definition_title")}</h3>
@@ -171,7 +172,7 @@ const disabilities = [
         </ul>
       </div>
     ),
-    color: "#9B51E0"
+    color: "#FFA722"
   }
 ];
 
@@ -245,16 +246,18 @@ export default function WhoWeHelpPage() {
           {disabilities.map((item, index) => (
             <div key={index}>
               <button
-                className="w-full flex justify-between items-center px-6 py-5 font-extrabold text-xl sm:text-2xl text-black"
-                style={{
-                  backgroundColor: item.color,
-                  borderTopLeftRadius: index === 0 ? "12px" : "0",
-                  borderTopRightRadius: index === 0 ? "12px" : "0",
-                  borderBottomLeftRadius:
-                    index === disabilities.length - 1 && openIndex !== index ? "12px" : "0",
-                  borderBottomRightRadius:
-                    index === disabilities.length - 1 && openIndex !== index ? "12px" : "0"
-                }}
+  className="w-full flex justify-between items-center px-6 py-5 font-extrabold text-xl sm:text-2xl"
+  style={{
+    color: "#694800",
+    backgroundColor: item.color,
+    borderTopLeftRadius: index === 0 ? "12px" : "0",
+    borderTopRightRadius: index === 0 ? "12px" : "0",
+    borderBottomLeftRadius:
+      index === disabilities.length - 1 && openIndex !== index ? "12px" : "0",
+    borderBottomRightRadius:
+      index === disabilities.length - 1 && openIndex !== index ? "12px" : "0"
+  }}
+
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
                 <span>{t(item.titleKey)}</span>

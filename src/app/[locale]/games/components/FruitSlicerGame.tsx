@@ -251,9 +251,10 @@ export default function FruitSlicerGame({ onGameOver, difficulty: initialDifficu
         if (!videoRef.current?.srcObject) {
           const stream = await navigator.mediaDevices.getUserMedia({ 
             video: { 
-              width: 640,
-              height: 480,
-              facingMode: 'user' 
+              width: 480,
+              height: 360,
+              facingMode: 'user',
+              frameRate: 15
             } 
           });
           
@@ -292,7 +293,11 @@ export default function FruitSlicerGame({ onGameOver, difficulty: initialDifficu
     if (!videoRef.current || !socketConnected || !wsRef.current) return;
     
     let processingActive = false;
+    let frameCount = 0; // Add frame counter
     const intervalId = setInterval(async () => {
+      frameCount++;
+
+      if (frameCount % 3 !== 0) return;
       if (processingActive || 
           !videoRef.current || 
           videoRef.current.readyState !== videoRef.current.HAVE_ENOUGH_DATA ||
@@ -317,7 +322,7 @@ export default function FruitSlicerGame({ onGameOver, difficulty: initialDifficu
           ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
           ctx.restore();
           
-          const imageData = canvas.toDataURL('image/jpeg', 0.7);
+          const imageData = canvas.toDataURL('image/jpeg', 0.5);
           
           if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
             wsRef.current.send(JSON.stringify({
@@ -334,7 +339,7 @@ export default function FruitSlicerGame({ onGameOver, difficulty: initialDifficu
         setIsProcessingFrame(false);
         processingActive = false;
       }
-    }, 100);
+    }, 200);
     
     return () => {
       clearInterval(intervalId);

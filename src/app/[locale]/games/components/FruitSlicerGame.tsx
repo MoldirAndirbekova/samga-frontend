@@ -251,10 +251,10 @@ export default function FruitSlicerGame({ onGameOver, difficulty: initialDifficu
         if (!videoRef.current?.srcObject) {
           const stream = await navigator.mediaDevices.getUserMedia({ 
             video: { 
-              width: 480,
-              height: 360,
+              width: 320,
+              height: 240,
               facingMode: 'user',
-              frameRate: 15
+              frameRate: 10
             } 
           });
           
@@ -339,7 +339,7 @@ export default function FruitSlicerGame({ onGameOver, difficulty: initialDifficu
         setIsProcessingFrame(false);
         processingActive = false;
       }
-    }, 200);
+    }, 500);
     
     return () => {
       clearInterval(intervalId);

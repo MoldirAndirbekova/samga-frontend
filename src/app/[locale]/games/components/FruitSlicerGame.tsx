@@ -186,6 +186,7 @@ export default function FruitSlicerGame({ onGameOver, difficulty: initialDifficu
         
         // Update fruits data
         if (data.data.fruits) {
+          console.log('Received fruits data:', data.data.fruits); // Debug log
           setFruits(data.data.fruits);
         }
         
@@ -388,6 +389,12 @@ export default function FruitSlicerGame({ onGameOver, difficulty: initialDifficu
 
   // Helper function to get fruit image source
   const getFruitImageSrc = (fruitType: string, isSliced: boolean = false) => {
+    // Handle undefined or invalid fruit types
+    if (!fruitType || fruitType === 'undefined') {
+      console.warn('Invalid fruit type:', fruitType);
+      fruitType = 'apple'; // fallback to apple
+    }
+    
     const suffix = isSliced ? '_sliced' : '';
     return `/fruits/${fruitType}${suffix}.png`;
   };
@@ -483,6 +490,11 @@ export default function FruitSlicerGame({ onGameOver, difficulty: initialDifficu
           const screenPos = gameToScreen(fruit.x, fruit.y);
           const screenSize = (fruit.size * Math.min(gameDimensions.width / 800, gameDimensions.height / 600));
           
+          // Debug log for problematic fruits
+          if (!fruit.fruit_type || fruit.fruit_type === 'undefined') {
+            console.warn('Fruit with undefined type:', fruit);
+          }
+          
           return (
             <div
               key={fruit.id}
@@ -503,6 +515,11 @@ export default function FruitSlicerGame({ onGameOver, difficulty: initialDifficu
                 className="w-full h-full object-contain"
                 style={{
                   filter: fruit.sliced && fruit.sliced_by_player ? 'hue-rotate(60deg) saturate(1.5)' : 'none'
+                }}
+                onError={(e) => {
+                  console.error('Failed to load fruit image:', e.currentTarget.src);
+                  // Fallback to a different image or hide the element
+                  e.currentTarget.style.display = 'none';
                 }}
               />
               

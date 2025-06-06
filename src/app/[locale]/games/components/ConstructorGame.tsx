@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import api from "@/features/page";
 import { registerWebSocket, unregisterWebSocket } from "@/features/websocket";
 import { useChild } from "@/contexts/ChildContext";
+import { useRouter } from "next/navigation";
 
 interface ConstructorGameProps {
   onGameOver: (score: number) => void;
@@ -11,6 +12,7 @@ interface ConstructorGameProps {
 }
 
 export default function ConstructorGame({ onGameOver, difficulty: initialDifficulty }: ConstructorGameProps) {
+  const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [gameState, setGameState] = useState({
@@ -19,7 +21,9 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
     gameOver: false,
     timeRemaining: 0,
     selectedLevel: null as number | null,
-    showingPreview: false
+    showingPreview: false,
+    piecesPlaced: 0,
+    totalPieces: 0
   });
   const [gameId, setGameId] = useState<string | null>(null);
   const [socketConnected, setSocketConnected] = useState(false);
@@ -33,18 +37,118 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
   const [gameDimensions, setGameDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
   const [showLevelSelect, setShowLevelSelect] = useState(true);
   
-  // Level data
+  // Complete level configurations matching backend
   const levels = [
-    { level: 1, name: "Mushroom", duration: 120, description: "Build a mushroom" },
-    { level: 2, name: "Flower", duration: 120, description: "Create a flower" },
-    { level: 3, name: "Car", duration: 140, description: "Assemble a car" },
-    { level: 4, name: "Tree", duration: 140, description: "Construct a tree" },
-    { level: 5, name: "Train", duration: 140, description: "Build a train" },
-    { level: 6, name: "Rainbow", duration: 200, description: "Form a rainbow" },
-    { level: 7, name: "Home", duration: 220, description: "Build a house" },
-    { level: 8, name: "Worm", duration: 220, description: "Create a worm" },
-    { level: 9, name: "Castle", duration: 240, description: "Construct a castle" }
+    { 
+      level: 1, 
+      name: "Simple Shapes", 
+      duration: 90, 
+      pieces: 4, 
+      theme: "basic",
+      description: "Learn the basics with simple shapes",
+      color: "bg-blue-500 hover:bg-blue-600",
+      emoji: "🔵"
+    },
+    { 
+      level: 2, 
+      name: "Flower Garden", 
+      duration: 100, 
+      pieces: 5, 
+      theme: "nature",
+      description: "Create a beautiful flower pattern",
+      color: "bg-pink-500 hover:bg-pink-600",
+      emoji: "🌸"
+    },
+    { 
+      level: 3, 
+      name: "Racing Car", 
+      duration: 110, 
+      pieces: 6, 
+      theme: "vehicle",
+      description: "Build a speedy race car",
+      color: "bg-red-500 hover:bg-red-600",
+      emoji: "🏎️"
+    },
+    { 
+      level: 4, 
+      name: "Magic Tree", 
+      duration: 120, 
+      pieces: 7, 
+      theme: "nature",
+      description: "Grow a magical tree with branches",
+      color: "bg-green-500 hover:bg-green-600",
+      emoji: "🌳"
+    },
+    { 
+      level: 5, 
+      name: "Express Train", 
+      duration: 130, 
+      pieces: 8, 
+      theme: "vehicle",
+      description: "Construct a long train",
+      color: "bg-indigo-500 hover:bg-indigo-600",
+      emoji: "🚂"
+    },
+    { 
+      level: 6, 
+      name: "Rainbow Bridge", 
+      duration: 140, 
+      pieces: 7, 
+      theme: "colorful",
+      description: "Paint a colorful rainbow",
+      color: "bg-purple-500 hover:bg-purple-600",
+      emoji: "🌈"
+    },
+    { 
+      level: 7, 
+      name: "Dream House", 
+      duration: 150, 
+      pieces: 9, 
+      theme: "building",
+      description: "Build your dream home",
+      color: "bg-orange-500 hover:bg-orange-600",
+      emoji: "🏠"
+    },
+    { 
+      level: 8, 
+      name: "Wiggle Worm", 
+      duration: 160, 
+      pieces: 10, 
+      theme: "animal",
+      description: "Create a wiggly worm",
+      color: "bg-yellow-500 hover:bg-yellow-600",
+      emoji: "🐛"
+    },
+    { 
+      level: 9, 
+      name: "Royal Castle", 
+      duration: 180, 
+      pieces: 12, 
+      theme: "building",
+      description: "Construct a majestic castle",
+      color: "bg-gray-700 hover:bg-gray-800",
+      emoji: "🏰"
+    }
   ];
+
+  // Handle exit button click
+  const handleExit = useCallback(() => {
+    console.log("🚪 Exit button clicked");
+    
+    // Send close message to server
+    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+      wsRef.current.send(JSON.stringify({
+        type: 'close_game',
+        data: {}
+      }));
+    }
+    
+    // Clean up and redirect
+    setTimeout(() => {
+      closeWebSocketConnection();
+      router.push('/games');
+    }, 100);
+  }, [router]);
 
   // Update game dimensions on resize
   useEffect(() => {
@@ -59,14 +163,14 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
   const createGame = async () => {
     try {
       if (!selectedChildId) {
-        console.error("No child selected");
+        console.error("❌ No child selected");
         return;
       }
 
-      console.log("Creating new Constructor game with difficulty:", difficulty);
+      console.log("🎮 Creating Constructor game...");
       
+      // Clean up existing connection
       if (wsRef.current) {
-        console.log("Cleaning up existing WebSocket connection");
         if (connectionId) {
           unregisterWebSocket(connectionId);
           setConnectionId(null);
@@ -74,13 +178,14 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
         
         if (wsRef.current.readyState === WebSocket.OPEN || 
             wsRef.current.readyState === WebSocket.CONNECTING) {
-          wsRef.current.close(1000, "Game recreated with new settings");
+          wsRef.current.close(1000, "Creating new game");
         }
         
         wsRef.current = null;
         setSocketConnected(false);
       }
 
+      // Reset state
       setFrameImage(null);
       setGameState({
         score: 0,
@@ -88,11 +193,14 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
         gameOver: false,
         timeRemaining: 0,
         selectedLevel: null,
-        showingPreview: false
+        showingPreview: false,
+        piecesPlaced: 0,
+        totalPieces: 0
       });
       
       gameCreatedRef.current = true;
 
+      // Create the game
       const response = await api.post('/games/game/start', {
         game_type: 'constructor',
         difficulty: difficulty,
@@ -100,19 +208,19 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
       });
       
       if (response.data && response.data.game_id) {
-        console.log("Game created with ID:", response.data.game_id);
+        console.log("✅ Game created with ID:", response.data.game_id);
         setGameId(response.data.game_id);
         
+        // Connect to WebSocket
         setTimeout(() => {
-          console.log("Connecting to WebSocket after delay");
           connectWebSocket(response.data.game_id);
         }, 500);
       } else {
-        console.error("Game creation failed: No game_id in response");
+        console.error("❌ Game creation failed");
         gameCreatedRef.current = false;
       }
     } catch (error) {
-      console.error('Error creating game:', error);
+      console.error('❌ Error creating game:', error);
       setSocketConnected(false);
       wsRef.current = null;
       gameCreatedRef.current = false;
@@ -128,19 +236,18 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
       
       if (wsRef.current.readyState === WebSocket.OPEN || 
           wsRef.current.readyState === WebSocket.CONNECTING) {
-        wsRef.current.close(1000, "Reconnecting to new game session");
+        wsRef.current.close(1000, "Reconnecting");
       }
       
       wsRef.current = null;
     }
     
     setGameId(id);
-    localStorage.setItem("constructor_game_id", id);
     setSocketConnected(false);
     
     const token = localStorage.getItem("access_token");
     if (!token) {
-      console.error("Authentication token not found");
+      console.error("❌ No authentication token");
       alert("Your session has expired. Please log in again.");
       window.location.href = "/login";
       return;
@@ -151,7 +258,7 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
     const ws = new WebSocket(`${protocol}://${host}/games/game/${id}/ws?token=${token}`);
     
     ws.onopen = () => {
-      console.log('WebSocket connected');
+      console.log('🔌 WebSocket connected for Constructor game');
       setSocketConnected(true);
     };
     
@@ -169,67 +276,94 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
           gameOver: data.data.game_over || false,
           timeRemaining: data.data.time_remaining || 0,
           selectedLevel: data.data.selected_level || gameState.selectedLevel,
-          showingPreview: data.data.showing_preview || false
+          showingPreview: data.data.showing_preview || false,
+          piecesPlaced: data.data.pieces_placed || 0,
+          totalPieces: data.data.total_pieces || 0
         };
 
+        // Debug level changes
+        if (newGameState.selectedLevel !== gameState.selectedLevel) {
+          console.log(`🔄 Level changed: ${gameState.selectedLevel} -> ${newGameState.selectedLevel}`);
+        }
+
+        // Handle game over
         if (newGameState.gameOver && !gameState.gameOver) {
-          console.log("Game just ended - calling onGameOver with score:", newGameState.score);
+          console.log("🏁 Game ended - Score:", newGameState.score);
           setTimeout(() => {
             onGameOver(newGameState.score);
             closeWebSocketConnection();
-          }, 1000);
+          }, 2000);
         }
         
         setGameState(newGameState);
+      } else if (data.type === 'close_acknowledgment') {
+        console.log("✅ Server acknowledged close request");
+        closeWebSocketConnection();
       }
     };
     
     ws.onclose = (event) => {
-      console.log('WebSocket disconnected', event.code, event.reason);
+      console.log('🔌 WebSocket disconnected:', event.code, event.reason);
       setSocketConnected(false);
       
-      if (event.code !== 1000 && event.code !== 1001) {
-        console.log("Attempting to reconnect in 1 second...");
+      // Only reconnect if it wasn't a clean close
+      if (event.code !== 1000 && event.code !== 1001 && gameId === id) {
+        console.log("🔄 Reconnecting in 2 seconds...");
         setTimeout(() => {
           if (gameId === id) {
             connectWebSocket(id);
           }
-        }, 1000);
+        }, 2000);
       }
     };
     
     ws.onerror = (error: Event) => {
-      console.error('WebSocket error occurred');
+      console.error('❌ WebSocket error:', error);
     };
     
     wsRef.current = ws;
     
-    const cleanupCallback = () => {
-      console.log("Cleaning up Constructor game resources");
-    };
-    
-    const newConnectionId = registerWebSocket(ws, cleanupCallback);
+    const newConnectionId = registerWebSocket(ws, () => {
+      console.log("🧹 Cleaning up Constructor game resources");
+    });
     setConnectionId(newConnectionId);
   };
   
   const startGameWithLevel = (level: number) => {
     if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
-      console.log("Starting game with level:", level);
-      wsRef.current.send(JSON.stringify({
+      console.log(`🚀 Starting level ${level}: ${levels[level - 1]?.name}`);
+      
+      const message = {
         type: 'start_game',
         data: {
           level: level,
           screen_width: gameDimensions.width,
           screen_height: gameDimensions.height
         }
+      };
+      
+      console.log("📤 Sending:", JSON.stringify(message));
+      wsRef.current.send(JSON.stringify(message));
+      
+      // Update local state
+      setGameState(prev => ({ 
+        ...prev, 
+        selectedLevel: level,
+        totalPieces: levels[level - 1]?.pieces || 4,
+        score: 0,
+        piecesPlaced: 0,
+        gameOver: false
       }));
-      setGameState(prev => ({ ...prev, selectedLevel: level }));
       setShowLevelSelect(false);
+      
+      console.log(`📋 Level ${level} selected - Expected pieces: ${levels[level - 1]?.pieces}`);
+    } else {
+      console.error("❌ WebSocket not connected");
     }
   };
   
   const closeWebSocketConnection = useCallback(() => {
-    console.log("Cleaning up WebSocket connection after game over");
+    console.log("🧹 Cleaning up WebSocket connection");
     
     if (connectionId) {
       unregisterWebSocket(connectionId);
@@ -239,7 +373,7 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
     if (wsRef.current) {
       if (wsRef.current.readyState === WebSocket.OPEN || 
           wsRef.current.readyState === WebSocket.CONNECTING) {
-        wsRef.current.close(1000, "Game over, cleaning up");
+        wsRef.current.close(1000, "Game cleanup");
       }
       wsRef.current = null;
     }
@@ -290,7 +424,7 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
     };
   }, [selectedChildId]);
   
-  // Set up hand tracking via WebSocket
+  // Set up hand tracking
   useEffect(() => {
     if (!videoRef.current || !socketConnected || !wsRef.current) return;
     
@@ -314,6 +448,7 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
         const ctx = canvas.getContext('2d');
         
         if (ctx) {
+          // Mirror the video
           ctx.save();
           ctx.scale(-1, 1);
           ctx.translate(-canvas.width, 0);
@@ -325,14 +460,12 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
           if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
             wsRef.current.send(JSON.stringify({
               type: 'hand_tracking_image',
-              data: {
-                image: imageData
-              }
+              data: { image: imageData }
             }));
           }
         }
       } catch (error) {
-        console.error('Error processing frame:', error);
+        console.error('❌ Frame processing error:', error);
       } finally {
         setIsProcessingFrame(false);
         processingActive = false;
@@ -343,10 +476,16 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
       clearInterval(intervalId);
     };
   }, [socketConnected, gameId]);
+
+  const getDifficultyInfo = (level: number) => {
+    if (level <= 3) return { text: "Beginner", color: "text-green-400" };
+    if (level <= 6) return { text: "Intermediate", color: "text-yellow-400" };
+    return { text: "Advanced", color: "text-red-400" };
+  };
   
   return (
     <div className="fixed inset-0 h-screen w-screen overflow-hidden">
-      {/* Camera background - full screen */}
+      {/* Camera background */}
       <video
         ref={videoRef}
         autoPlay
@@ -354,7 +493,7 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
         className="absolute inset-0 w-full h-full object-cover transform -scale-x-100"
       />
       
-      {/* Game overlay - full screen without border */}
+      {/* Game overlay */}
       <div className="absolute inset-0 w-full h-full">
         {frameImage ? (
           <img 
@@ -363,62 +502,199 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-            <p className="text-white text-xl">Loading game...</p>
+          <div className="w-full h-full flex items-center justify-center bg-black bg-opacity-60">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-20 w-20 border-b-4 border-white mx-auto mb-4"></div>
+              <p className="text-white text-2xl font-bold">🏗️ Loading Constructor...</p>
+              {!socketConnected && (
+                <p className="text-white text-lg mt-2">Connecting to game server...</p>
+              )}
+            </div>
           </div>
         )}
       </div>
       
       {/* Level selection overlay */}
       {socketConnected && showLevelSelect && !gameState.gameActive && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70">
-          <div className="bg-white bg-opacity-90 p-8 rounded-lg max-w-5xl w-full mx-4">
-            <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Select a Level</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {levels.map((level) => (
-                <button
-                  key={level.level}
-                  onClick={() => startGameWithLevel(level.level)}
-                  className="p-6 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all transform hover:scale-105"
-                >
-                  <h3 className="text-xl font-bold">Level {level.level}</h3>
-                  <p className="text-lg mt-2">{level.name}</p>
-                  <p className="text-sm mt-1 opacity-90">{level.description}</p>
-                  <p className="text-sm mt-2">Duration: {level.duration}s</p>
-                </button>
-              ))}
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-85">
+          <div className="bg-white bg-opacity-98 p-8 rounded-2xl max-w-7xl w-full mx-4 max-h-[95vh] overflow-y-auto shadow-2xl">
+            <div className="text-center mb-8">
+              <h2 className="text-5xl font-bold text-gray-800 mb-4">
+                🏗️ Constructor Challenge
+              </h2>
+              <p className="text-xl text-gray-600 mb-2">
+                Choose your building adventure!
+              </p>
+              <p className="text-lg text-gray-500">
+                Use pinch gestures (👆🤏) to grab and place pieces
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {levels.map((level) => {
+                const difficultyInfo = getDifficultyInfo(level.level);
+                return (
+                  <button
+                    key={level.level}
+                    onClick={() => startGameWithLevel(level.level)}
+                    className={`p-6 text-white rounded-xl transition-all transform hover:scale-105 shadow-lg ${level.color} relative overflow-hidden`}
+                  >
+                    {/* Level badge */}
+                    <div className="absolute top-2 right-2 bg-white bg-opacity-20 px-2 py-1 rounded-full text-xs font-bold">
+                      #{level.level}
+                    </div>
+                    
+                    <div className="text-center">
+                      {/* Emoji and title */}
+                      <div className="text-4xl mb-2">{level.emoji}</div>
+                      <h3 className="text-2xl font-bold mb-2">{level.name}</h3>
+                      <p className="text-sm opacity-90 mb-4 h-12 flex items-center justify-center">
+                        {level.description}
+                      </p>
+                      
+                      {/* Stats */}
+                      <div className="space-y-2 text-sm">
+                        <div className="bg-white bg-opacity-20 px-3 py-2 rounded-lg flex justify-between items-center">
+                          <span>🧩 Pieces:</span>
+                          <span className="font-bold">{level.pieces}</span>
+                        </div>
+                        <div className="bg-white bg-opacity-20 px-3 py-2 rounded-lg flex justify-between items-center">
+                          <span>⏱️ Time:</span>
+                          <span className="font-bold">{level.duration}s</span>
+                        </div>
+                        <div className="bg-white bg-opacity-20 px-3 py-2 rounded-lg flex justify-between items-center">
+                          <span>📊 Level:</span>
+                          <span className={`font-bold ${difficultyInfo.color.replace('text-', '')}`}>
+                            {difficultyInfo.text}
+                          </span>
+                        </div>
+                        <div className="bg-white bg-opacity-20 px-3 py-2 rounded-lg flex justify-between items-center">
+                          <span>🎨 Theme:</span>
+                          <span className="font-bold capitalize">{level.theme}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+            
+            <div className="mt-8 text-center">
+              <div className="bg-blue-50 p-6 rounded-xl border-2 border-blue-200">
+                <h3 className="text-xl font-bold text-blue-800 mb-3">🎮 How to Play</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-blue-700">
+                  <div className="text-center">
+                    <div className="text-2xl mb-2">👀</div>
+                    <p className="font-semibold">Study Pattern</p>
+                    <p className="text-sm">Memorize where pieces go</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl mb-2">🤏</div>
+                    <p className="font-semibold">Pinch to Grab</p>
+                    <p className="text-sm">Use thumb + index finger</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl mb-2">🎯</div>
+                    <p className="font-semibold">Place Pieces</p>
+                    <p className="text-sm">Move to white circles</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       )}
       
-      {/* HUD overlay - shown during active game */}
+      {/* HUD during active game */}
       {gameState.gameActive && !gameState.showingPreview && !showLevelSelect && (
-        <div className="absolute top-4 left-4 right-4 flex justify-between z-50">
-          <div className="bg-blue-100 bg-opacity-90 text-blue-800 p-3 rounded-lg">
-            <p className="text-lg font-bold">
-              Level {gameState.selectedLevel}: {levels.find(l => l.level === gameState.selectedLevel)?.name}
-            </p>
-          </div>
-          
-          <div className="bg-green-100 bg-opacity-90 text-green-800 p-3 rounded-lg">
-            <p className="text-lg font-bold">Time: {gameState.timeRemaining}s</p>
+        <div className="absolute top-4 left-4 right-4 z-50">
+          <div className="flex justify-between items-start">
+            {/* Level info */}
+            <div className="bg-blue-600 bg-opacity-95 text-white p-4 rounded-lg shadow-lg">
+              <div className="flex items-center space-x-2">
+                <span className="text-2xl">{levels.find(l => l.level === gameState.selectedLevel)?.emoji}</span>
+                <div>
+                  <p className="text-lg font-bold">
+                    Level {gameState.selectedLevel}
+                  </p>
+                  <p className="text-sm opacity-90">
+                    {levels.find(l => l.level === gameState.selectedLevel)?.name}
+                  </p>
+                </div>
+              </div>
+              <p className="text-sm mt-2">
+                Progress: {gameState.piecesPlaced}/{gameState.totalPieces} pieces
+              </p>
+            </div>
+            
+            {/* Timer */}
+            <div className="bg-green-600 bg-opacity-95 text-white p-4 rounded-lg shadow-lg">
+              <p className="text-lg font-bold">⏰ {gameState.timeRemaining}s</p>
+            </div>
+            
+            {/* Score */}
+            <div className="bg-purple-600 bg-opacity-95 text-white p-4 rounded-lg shadow-lg">
+              <p className="text-lg font-bold">🏆 {gameState.score}</p>
+            </div>
           </div>
         </div>
       )}
       
       {/* Preview message */}
       {gameState.showingPreview && (
-        <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white p-6 rounded-lg">
-          <h2 className="text-3xl font-bold">Memorize the Pattern!</h2>
-          <p className="text-xl mt-2">Get ready to build: {levels.find(l => l.level === gameState.selectedLevel)?.name}</p>
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-80">
+          <div className="bg-white bg-opacity-95 p-8 rounded-2xl text-center max-w-lg mx-4 shadow-2xl">
+            <div className="text-6xl mb-4">🧠</div>
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">Study Time!</h2>
+            <div className="text-2xl mb-4">
+              {levels.find(l => l.level === gameState.selectedLevel)?.emoji}
+            </div>
+            <p className="text-xl text-gray-600 mb-4">
+              Level {gameState.selectedLevel}: {levels.find(l => l.level === gameState.selectedLevel)?.name}
+            </p>
+            <p className="text-lg text-blue-600 mb-4">
+              Memorize where the {gameState.totalPieces} pieces belong...
+            </p>
+            <div className="animate-pulse">
+              <p className="text-xl text-green-600 font-bold">Get ready to build! 🔧</p>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Exit button - bottom right corner */}
+      <button
+        onClick={handleExit}
+        className="fixed bottom-6 right-6 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl shadow-lg transition-all transform hover:scale-105 z-50 font-bold"
+      >
+        🚪 Exit Game
+      </button>
+      
+      {/* Processing indicator */}
+      {isProcessingFrame && (
+        <div className="absolute bottom-6 left-6 bg-blue-500 bg-opacity-90 text-white p-3 rounded-lg shadow-lg">
+          <div className="flex items-center space-x-2">
+            <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
+            <span className="text-sm">Processing...</span>
+          </div>
         </div>
       )}
       
       {/* Error display */}
       {cameraError && (
-        <div className="absolute top-4 left-4 right-4 bg-red-500 text-white p-4 rounded-lg z-50">
-          {cameraError}
+        <div className="absolute top-4 left-4 right-4 bg-red-500 text-white p-4 rounded-lg z-50 shadow-lg">
+          <p className="font-bold">📷 Camera Error</p>
+          <p>{cameraError}</p>
+        </div>
+      )}
+      
+      {/* Connection status */}
+      {!socketConnected && gameId && (
+        <div className="absolute bottom-20 left-6 bg-yellow-500 bg-opacity-90 text-white p-3 rounded-lg shadow-lg">
+          <div className="flex items-center space-x-2">
+            <div className="animate-pulse h-2 w-2 bg-white rounded-full"></div>
+            <p className="text-sm">Reconnecting...</p>
+          </div>
         </div>
       )}
     </div>

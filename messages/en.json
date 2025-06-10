@@ -101,7 +101,7 @@
   },
   "ForgotPasswordPage": {
     "title": "FORGOT PASSWORD",
-    "title-paragraph": " Enter your email and we’ll send you a link to reset your password.",
+    "title-paragraph": " Enter your email and we'll send you a link to reset your password.",
     "email": "Email",
     "email-required": "Please input your email!",
     "email-placeholder": "Type your email",
@@ -174,44 +174,44 @@
     "subtitle": "REFINEMENT OF MENTAL PROCESSES",
 
     "section1": {
-      "title": "Samga’s Online Cognitive Games",
+      "title": "Samga's Online Cognitive Games",
       "text": "Online cognitive games for children with special needs are more than just entertainment—they are a powerful tool for enhancing learning and development in an engaging and enjoyable way. From basic memory exercises to intricate puzzles, these interactive games offer children the opportunity to build key life skills, such as cognitive and motor abilities, at their own pace."
     },
 
     "section2": {
-      "title": "Samga’s Interactive Cognitive Games – A Powerful Tool for Learning",
-      "text": "If you're seeking interactive online cognitive games for your child, Samga's cognitive games provide a comprehensive solution. Thoughtfully designed with the needs of children with special needs in mind, these games offer more than just fun—they provide unique learning experiences that foster skill development. Explore Samga’s diverse collection of cognitive games, discover how each game promotes growth, and find the perfect match for your child’s needs!"
+      "title": "Samga's Interactive Cognitive Games – A Powerful Tool for Learning",
+      "text": "If you're seeking interactive online cognitive games for your child, Samga's cognitive games provide a comprehensive solution. Thoughtfully designed with the needs of children with special needs in mind, these games offer more than just fun—they provide unique learning experiences that foster skill development. Explore Samga's diverse collection of cognitive games, discover how each game promotes growth, and find the perfect match for your child's needs!"
     },
 
     "section3": {
-      "title": "Skills Samga’s Cognitive Games Help Improve in Children with Special Needs",
-      "text": "Samga’s cognitive games for children with special needs are specifically designed to make learning both fun and impactful, while supporting the development of vital life skills in a playful, interactive environment. Here’s how Samga’s cognitive games promote growth in crucial areas:"
+      "title": "Skills Samga's Cognitive Games Help Improve in Children with Special Needs",
+      "text": "Samga's cognitive games for children with special needs are specifically designed to make learning both fun and impactful, while supporting the development of vital life skills in a playful, interactive environment. Here's how Samga's cognitive games promote growth in crucial areas:"
     },
 
     "skills": {
       "skill0": {
         "title": "Attention and Focus",
-        "text": "Samga’s cognitive games help improve children’s attention span by encouraging sustained engagement with tasks. Games that require focus and perseverance help enhance their concentration skills and the ability to stay on track."
+        "text": "Samga's cognitive games help improve children's attention span by encouraging sustained engagement with tasks. Games that require focus and perseverance help enhance their concentration skills and the ability to stay on track."
       },
       "skill1": {
         "title": "Critical Thinking and Decision-Making Skills",
-        "text": "Samga’s cognitive games provide valuable opportunities for sharpening cognitive skills like critical thinking and decision-making. Through entertaining challenges, children learn to manage problems independently and make decisions on the fly, which helps strengthen their cognitive abilities."
+        "text": "Samga's cognitive games provide valuable opportunities for sharpening cognitive skills like critical thinking and decision-making. Through entertaining challenges, children learn to manage problems independently and make decisions on the fly, which helps strengthen their cognitive abilities."
       },
       "skill2": {
         "title": "Motor Skills and Visual Perception",
-        "text": "Samga’s cognitive games are an excellent resource for improving movement coordination and visual responses. By engaging in various game activities, children practice coordination and visual skills in a supportive and enjoyable environment."
+        "text": "Samga's cognitive games are an excellent resource for improving movement coordination and visual responses. By engaging in various game activities, children practice coordination and visual skills in a supportive and enjoyable environment."
       },
       "skill3": {
         "title": "Memory Enhancement",
-        "text": "Effective memory skills are essential for learning, and Samga’s cognitive games aim to enhance memory in children with special needs. The interactive and fun nature of the games encourages children to retain and recall information, sharpening their memory while enjoying the process."
+        "text": "Effective memory skills are essential for learning, and Samga's cognitive games aim to enhance memory in children with special needs. The interactive and fun nature of the games encourages children to retain and recall information, sharpening their memory while enjoying the process."
       },
       "skill4": {
         "title": "Object and Concept Recognition",
-        "text": "From shapes and numbers to letters and symbols, Samga’s games help children improve their object recognition skills. The hands-on, interactive approach helps children better identify and understand objects, making learning enjoyable and effective."
+        "text": "From shapes and numbers to letters and symbols, Samga's games help children improve their object recognition skills. The hands-on, interactive approach helps children better identify and understand objects, making learning enjoyable and effective."
       }
     },
 
-    "conclusion": "Samga’s online cognitive games offer a modern, technology-driven approach to learning that empowers children with special needs to grow, learn, and succeed in a fun, interactive way."
+    "conclusion": "Samga's online cognitive games offer a modern, technology-driven approach to learning that empowers children with special needs to grow, learn, and succeed in a fun, interactive way."
   },
   "MotoricSkills": {
     "heading": "SKILLS WE DEVELOP",
@@ -219,7 +219,7 @@
     "subtitle": "IMPROVING COORDINATION AND MOVEMENT",
 
     "section1": {
-      "title": "Samga’s Motor Skills Games",
+      "title": "Samga's Motor Skills Games",
       "text": "Samga's online games are designed to develop and improve motor functions in children with special needs. These games target both fine and gross motor skills, helping children to strengthen coordination, balance, and physical awareness."
     },
 
@@ -229,7 +229,7 @@
     },
 
     "section3": {
-      "title": "Skills Samga’s Motor Games Help Improve:"
+      "title": "Skills Samga's Motor Games Help Improve:"
     },
 
     "skills": {
@@ -258,79 +258,245 @@
     "conclusion": "These games provide an inclusive, low-pressure, and engaging way for kids to develop confidence in their physical abilities."
   },
   "BalloonPop": {
-    "back": "Back",
-    "title": "Balloon Pop",
-    "subtitle": "Step Into The Colorful World Of Balloon Pop!",
-    "description": "Step into the colorful world of Balloon Pop! Get ready to pop as many balloons as you can before the clock runs out. But watch out for those sneaky fireballs and bombs in red — they'll burst your balloon in no time!\n\nWith a party-time theme, this game is the perfect way to add some excitement to your daily routine. So, grab your balloon wand and let’s get popping!",
-    "skillsTitle": "The skills being developed by: Balloon Pop",
-    "motor": {
-      "title": "Motor Skills",
-      "upperBody": "Upper Body Strength",
-      "range": "Range of Motion and Response Time",
-      "posture": "Posture Control",
-      "core": "Core Strength"
-    },
-    "cognitive": {
-      "title": "Cognitive Skills",
-      "focus": "Visualisation and Focus"
-    }
+  "back": "Back",
+  "title": "Balloon Pop",
+  "subtitle": "Pop Balloons with Your Fingertip Using Computer Vision!",
+  "description": "🎈 Welcome to Balloon Pop — an exciting gesture-based game that uses advanced computer vision technology! Using MediaPipe's hand tracking system, this game detects your index fingertip through your webcam and lets you pop colorful balloons in real-time. Experience the thrill of popping balloons without touching any device — just point and pop! The game progressively increases in difficulty as balloons move faster after each successful pop, keeping you engaged and challenged.",
+  "howToPlay": {
+    "title": "How to Play:",
+    "step1": "Position yourself in front of the webcam with good lighting",
+    "step2": "Hold up your hand where the camera can see it clearly",
+    "step3": "Point with your index finger at the balloons on screen",
+    "step4": "Touch the balloons with your fingertip to pop them and score points!"
   },
-  "DrawIt": {
-    "back": "Back",
-    "title": "Draw It",
-    "subtitle": "Use Your Body to Draw Letters!",
-    "description": "✍️ Welcome to **Draw It** — a creative game where you draw letters in the air using your body!\nWith real-time motion tracking, you trace the shape of letters and receive feedback based on form, size, and accuracy.\n\nGreat for developing precision, balance, and creative thinking — all while having fun writing letters in space!",
-    "skillsTitle": "The skills being developed by: Draw It",
-    "motor": {
-      "title": "Motor Skills",
-      "fine": "Fine Motor Control",
-      "coord": "Arm and Shoulder Coordination",
-      "balance": "Postural Balance",
-      "precision": "Precision of Movement"
-    },
-    "cognitive": {
-      "title": "Cognitive Skills",
-      "recognition": "Letter Recognition",
-      "memory": "Shape Memory",
-      "focus": "Attention and Focus",
-      "integration": "Visual-Motor Integration"
-    }
+  "technology": {
+    "title": "Technology Behind the Game:",
+    "item1": "Computer Vision (CV) for real-time video processing",
+    "item2": "MediaPipe hand tracking to detect fingertip position",
+    "item3": "CVZone HandTrackingModule for precise gesture recognition",
+    "item4": "No mouse or keyboard needed — just your hand!"
   },
-  "FruitSlicer": {
-    "back": "Back",
-    "title": "Fruit Slicer",
-    "subtitle": "Slice Fruits with Your Nose — Seriously!",
-    "description": "🥝 Welcome to Fruit Slicer — where you don’t need hands or swords, just your nose! 🍍 This hilarious and high-energy game uses computer vision to track your head movements so you can slice fruits as they fly across the screen. Tilt, nod, and ninja your way through juicy chaos!It's fun, it's fast, and it secretly boosts your balance, reaction time, and mental focus. Who knew your nose could be this powerful?",
-    "skillsTitle": "The skills being developed by: Fruit Slicer",
-    "motorTitle": "Motor Skills",
-    "motor1": "Neck & Head Coordination",
-    "motor2": "Balance and Posture",
-    "motor3": "Timing and Accuracy",
-    "motor4": "Upper Body Awareness",
-    "cognitiveTitle": "Cognitive Skills",
-    "cognitive1": "Focus and Anticipation",
-    "cognitive2": "Spatial Awareness",
-    "cognitive3": "Impulse Control",
-    "cognitive4": "Fast Decision-Making"
+  "skillsTitle": "The skills being developed by: Balloon Pop",
+  "motor": {
+    "title": "Motor Skills",
+    "fingerPrecision": "Index Finger Precision and Control",
+    "handEye": "Enhanced Hand-Eye Coordination",
+    "tracking": "Visual Tracking of Moving Objects",
+    "reaction": "Quick Reaction Time Development"
   },
-  "Tennis": {
-    "back": "Back",
-    "title": "Tennis",
-    "subtitle": "Play Tennis Using Only Your Hands!",
-    "description": "🎾 Welcome to Tennis — a motion-controlled game where your hands become the racket! Using our advanced computer vision system, your hand movements are tracked in real-time to simulate the excitement of real tennis.Swing, react, and strategize — while building your coordination and sharpening your mind. Whether you're training or just playing for fun, Tennis brings the court to your screen!",
-    "skillsTitle": "The skills being developed by: Tennis",
-    "motorTitle": "Motor Skills",
-    "motor1": "Hand-Eye Coordination",
-    "motor2": "Arm Range of Motion",
-    "motor3": "Reaction Speed",
-    "motor4": "Gross Motor Control",
-    "cognitiveTitle": "Cognitive Skills",
-    "cognitive1": "Focus and Concentration",
-    "cognitive2": "Decision-Making Under Pressure",
-    "cognitive3": "Visual Tracking & Prediction",
-    "cognitive4": "Mental Agility"
+  "cognitive": {
+    "title": "Cognitive Skills",
+    "focus": "Sustained Visual Attention",
+    "prediction": "Movement Prediction and Timing",
+    "adaptation": "Adaptation to Increasing Speed",
+    "processing": "Visual Processing Speed"
   }
-  ,"Footer":{
+},"LetterTracing": {
+  "back": "Back",
+  "title": "Letter Tracing",
+  "subtitle": "Learn to Write Letters Using Hand Gestures!",
+  "description": "✍️ Welcome to Letter Tracing — an innovative educational game that transforms handwriting practice into a contactless, gesture-controlled experience! Using MediaPipe's hand tracking technology, the game tracks your index finger in real-time through your webcam, allowing you to trace letter outlines in the air. Perfect for children and early learners to develop fine motor control and letter formation skills in an engaging digital environment.",
+  "howToPlay": {
+    "title": "How to Play:",
+    "step1": "Position yourself in front of the webcam with your hand clearly visible",
+    "step2": "Use your index finger as a virtual pen to trace letters",
+    "step3": "Follow the letter outline displayed on screen",
+    "step4": "Receive instant feedback on your tracing accuracy (90% threshold for success)"
+  },
+  "features": {
+    "title": "Key Features:",
+    "realTime": {
+      "title": "Real-Time Tracking",
+      "description": "21 hand landmarks tracked in 3D using MediaPipe"
+    },
+    "fingerTracking": {
+      "title": "Precise Finger Detection",
+      "description": "Index fingertip (landmark 8) serves as your virtual pen"
+    },
+    "accuracy": {
+      "title": "Accuracy Assessment",
+      "description": "Pixel-level overlap calculation for tracing evaluation"
+    },
+    "contactless": {
+      "title": "Contactless Learning",
+      "description": "No physical tools needed - just your hand!"
+    }
+  },
+  "alphabet": {
+    "title": "Practice All Letters:"
+  },
+  "skillsTitle": "The skills being developed by: Letter Tracing",
+  "motor": {
+    "title": "Motor Skills",
+    "fineMotor": "Fine Motor Control Development",
+    "handEye": "Hand-Eye Coordination",
+    "precision": "Precision in Movement",
+    "control": "Controlled Finger Movements"
+  },
+  "cognitive": {
+    "title": "Cognitive Skills",
+    "letterRecognition": "Letter Recognition and Formation",
+    "memory": "Visual Memory Enhancement",
+    "sequencing": "Sequential Movement Planning",
+    "spatial": "Spatial Awareness"
+  }
+},"FruitSlicer": {
+  "back": "Back",
+  "title": "Fruit Slicer",
+  "subtitle": "Slice Fruits with Your Nose Using Motion Tracking!",
+  "description": "🍓 Welcome to Fruit Slicer — an innovative game that uses nose tracking technology for a unique gaming experience! Using MediaPipe's face detection, this game tracks your nose position through your webcam, allowing you to slice fruits by moving your head. Perfect for developing motor skills, attention, and visual-motor coordination in an accessible way. The game features progressive difficulty levels and motivating sound effects to keep players engaged.",
+  "howToPlay": {
+    "title": "How to Play:",
+    "step1": "Position yourself in front of the webcam with your face clearly visible",
+    "step2": "Move your head to control the slicing cursor with your nose",
+    "step3": "Touch the fruits with your nose position to slice them",
+    "step4": "Avoid bombs in higher levels and score as many points as possible!"
+  },
+  "levels": {
+    "title": "Progressive Difficulty Levels:",
+    "level1": {
+      "title": "Level 1 - Beginner",
+      "description": "Large, slow-moving fruits only. No bombs. Perfect for getting started!"
+    },
+    "level2": {
+      "title": "Level 2 - Intermediate",
+      "description": "Smaller fruits and bombs introduced. Be careful what you slice!"
+    },
+    "level3": {
+      "title": "Level 3 - Advanced",
+      "description": "Fast, small fruits with more bombs. Test your skills and reflexes!"
+    }
+  },
+  "technology": {
+    "title": "Innovative Technology:",
+    "item1": "Nose tracking via MediaPipe face detection",
+    "item2": "Real-time webcam movement capture",
+    "item3": "Contactless control system",
+    "item4": "Accessibility for users with limited hand mobility"
+  },
+  "skillsTitle": "The skills being developed by: Fruit Slicer",
+  "motor": {
+    "title": "Motor Skills",
+    "headControl": "Head Movement Control",
+    "neckFlexibility": "Neck Flexibility and Range",
+    "timing": "Timing and Accuracy",
+    "spatial": "Spatial Awareness"
+  },
+  "cognitive": {
+    "title": "Cognitive Skills",
+    "attention": "Sustained Attention",
+    "tracking": "Visual Tracking",
+    "decision": "Quick Decision Making",
+    "adaptation": "Progressive Adaptation"
+  }
+},"Tennis": {
+  "back": "Back",
+  "title": "Tennis",
+  "subtitle": "Play Virtual Tennis with Hand Movements!",
+  "description": "🎾 Welcome to Tennis — a virtual tennis experience where you control rackets using hand movements tracked via webcam! This adaptive game helps develop hand-eye coordination and motor skills in a fun, engaging way. With bright visual elements including a colorful tennis court, animated ball, and rackets, the game creates an exciting and friendly environment suitable for children of all abilities.",
+  "howToPlay": {
+    "title": "How to Play:",
+    "step1": "Position yourself in front of the webcam with your hands visible",
+    "step2": "Move your hands to control the virtual tennis rackets",
+    "step3": "Catch and hit the ball as it moves across the court",
+    "step4": "Score points by successfully returning the ball!"
+  },
+  "levels": {
+    "title": "Adaptive Difficulty Levels:",
+    "racketSize": "Racket Size",
+    "ballSpeed": "Ball Speed",
+    "easy": {
+      "title": "Easy",
+      "racket": "Large",
+      "speed": "Slow",
+      "description": "Perfect for beginners to develop basic coordination"
+    },
+    "medium": {
+      "title": "Medium",
+      "racket": "Medium",
+      "speed": "Moderate",
+      "description": "Provides a balanced challenge for improving skills"
+    },
+    "difficult": {
+      "title": "Difficult",
+      "racket": "Small",
+      "speed": "Fast",
+      "description": "Requires quick reactions and concentration"
+    }
+  },
+  "technology": {
+    "title": "Core Technologies:",
+    "opencv": "Captures and processes real-time video stream from webcam",
+    "mediapipe": "Enables hand detection and tracking of key landmarks",
+    "cvzone": "Provides simplified hand tracking implementation",
+    "browser": "Runs directly in browser, no installation required"
+  },
+  "skillsTitle": "The skills being developed by: Tennis",
+  "motor": {
+    "title": "Motor Skills",
+    "handEye": "Hand-Eye Coordination",
+    "timing": "Timing and Rhythm",
+    "precision": "Precision Movement Control",
+    "bilateral": "Bilateral Coordination"
+  },
+  "cognitive": {
+    "title": "Cognitive Skills",
+    "tracking": "Visual Tracking",
+    "prediction": "Ball Trajectory Prediction",
+    "adaptation": "Adaptive Strategy Development",
+    "concentration": "Sustained Concentration"
+  }
+},"RockPaperScissors": {
+  "back": "Back",
+  "title": "Rock Paper Scissors",
+  "subtitle": "Battle AI with Hand Gesture Recognition!",
+  "description": "✊✋✌️ Welcome to Rock Paper Scissors — the classic strategy game reimagined with cutting-edge computer vision technology! Using real-time hand gesture recognition, show rock, paper, or scissors to your webcam and watch as our AI instantly detects your move and responds. Experience the timeless game in a whole new way that promotes quick decision-making, pattern recognition, and strategic thinking!",
+  "howToPlay": {
+    "title": "How to Play:",
+    "step1": "Position yourself in front of the webcam with good lighting",
+    "step2": "Make your choice: Rock (fist), Paper (flat hand), or Scissors (victory sign)",
+    "step3": "Show your gesture clearly to the camera",
+    "step4": "The AI will detect your move and reveal its choice instantly!"
+  },
+  "rules": {
+    "title": "Game Rules:",
+    "rock": "Rock",
+    "paper": "Paper",
+    "scissors": "Scissors",
+    "beats": "beats"
+  },
+  "technology": {
+    "title": "Advanced Technology:",
+    "detection": {
+      "title": "Hand Gesture Recognition",
+      "description": "Computer vision algorithms detect and classify your hand gestures in real-time"
+    },
+    "ai": {
+      "title": "Smart AI Opponent",
+      "description": "Adaptive AI that analyzes patterns and provides challenging gameplay"
+    },
+    "realtime": {
+      "title": "Instant Response",
+      "description": "Millisecond-level detection for seamless gaming experience"
+    }
+  },
+  "skillsTitle": "The skills being developed by: Rock Paper Scissors",
+  "motor": {
+    "title": "Motor Skills",
+    "handGestures": "Hand Gesture Formation",
+    "timing": "Timing and Coordination",
+    "precision": "Precision in Movement",
+    "coordination": "Fine Motor Control"
+  },
+  "cognitive": {
+    "title": "Cognitive Skills",
+    "strategy": "Strategic Planning",
+    "prediction": "Opponent Prediction",
+    "adaptation": "Adaptive Thinking",
+    "memory": "Pattern Memory"
+  }
+},
+  "Footer":{
     "itsSamgaTime": "IT'S SAMGA TIME!",
     "inclusivePlatform": "Inclusive platform that helps kids with motor and cognitive disabilities.",
     "quickLinks": "QUICK LINKS",
@@ -344,10 +510,11 @@
     "motorSkills": "Motor skills",
     "haveQuestions": "DO YOU HAVE QUESTIONS OR SUGGESTIONS?",
     "enterEmail": "Enter your email address",
-    "weWillContact": "We will contact you!"
-  }
-  
-  ,"Home":{
+    "weWillContact": "We will contact you!",
+    "submit": "Submit",
+    "submitted": "Submitted!"
+  },
+  "Home":{
 
     "whyUs1title":"💡 Engaging Games",
   
@@ -377,11 +544,11 @@
   
   "review3author":"Amrita Singh",
   
-  "review4text":"My two-year-old daughter loves this because she thinks it’s magical. She says she 'learns everything' through games. A fun and educational tool that we now use daily.",
+  "review4text":"My two-year-old daughter loves this because she thinks it's magical. She says she 'learns everything' through games. A fun and educational tool that we now use daily.",
   
   "review4author":"Melody Wisk",
   
-  "review5text":"Samga is an amazing project. I’ve personally seen children light up with excitement while using it. The interface is designed with care and heart.",
+  "review5text":"Samga is an amazing project. I've personally seen children light up with excitement while using it. The interface is designed with care and heart.",
   
   "review5author":"Danelia Nauryz",
   
@@ -434,7 +601,7 @@
   
   "card3_title":"Real-Time Progress",
   
-  "card3_text":"Track your child’s growth with instant feedback designed for parents, educators, and therapists.",
+  "card3_text":"Track your child's growth with instant feedback designed for parents, educators, and therapists.",
   
   "card4_title":"Samga for Institutions",
   
@@ -497,7 +664,7 @@
       "score_dist":"Score Distribution"
     },
     "WhoWeHelp":      {
-        "page_title": "Who We Help",
+        "page_title": "WHO WE HELP",
         "card_neurodivergent_title": "Neurodivergent Children",
         "card_neurodivergent_text": "Children with ADHD, autism, Down syndrome, and other developmental conditions benefit from therapeutic games that improve attention, social skills, and motor control — all while keeping them engaged and motivated to play and learn.",
         "card_earlylearners_title": "Early Childhood Learners",
@@ -543,7 +710,7 @@
       
         "down_title": "Down Syndrome",
         "down_intro_title": "Sensory Activities and Therapy Games for Kids with Down Syndrome",
-        "down_intro_text_1": "Children with Down Syndrome need help improving their fine and gross motor skills. Samğa’s interactive games support them in achieving developmental goals that positively impact their daily lives.",
+        "down_intro_text_1": "Children with Down Syndrome need help improving their fine and gross motor skills. Samğa's interactive games support them in achieving developmental goals that positively impact their daily lives.",
         "down_intro_text_2": "Games that require hand-eye coordination help strengthen visual-motor integration, while balance-based games improve postural stability.",
         "down_support_title": "How Samğa Helps Children with Down Syndrome:",
         "down_support_text_1": "Samğa provides a variety of online activities that challenge cognitive abilities. Memory games assist in improving both short-term and long-term memory, and attention-based tasks enhance focus and sustained engagement.",
@@ -556,10 +723,10 @@
       
         "dcd_title": "Developmental Coordination Disorder (DCD)",
         "dcd_intro_title": "Interactive Therapy and Sensory Games for Children with Cerebral Palsy",
-        "dcd_intro_text_1": "Samğa’s online games for cerebral palsy can supplement in-clinic occupational therapy for children with Cerebral Palsy. These games provide therapeutic activities for developing both gross and fine motor skills, making them an ideal addition to physical and occupational therapy.",
+        "dcd_intro_text_1": "Samğa's online games for cerebral palsy can supplement in-clinic occupational therapy for children with Cerebral Palsy. These games provide therapeutic activities for developing both gross and fine motor skills, making them an ideal addition to physical and occupational therapy.",
         "dcd_intro_text_2": "These games are not only fun but can also be customized to suit children with varying conditions and levels of capabilities, offering a great solution for parents and therapists looking for enjoyable and effective ways to encourage motor skill development.",
         "dcd_support_title": "How Samğa helps children with Cerebral Palsy",
-        "dcd_support_text": "Games allow adjustment of difficulty levels according to each child’s ability, challenging them to expand their range of motion and improve bilateral coordination. Continued practice helps children with cerebral palsy develop upper body strength and body awareness, boosting their confidence.",
+        "dcd_support_text": "Games allow adjustment of difficulty levels according to each child's ability, challenging them to expand their range of motion and improve bilateral coordination. Continued practice helps children with cerebral palsy develop upper body strength and body awareness, boosting their confidence.",
         "dcd_skills_title": "Skills and Abilities Developed:",
         "dcd_skill_1": "Improve upper body muscle strength and expand range of motion",
         "dcd_skill_2": "Enhance synchronized movements with greater precision",
@@ -569,7 +736,7 @@
       
         "cp_title": "Cerebral Palsy (CP)",
         "cp_intro_title": "Interactive Therapy and Sensory Games for Children with Cerebral Palsy",
-        "cp_intro_text": "Samğa’s online games for cerebral palsy can supplement in-clinic occupational therapy. These therapeutic activities help develop both gross and fine motor skills and can be tailored to each child's ability level.",
+        "cp_intro_text": "Samğa's online games for cerebral palsy can supplement in-clinic occupational therapy. These therapeutic activities help develop both gross and fine motor skills and can be tailored to each child's ability level.",
         "cp_support_title": "How Samğa helps children with Cerebral Palsy:",
         "cp_support_text": "Our games help improve bilateral coordination, expand the range of motion, and develop upper body strength. They also support children with limited mobility, including those in wheelchairs, through adaptive design.",
         "cp_skills_title": "Skills and abilities developed with Samğa:",
@@ -590,7 +757,7 @@
         "ece_benefit_1": "Cognitive Development: Enhances memory, attention, problem-solving, and critical thinking.",
         "ece_benefit_2": "Physical Growth: Improves motor skills, coordination, and overall physical health.",
         "ece_benefit_3": "Social and Emotional Skills: Builds confidence, communication, and emotional regulation.",
-        "ece_benefit_4": "Special Education Support: Adapts to children’s needs with inclusive game design and real-time tracking for educators and parents."
+        "ece_benefit_4": "Special Education Support: Adapts to children's needs with inclusive game design and real-time tracking for educators and parents."
       
 
     },
@@ -627,6 +794,133 @@
     
     "section10_title": "10. Contact Us",
     "section10_text": "For questions, please contact us at {email}."
+  },"SnakeGame": {
+  "back": "Back",
+  "title": "Snake Game",
+  "subtitle": "Control Your Snake with Gesture Tracking!",
+  "description": "🐍 Welcome to Snake Game — the classic arcade game revolutionized with computer vision technology! Using real-time hand tracking via webcam, guide your snake using only your index finger. Navigate through the grid to collect food items like virtual donuts, watch your snake grow longer, and avoid colliding with yourself. This gesture-based control system transforms the traditional Snake game into an immersive experience that develops hand-eye coordination and spatial awareness.",
+  "howToPlay": {
+    "title": "How to Play:",
+    "step1": "Position yourself in front of the webcam with good lighting",
+    "step2": "Hold up your index finger - it becomes the snake's head",
+    "step3": "Move your finger to guide the snake toward food items",
+    "step4": "Avoid colliding with your own snake body as it grows!"
+  },
+  "mechanics": {
+    "title": "Game Mechanics:",
+    "webcam": {
+      "title": "Webcam Capture",
+      "description": "Real-time video processing tracks your movements"
+    },
+    "control": {
+      "title": "Finger Control",
+      "description": "Index finger acts as the snake's head for navigation"
+    },
+    "food": {
+      "title": "Food Collection",
+      "description": "Collect donuts and other items to grow your snake"
+    },
+    "collision": {
+      "title": "Collision Detection",
+      "description": "Game ends if snake collides with its own body"
+    }
+  },
+  "technology": {
+    "title": "Advanced Technology:",
+    "cv": {
+      "title": "Computer Vision",
+      "description": "Image-based position comparisons for food collection"
+    },
+    "tracking": {
+      "title": "Hand Tracking Module",
+      "description": "Continuous fingertip coordinate tracking frame by frame"
+    },
+    "detection": {
+      "title": "Self-Collision Detection",
+      "description": "cv2.pointPolygonTest function from OpenCV for body intersection"
+    }
+  },
+  "skillsTitle": "The skills being developed by: Snake Game",
+  "motor": {
+    "title": "Motor Skills",
+    "fingerControl": "Precise Finger Movement Control",
+    "precision": "Fine Motor Precision",
+    "tracking": "Real-time Motion Tracking",
+    "coordination": "Hand-Eye Coordination"
+  },
+  "cognitive": {
+    "title": "Cognitive Skills",
+    "planning": "Path Planning Strategy",
+    "spatial": "Spatial Awareness",
+    "anticipation": "Movement Anticipation",
+    "strategy": "Strategic Decision Making"
   }
+},"ConstructorGame": {
+  "back": "Back",
+  "title": "Constructor",
+  "subtitle": "Build, Remember, and Create with Gesture Control!",
+  "description": "🏗️ Welcome to Constructor — an innovative educational game that enhances visual memory, attention, and fine motor skills through gesture-based interaction! Using real-time hand tracking through your webcam, you'll memorize reference images and recreate them by moving objects with simple pinch gestures. Perfect for developing short-term memory, spatial reasoning, and concentration in a fun, interactive environment.",
+  "howToPlay": {
+    "title": "How to Play:",
+    "step1": "Study the reference image carefully when it appears",
+    "step2": "Use the pinch gesture (index and middle fingers) to grab objects",
+    "step3": "Move your hand to position objects where they belong",
+    "step4": "Release the pinch to drop objects in place and recreate the original layout"
+  },
+  "levels": {
+    "title": "9 Themed Levels:",
+    "items": ["Mushroom", "Flower", "Car", "Tree", "Train", "Rainbow", "Home", "Worm", "Castle"]
+  },
+  "skillsTitle": "The skills being developed by: Constructor",
+  "motor": {
+    "title": "Motor Skills",
+    "fineMotor": "Fine Motor Control and Precision",
+    "gesture": "Gesture-Based Interaction Mastery",
+    "coordination": "Hand-Eye Coordination",
+    "spatial": "Spatial Movement Accuracy"
+  },
+  "cognitive": {
+    "title": "Cognitive Skills",
+    "memory": "Visual Memory Enhancement",
+    "attention": "Sustained Attention and Focus",
+    "reasoning": "Spatial Reasoning Development",
+    "concentration": "Memory Recall and Concentration"
+  }
+},"FlappyBird": {
+  "back": "Back",
+  "title": "Flappy Bird",
+  "subtitle": "Fly Through Pipes Using Your Arms!",
+  "description": "🐦 Welcome to Flappy Bird with a twist — control the bird using your arm movements! This hands-free version uses computer vision and pose detection to track your arm positions in real-time. Raise both arms to make the bird flap upward, lower them to prepare for the next flap. Experience the classic gameplay in an entirely new, physically engaging way that promotes movement and coordination.",
+  "howToPlay": {
+    "title": "How to Play:",
+    "step1": "Position yourself in front of the webcam where your upper body is visible",
+    "step2": "Raise both arms upward to make the bird flap",
+    "step3": "Lower your arms to reset for the next flap",
+    "step4": "Guide the bird through gaps between pipes and avoid collisions"
+  },
+  "mechanics": {
+    "title": "Game Mechanics:",
+    "item1": "Real-time pose detection tracks shoulder-elbow-hip angles",
+    "item2": "Dynamic pipe generation with varying heights",
+    "item3": "Score tracking based on pipes successfully passed",
+    "item4": "Animated backgrounds and sound effects",
+    "item5": "Collision detection with pipes and boundaries"
+  },
+  "skillsTitle": "The skills being developed by: Flappy Bird",
+  "motor": {
+    "title": "Motor Skills",
+    "armControl": "Gross Motor Arm Control",
+    "coordination": "Bilateral Arm Coordination",
+    "timing": "Precise Movement Timing",
+    "bodyAwareness": "Upper Body Awareness"
+  },
+  "cognitive": {
+    "title": "Cognitive Skills",
+    "timing": "Timing and Rhythm Recognition",
+    "spatial": "Spatial Judgment",
+    "reaction": "Quick Decision Making",
+    "focus": "Sustained Attention Under Pressure"
+  }
+}
 
 }

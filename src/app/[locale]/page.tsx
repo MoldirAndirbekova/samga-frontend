@@ -141,27 +141,27 @@ useEffect(() => {
     {
       text: t("review1text"),
       author: t("review1author"),
-      color: "bg-blue-400",
+      color: "#2959BF",
     },
     {
       text: t("review2text"),
       author: t("review2author"),
-      color: "bg-pink-400",
+      color: "#34A853",
     },
     {
       text: t("review3text"),
       author: t("review3author"),
-      color: "bg-lime-400",
+      color: "#7E44A1",
     },
     {
       text: t("review4text"),
       author: t("review4author"),
-      color: "bg-orange-400",
+      color: "#F9DB63",
     },
     {
       text: t("review5text"),
       author: t("review5author"),
-      color: "bg-purple-400",
+      color: "#FFB1B1",
     }
   ];
   const features = [
@@ -483,7 +483,7 @@ const [isLangOpen, setIsLangOpen] = useState(false);
 
         
         <div
-          className={`w-full px-6 pt-16 pb-10 ${
+          className={`w-full px-6 pt-16 pb-10 flex flex-col justify-between ${
             idx % 2 === 0 ? "bg-[#2959BF] text-white" : "bg-white text-[#2959BF]"
           }`}
           style={{ transform: "none", scale: "1" ,  height: "350px"}}
@@ -591,15 +591,17 @@ const [isLangOpen, setIsLangOpen] = useState(false);
       className="flex gap-6 whitespace-nowrap overflow-hidden w-full"
     >
       {[...reviews, ...reviews].map((review, index) => (
-        <div
-          key={index}
-          className={`${review.color} rounded-2xl min-w-[360px] sm:min-w-[420px] w-[420px] flex-shrink-0 p-6 shadow-lg text-black flex flex-col justify-between whitespace-normal break-words`}
-        >
-          <div className="text-3xl text-white mb-4">“</div>
-          <div className="text-lg sm:text-xl font-semibold">{review.text}</div>
-          <div className="mt-6 font-bold text-black">{review.author}</div>
-          <div className="mt-2 text-yellow-500 text-lg">★★★★★</div>
-        </div>
+       <div
+       key={index}
+       className="rounded-2xl min-w-[360px] sm:min-w-[420px] w-[420px] flex-shrink-0 p-6 shadow-lg flex flex-col justify-between whitespace-normal break-words"
+       style={{ backgroundColor: review.color }}
+     >
+       <div className="text-3xl text-white mb-4">“</div>
+       <div className="text-lg sm:text-xl font-semibold text-white">{review.text}</div>
+       <div className="mt-6 font-bold text-white">{review.author}</div>
+       <div className="mt-2 text-yellow-400 text-lg">★★★★★</div>
+     </div>
+   
       ))}
       
 

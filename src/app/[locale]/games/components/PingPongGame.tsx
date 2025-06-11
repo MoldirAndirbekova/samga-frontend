@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import api from "@/lib/api";
 import { registerWebSocket, unregisterWebSocket } from "@/features/websocket";
 import { useChild } from "@/contexts/ChildContext";
+import PauseResumeButtons from "@/components/PauseResumeButtonsProps";
 
 interface PingPongGameProps {
   onGameOver: (score: number) => void;
@@ -38,6 +39,10 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
   const { selectedChildId } = useChild();
   const [savedGameResult, setSavedGameResult] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  
+  // Add pause state
+  const [isPaused, setIsPaused] = useState(false);
+  const [showPauseMenu, setShowPauseMenu] = useState(false);
   
   // Updated gameDimensions state with better handling
   const [gameDimensions, setGameDimensions] = useState({ 
@@ -94,6 +99,7 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
         setSocketConnected(false);
       }
 
+      // Reset pause state
       setFrameImage(null);
       setGameState({
         score: 0,
@@ -103,6 +109,8 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
         gameOver: false,
         currentSpeed: 1
       });
+      setIsPaused(false);
+      setShowPauseMenu(false);
       
       gameCreatedRef.current = true;
 
@@ -249,6 +257,32 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
     }
   };
   
+  const pauseGame = () => {
+    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+      setIsPaused(true);
+      setShowPauseMenu(true);
+      wsRef.current.send(JSON.stringify({
+        type: 'pause_game'
+      }));
+    }
+  };
+  
+  const resumeGame = () => {
+    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+      setIsPaused(false);
+      setShowPauseMenu(false);
+      wsRef.current.send(JSON.stringify({
+        type: 'resume_game'
+      }));
+    }
+  };
+  
+  const exitGame = () => {
+    console.log("Exiting game...");
+    closeWebSocketConnection();
+    onGameOver(gameState.score);
+  };
+  
   // Initialize camera and create game
   useEffect(() => {
     const startCamera = async () => {
@@ -294,7 +328,7 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
   
   // Set up hand tracking via WebSocket
   useEffect(() => {
-    if (!videoRef.current || !socketConnected || !wsRef.current) return;
+    if (!videoRef.current || !socketConnected || !wsRef.current || isPaused) return;
     
     let processingActive = false;
     const intervalId = setInterval(async () => {
@@ -302,7 +336,8 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
           !videoRef.current || 
           videoRef.current.readyState !== videoRef.current.HAVE_ENOUGH_DATA ||
           !wsRef.current ||
-          wsRef.current.readyState !== WebSocket.OPEN) {
+          wsRef.current.readyState !== WebSocket.OPEN ||
+          isPaused) {
         return;
       }
       
@@ -343,7 +378,7 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
     return () => {
       clearInterval(intervalId);
     };
-  }, [socketConnected, gameId, difficulty]);
+  }, [socketConnected, gameId, difficulty, isPaused]);
   
   const closeWebSocketConnection = useCallback(() => {
     console.log("Cleaning up WebSocket connection after game over");
@@ -403,6 +438,18 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
           <p className="text-lg font-bold">Right: {gameState.rightScore}</p>
         </div>
       </div>
+      
+      {/* Use the common PauseResumeButtons component */}
+      <PauseResumeButtons
+        onPause={pauseGame}
+        onResume={resumeGame}
+        onExit={exitGame}
+        isPaused={isPaused}
+        showPauseMenu={showPauseMenu}
+        score={gameState.score}
+        gameActive={gameState.gameActive}
+        gameOver={gameState.gameOver}
+      />
       
       {/* Error display */}
       {cameraError && (

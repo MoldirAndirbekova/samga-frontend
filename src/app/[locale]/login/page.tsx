@@ -90,12 +90,12 @@ export default function LoginPage() {
                   {t('register-link')}
                 </Link>
               </p>
-              <Button
+              {/* <Button
                 className="w-full sm:w-1/2 flex items-center justify-center gap-2 mb-6"
                 icon={<GoogleOutlined />}
               >
                {t('sign-with-google')}
-              </Button>
+              </Button> */}
             </div>
             <Form.Item className="flex justify-center">
               <Button htmlType="submit" className="w-full">

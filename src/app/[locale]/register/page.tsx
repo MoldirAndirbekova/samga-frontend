@@ -53,12 +53,12 @@ export default function SignupPage() {
           
           
           </div>
-          <Button
+          {/* <Button
             className="w-full sm:w-1/2 flex items-center justify-center gap-2 mb-6"
             icon={<GoogleOutlined />}
           >
            {t('sign-up-google')}
-          </Button>
+          </Button> */}
           <Form
             layout="vertical"
             className="font-semibold"

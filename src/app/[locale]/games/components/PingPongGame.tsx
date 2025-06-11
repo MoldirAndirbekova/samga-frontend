@@ -38,17 +38,35 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
   const { selectedChildId } = useChild();
   const [savedGameResult, setSavedGameResult] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
-  const [gameDimensions, setGameDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
   
-  // Update game dimensions on resize
+  // Updated gameDimensions state with better handling
+  const [gameDimensions, setGameDimensions] = useState({ 
+    width: typeof window !== 'undefined' ? window.innerWidth : 700, 
+    height: typeof window !== 'undefined' ? window.innerHeight : 500 
+  });
+  
+  // Update game dimensions on resize and restart game with new dimensions
   useEffect(() => {
     const handleResize = () => {
-      setGameDimensions({ width: window.innerWidth, height: window.innerHeight });
+      const newDimensions = { width: window.innerWidth, height: window.innerHeight };
+      setGameDimensions(newDimensions);
+      
+      // If game is active, restart with new dimensions
+      if (socketConnected && wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+        console.log("Screen resized, updating game dimensions:", newDimensions);
+        wsRef.current.send(JSON.stringify({
+          type: 'start_game',
+          data: {
+            screen_width: newDimensions.width,
+            screen_height: newDimensions.height
+          }
+        }));
+      }
     };
     
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [socketConnected]);
   
   const createGame = async () => {
     try {
@@ -390,6 +408,22 @@ export default function PingPongGame({ onGameOver, difficulty: initialDifficulty
       {cameraError && (
         <div className="absolute top-4 left-4 right-4 bg-red-500 text-white p-4 rounded-lg z-50">
           {cameraError}
+        </div>
+      )}
+      
+      {/* Save error display */}
+      {saveError && (
+        <div className="absolute top-20 left-4 right-4 bg-red-500 text-white p-4 rounded-lg z-50">
+          {saveError}
+        </div>
+      )}
+      
+      {/* Debug info for development */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white p-2 rounded text-sm z-50">
+          <p>Dimensions: {gameDimensions.width}x{gameDimensions.height}</p>
+          <p>Socket: {socketConnected ? 'Connected' : 'Disconnected'}</p>
+          <p>Game ID: {gameId || 'None'}</p>
         </div>
       )}
     </div>

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import api from "@/lib/api";
 import { registerWebSocket, unregisterWebSocket } from "@/features/websocket";
 import { useChild } from "@/contexts/ChildContext";
+import PauseResumeButtons from "@/components/PauseResumeButtonsProps";
 
 interface BubblePopGameProps {
   onGameOver: (score: number) => void;
@@ -32,6 +33,10 @@ export default function BubblePopGame({ onGameOver, difficulty: initialDifficult
   const [savedGameResult, setSavedGameResult] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [gameDimensions, setGameDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
+  
+  // Add pause state
+  const [isPaused, setIsPaused] = useState(false);
+  const [showPauseMenu, setShowPauseMenu] = useState(false);
   
   // Update game dimensions on resize
   useEffect(() => {
@@ -68,6 +73,7 @@ export default function BubblePopGame({ onGameOver, difficulty: initialDifficult
         setSocketConnected(false);
       }
 
+      // Reset pause state
       setFrameImage(null);
       setGameState({
         score: 0,
@@ -75,6 +81,8 @@ export default function BubblePopGame({ onGameOver, difficulty: initialDifficult
         gameOver: false,
         timeRemaining: 60
       });
+      setIsPaused(false);
+      setShowPauseMenu(false);
       
       gameCreatedRef.current = true;
 
@@ -216,6 +224,32 @@ export default function BubblePopGame({ onGameOver, difficulty: initialDifficult
     }
   };
   
+  const pauseGame = () => {
+    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+      setIsPaused(true);
+      setShowPauseMenu(true);
+      wsRef.current.send(JSON.stringify({
+        type: 'pause_game'
+      }));
+    }
+  };
+  
+  const resumeGame = () => {
+    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+      setIsPaused(false);
+      setShowPauseMenu(false);
+      wsRef.current.send(JSON.stringify({
+        type: 'resume_game'
+      }));
+    }
+  };
+  
+  const exitGame = () => {
+    console.log("Exiting game...");
+    closeWebSocketConnection();
+    onGameOver(gameState.score);
+  };
+  
   const closeWebSocketConnection = useCallback(() => {
     console.log("Cleaning up WebSocket connection after game over");
     
@@ -280,7 +314,7 @@ export default function BubblePopGame({ onGameOver, difficulty: initialDifficult
   
   // Set up hand tracking via WebSocket
   useEffect(() => {
-    if (!videoRef.current || !socketConnected || !wsRef.current) return;
+    if (!videoRef.current || !socketConnected || !wsRef.current || isPaused) return;
     
     let processingActive = false;
     const intervalId = setInterval(async () => {
@@ -288,7 +322,8 @@ export default function BubblePopGame({ onGameOver, difficulty: initialDifficult
           !videoRef.current || 
           videoRef.current.readyState !== videoRef.current.HAVE_ENOUGH_DATA ||
           !wsRef.current ||
-          wsRef.current.readyState !== WebSocket.OPEN) {
+          wsRef.current.readyState !== WebSocket.OPEN ||
+          isPaused) {
         return;
       }
       
@@ -330,7 +365,7 @@ export default function BubblePopGame({ onGameOver, difficulty: initialDifficult
     return () => {
       clearInterval(intervalId);
     };
-  }, [socketConnected, gameId]);
+  }, [socketConnected, gameId, isPaused]);
   
   return (
     <div className="fixed inset-0 h-screen w-screen overflow-hidden">
@@ -367,6 +402,18 @@ export default function BubblePopGame({ onGameOver, difficulty: initialDifficult
           <p className="text-lg font-bold">Time: {gameState.timeRemaining}s</p>
         </div>
       </div>
+      
+      {/* Use the common PauseResumeButtons component */}
+      <PauseResumeButtons
+        onPause={pauseGame}
+        onResume={resumeGame}
+        onExit={exitGame}
+        isPaused={isPaused}
+        showPauseMenu={showPauseMenu}
+        score={gameState.score}
+        gameActive={gameState.gameActive}
+        gameOver={gameState.gameOver}
+      />
       
       {/* Error display */}
       {cameraError && (

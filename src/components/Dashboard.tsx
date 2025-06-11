@@ -147,7 +147,7 @@ export default function Dashboard() {
 
   const handleGameClick = (gameId: string) => {
     console.log("Game clicked for game ID:", gameId);
-    router.push(`/description/balloonpop`);
+    router.push(`/description/${gameId}`);
   };
 
   return (

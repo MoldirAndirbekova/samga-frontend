@@ -3,6 +3,71 @@
     "title": "Hello World!",
     "review1": "It is an incredible platform that provides an engaging and accessible experience for children with motor and cognitive disabilities. Designed with inclusivity in mind, it features intuitive controls, adaptive difficulty levels, and interactive gameplay that keeps kids entertained while supporting their development."
   },
+  "ProfileAcc": {
+    "account": "Account",
+    "personal-account": "Personal Account",
+    "name": "Name",
+    "email": "Email",
+    "children": "Children",
+    "add-new-child": "Add New Child",
+    "user-avatar-alt": "User Avatar",
+    "child-avatar-alt": "Child Avatar",
+    "placeholders": {
+      "full-name": "Full Name",
+      "email": "Email",
+      "child-name": "Child's Name"
+    },
+    "labels": {
+      "name": "Name",
+      "email": "Email"
+    },
+    "buttons": {
+      "edit-profile": "Edit profile",
+      "save": "Save",
+      "cancel": "Cancel",
+      "add-child": "Add Child",
+      "edit-child": "Edit child",
+      "delete-child": "Delete child",
+      "select-for-games": "Select for Games",
+      "save-profile-changes": "Save profile changes",
+      "cancel-editing": "Cancel editing",
+      "add-new-child": "Add new child"
+    },
+    "success": {
+      "profile-updated": "Profile updated successfully!",
+      "child-added": "Child added successfully!",
+      "child-updated": "Child updated successfully!",
+      "child-deleted": "Child deleted successfully!"
+    },
+    "errors": {
+      "load-profile": "Failed to load user profile",
+      "update-profile": "Failed to update profile",
+      "add-child": "Failed to add child",
+      "update-child": "Failed to update child",
+      "delete-child": "Failed to delete child"
+    },
+    "confirm": {
+      "delete-child": "Are you sure you want to delete this child? This action cannot be undone."
+    },
+    "no-children": {
+      "title": "No children added yet.",
+      "subtitle": "Click \"Add Child\" to create your first child profile."
+    }
+  },
+  "ChildSelector": {
+    "add-child-message": "Please add a child to play games",
+    "child-label": "Child",
+    "loading": "Loading...",
+    "select-child": "Select Child",
+    "add-new-child": "Add New Child"
+  },
+   "Header": {
+    "logo-alt": "Samga Logo",
+    "user-photo-alt": "User Photo", 
+    "user-avatar-alt": "User Avatar",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
   "Feedback": {
     "title": "Feedback",
     "rating": "Our rating is",
@@ -121,8 +186,27 @@
     "step2": "STEP 2",
     "step2-text": "Use a computer screen and stand 3-4 feet away.",
     "step3": "STEP 3",
-    "step3-text": "Time to play!"
-  },
+    "step3-text": "Time to play!",
+    "default-description": "Interactive motion-based game",
+    "categories": {
+      "motion-games": "Motion Games",
+      "cognitive-games": "Cognitive Games", 
+      "motor-games": "Motor Games",
+      "fine-motor-games": "Fine Motor Games",
+      "gross-motor-games": "Gross Motor Games"
+    },
+    "game-descriptions": {
+      "ping-pong": "Play ping pong using your hands as paddles!",
+      "bubble-pop": "Pop as many bubbles as you can in 60 seconds!",
+      "letter-tracing": "Learn to trace letters with your finger!",
+      "fruit-slicer": "Slice fruits in the air using your head movements!",
+      "snake": "Control the snake with your hand movements!",
+      "constructor": "Build objects by assembling pieces with your hands!",
+      "rock-paper-scissors": "Play Rock Paper Scissors against the computer using hand gestures!",
+      "flappy-bird": "Fly through pipes using your arm movements!"
+    }
+  
+},
   "ProductPage": {
     "why_us_title": "WHY US?",
 
@@ -632,37 +716,85 @@
   "button4_text":"Book a meeting now"
   
 },
-  "Reports1":{
-      "game_reports":"Game Reports",
-      "skills_reports":"Skills Report",
-      "loading":"Loading children data...",
-      "no_children":"No children found",
-      "add_child":"Please add a child to view game reports",
-      "no_child_select":"No child selected",
-      "select_child":"Please select a child from the header menu to view reports",
-      "loading_reports":"Loading game reports...",
-      "no_date":"No game data available for",
-      "play_game":"Play some games with this child to see reports!",
-      "total_games":"Total Games",
-      "average":"Average Score",
-      "avg_duration":"Average Duration",
-      "game-select":"Games by Difficulty",
-      "skills":"Skills Assessment",
-      "score":"Score",
-      "no_skills":"No skill metrics available yet. Play more games to see your skill assessment!",
-      "skills_progress":"Skills Progress Over Time",
-      "no_date_1":"Not enough data to show skills progress. Play more games over time to track your improvement! ",
-      "recent":"Recent Ping Pong Games",
-      "game_id":"Game ID",
-      "Difficulty":"Difficulty",
-      "Score":"Score",
-      "LeftScore":"Left Score",
-      "RightScore":"Right Score",
-      "Duration":"Duration",
-      "Timestamp":"Timestamp",
-      "Skills":"Skills",
-      "score_dist":"Score Distribution"
+  "Reports1": {
+    "game_reports": "Game Reports",
+    "skills_reports": "Skills Reports",
+    "loading": "Loading...",
+    "loading_reports": "Loading reports...",
+    "no_children": "No children profiles found",
+    "add_child": "Please add a child profile first to view reports",
+    "no_child_select": "No child selected",
+    "select_child": "Please select a child from the sidebar to view their reports",
+    "no_date": "No data available for",
+    "play_game": "Start playing games to see reports here!",
+    "total_games": "Total Games",
+    "average": "Average Score",
+    "avg_duration": "Avg Duration",
+    "game-select": "Games by Difficulty",
+    "skillsover": "Skills Overview",
+    "skills_progress": "Skills Progress",
+    "no_skills": "No skill metrics available yet. Play games to see skill development!",
+    "no_skills_progress": "No skills progress data available yet. Continue playing to track improvement!",
+    "no_recent_games": "No recent games found",
+    "view_modes": {
+      "table_view": "Table View",
+      "chart_view": "Chart View"
     },
+    "skills": {
+      "hand_eye_coordination": "Hand-Eye Coordination",
+      "agility": "Agility",
+      "focus": "Focus",
+      "reaction_time": "Reaction Time",
+      "hand_eye_short": "Hand-Eye",
+      "reaction_short": "Reaction"
+    },
+    "performance": {
+      "needs_practice": "Needs Practice",
+      "good": "Good",
+      "excellent": "Excellent"
+    },
+    "charts": {
+      "progress_over_time": "Progress Over Time",
+      "score_distribution": "Score Distribution",
+      "left_right_comparison": "Left/Right Score Comparison"
+    },
+    "labels": {
+      "score": "Score",
+      "duration": "Duration",
+      "left_score": "Left Score",
+      "right_score": "Right Score",
+      "date": "Date",
+      "skill_level": "Skill Level",
+      "game_session": "Game Session",
+      "session_number": "Session Number",
+      "session": "Session",
+      "duration_min": "Duration (min)",
+      "latest": "Latest",
+      "left_side": "Left Side",
+      "right_side": "Right Side",
+      "score_trend": "Score Trend",
+      "left_trend": "Left Trend",
+      "right_trend": "Right Trend",
+      "difference": "Difference"
+    },
+    "comparisons": {
+      "left_stronger": "Left side is stronger by",
+      "right_stronger": "Right side is stronger by",
+      "both_equal": "Both sides are equal"
+    },
+    "table": {
+      "recent_games": "Recent Games",
+      "headers": {
+        "game_name": "Game Name",
+        "difficulty": "Difficulty",
+        "score": "Score",
+        "left_score": "Left Score",
+        "right_score": "Right Score",
+        "duration": "Duration",
+        "date": "Date"
+      }
+    }
+  },
     "WhoWeHelp":      {
         "page_title": "WHO WE HELP",
         "card_neurodivergent_title": "Neurodivergent Children",
@@ -921,6 +1053,6 @@
     "reaction": "Quick Decision Making",
     "focus": "Sustained Attention Under Pressure"
   }
-}
 
-}
+
+}}

@@ -4,19 +4,86 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Marquee from "react-fast-marquee";
-import { Nerko_One } from "next/font/google";
+import { Nerko_One, Rubik } from "next/font/google";
 import Link from "next/link";
 import { Globe, ChevronDown } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, usePathname, Locale } from "@/i18n/routing"; 
 
 const nerkoOne = Nerko_One({ subsets: ["latin"], weight: "400" });
+const rubik = Rubik({ 
+  subsets: ["latin", "cyrillic"], 
+  weight: ["400", "700", "800"] 
+});
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+
+// Font selection function
+const getFontClass = (locale) => {
+  switch (locale) {
+    case 'ru':
+    case 'kz':
+      return rubik.className;
+    case 'en':
+    default:
+      return nerkoOne.className;
+  }
+};
+
+// Font size function for different locales
+const getFontSizeClass = (locale, baseSize) => {
+  const sizeMapping = {
+    // For main headers (like h1 titles)
+    'header-main': {
+      'en': 'text-6xl sm:text-8xl',
+      'ru': 'text-5xl sm:text-7xl', 
+      'kz': 'text-5xl sm:text-7xl'
+    },
+    // For section titles  
+    'header-section': {
+      'en': 'text-4xl sm:text-6xl',
+      'ru': 'text-3xl sm:text-5xl',
+      'kz': 'text-3xl sm:text-5xl'
+    },
+    // For feature titles
+    'header-feature': {
+      'en': 'text-6xl',
+      'ru': 'text-5xl',
+      'kz': 'text-5xl'
+    },
+    // For card titles
+    'header-card': {
+      'en': 'text-2xl sm:text-3xl',
+      'ru': 'text-xl sm:text-2xl',
+      'kz': 'text-xl sm:text-2xl'
+    },
+    // For review titles
+    'header-reviews': {
+      'en': 'text-3xl sm:text-7xl',
+      'ru': 'text-2xl sm:text-6xl',
+      'kz': 'text-2xl sm:text-6xl'
+    },
+    // For help section titles
+    'header-help': {
+      'en': 'text-4xl sm:text-5xl',
+      'ru': 'text-3xl sm:text-4xl',
+      'kz': 'text-3xl sm:text-4xl'
+    },
+    // For marquee text
+    'marquee': {
+      'en': 'text-xl sm:text-3xl',
+      'ru': 'text-lg sm:text-2xl',
+      'kz': 'text-lg sm:text-2xl'
+    }
+  };
+
+  return sizeMapping[baseSize]?.[locale] || sizeMapping[baseSize]?.['en'] || '';
+};
 
 export default function Home() {
 
   const t = useTranslations("Home"); 
+  const locale = useLocale();
 
   const [textVisible, setTextVisible] = useState(false);
   const [subTextVisible, setSubTextVisible] = useState(false);
@@ -207,7 +274,6 @@ useEffect(() => {
 }, []);
 
 const [isLangOpen, setIsLangOpen] = useState(false);
-  const locale = useLocale();
   const [language, setLanguage] = useState(locale.toUpperCase());
 
   const router = useRouter();
@@ -339,21 +405,21 @@ const [isLangOpen, setIsLangOpen] = useState(false);
       
       <div className="relative z-20 pt-48 px-6 text-center flex flex-col items-center">
         <h1
-          className={`${nerkoOne.className} text-white text-6xl sm:text-8xl font-extrabold transition-all duration-700 ease-out ${
+          className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-main')} text-white font-extrabold transition-all duration-700 ease-out ${
             textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
           {t("header1")}
         </h1>
         <h1
-          className={`${nerkoOne.className} text-white text-6xl sm:text-8xl font-extrabold transition-all duration-700 ease-out delay-300 ${
+          className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-main')} text-white font-extrabold transition-all duration-700 ease-out delay-300 ${
             textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
          {t("header2")}
         </h1>
         <h1
-          className={`${nerkoOne.className} text-white text-6xl sm:text-8xl font-extrabold transition-all duration-700 ease-out delay-500 ${
+          className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-main')} text-white font-extrabold transition-all duration-700 ease-out delay-500 ${
             textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
@@ -381,7 +447,7 @@ const [isLangOpen, setIsLangOpen] = useState(false);
       
     
 <div id = 'why-us' className=" bg-[#FFF5E1] py-24 px-6 sm:px-10">
-        <h2 className="text-4xl sm:text-6xl font-bold text-center text-[#5C3E00] mb-12">{t("whyUs_title")}</h2>
+        <h2 className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-section')} font-bold text-center text-[#5C3E00] mb-12`}>{t("whyUs_title")}</h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {whyUs.map((item, index) => (
             <div
@@ -488,7 +554,7 @@ const [isLangOpen, setIsLangOpen] = useState(false);
           }`}
           style={{ transform: "none", scale: "1" ,  height: "350px"}}
         >
-          <h3 className="text-2xl sm:text-3xl font-bold mb-4">{card.title}</h3>
+          <h3 className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-card')} font-bold mb-4`}>{card.title}</h3>
           <p className="text-base sm:text-lg mb-6 leading-relaxed">{card.text}</p>
 
           <Link href="/product">
@@ -537,14 +603,14 @@ const [isLangOpen, setIsLangOpen] = useState(false);
           {index === 3 && growAnim && <Lottie animationData={growAnim} loop />}
         </div>
         <div className="text-left">
-          <h3 className="text-6xl font-bold text-[#333] mb-4">{feature.title}</h3>
+          <h3 className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-feature')} font-bold text-[#333] mb-4`}>{feature.title}</h3>
           <p className="text-2xl text-[#444] max-w-xl">{feature.text}</p>
         </div>
       </>
     ) : (
       <>
         <div className="text-left">
-          <h3 className="text-6xl font-bold text-[#333] mb-4">{feature.title}</h3>
+          <h3 className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-feature')} font-bold text-[#333] mb-4`}>{feature.title}</h3>
           <p className="text-2xl text-[#444] max-w-xl">{feature.text}</p>
         </div>
         <div className="w-[400px] h-[400px]">
@@ -562,7 +628,7 @@ const [isLangOpen, setIsLangOpen] = useState(false);
       
       <div className="bg-purple-500 py-2">
   <Marquee speed={100} gradient={false}>
-    <span className="mx-6 text-white text-xl sm:text-3xl font-bold">{t("enjoy_move")}</span>
+    <span className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'marquee')} mx-6 text-white font-bold`}>{t("enjoy_move")}</span>
   </Marquee>
 </div>
 
@@ -570,7 +636,7 @@ const [isLangOpen, setIsLangOpen] = useState(false);
 
 
 <div id='reviews' className="py-20 bg-[#FFF6E2] w-full mb-24">
-  <h2 className="text-3xl sm:text-7xl font-bold text-center text-[#694800] mb-2 whitespace-pre-line">
+  <h2 className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-reviews')} font-bold text-center text-[#694800] mb-2 whitespace-pre-line`}>
     {t("reviews_title")}
   </h2>
   {familyAnim && (
@@ -596,7 +662,7 @@ const [isLangOpen, setIsLangOpen] = useState(false);
        className="rounded-2xl min-w-[360px] sm:min-w-[420px] w-[420px] flex-shrink-0 p-6 shadow-lg flex flex-col justify-between whitespace-normal break-words"
        style={{ backgroundColor: review.color }}
      >
-       <div className="text-3xl text-white mb-4">“</div>
+       <div className="text-3xl text-white mb-4">"</div>
        <div className="text-lg sm:text-xl font-semibold text-white">{review.text}</div>
        <div className="mt-6 font-bold text-white">{review.author}</div>
        <div className="mt-2 text-yellow-400 text-lg">★★★★★</div>
@@ -651,7 +717,7 @@ const [isLangOpen, setIsLangOpen] = useState(false);
   <div className="w-full max-w-7xl bg-[#FDE68A] rounded-3xl shadow-lg border-4 border-[#F59E0B] flex flex-col md:flex-row items-start p-10 gap-8">
     
     <div className="w-full md:w-1/2">
-      <h2 className="text-4xl sm:text-5xl font-bold text-[#5C3E00] mb-6 leading-tight whitespace-pre-line">
+      <h2 className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-help')} font-bold text-[#5C3E00] mb-6 leading-tight whitespace-pre-line`}>
          {t("help_you_title")}
       </h2>
       <div className="flex justify-end">

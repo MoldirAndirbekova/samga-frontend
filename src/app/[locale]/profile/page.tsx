@@ -6,6 +6,7 @@ import api from "@/lib/api";
 import Image from "next/image";
 import { useChild } from "@/contexts/ChildContext";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface User {
   id: string;
@@ -21,6 +22,7 @@ interface Child {
 }
 
 export default function Profile() {
+  const t = useTranslations("ProfileAcc");
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -54,7 +56,7 @@ export default function Profile() {
       setLoading(false);
     } catch (error) {
       console.error("Error fetching user data:", error);
-      setError("Failed to load user profile");
+      setError(t('errors.load-profile'));
       setLoading(false);
     }
   };
@@ -94,7 +96,7 @@ export default function Profile() {
       if (response.data) {
         setUser(response.data);
         setEditMode(false);
-        setSuccessMessage("Profile updated successfully!");
+        setSuccessMessage(t('success.profile-updated'));
         
         // Clear success message after 3 seconds
         setTimeout(() => {
@@ -103,7 +105,7 @@ export default function Profile() {
       }
     } catch (error: any) {
       console.error("Error updating user data:", error);
-      setError(error.response?.data?.detail || "Failed to update profile");
+      setError(error.response?.data?.detail || t('errors.update-profile'));
     } finally {
       setLoading(false);
     }
@@ -126,7 +128,7 @@ export default function Profile() {
         await refreshChildren();
         setAddChildMode(false);
         setChildFormData({ full_name: '' });
-        setSuccessMessage("Child added successfully!");
+        setSuccessMessage(t('success.child-added'));
         
         // Clear success message after 3 seconds
         setTimeout(() => {
@@ -135,7 +137,7 @@ export default function Profile() {
       }
     } catch (error: any) {
       console.error("Error adding child:", error);
-      setError(error.response?.data?.detail || "Failed to add child");
+      setError(error.response?.data?.detail || t('errors.add-child'));
     } finally {
       setLoading(false);
     }
@@ -160,7 +162,7 @@ export default function Profile() {
         await refreshChildren();
         setEditChildMode(null);
         setChildFormData({ full_name: '' });
-        setSuccessMessage("Child updated successfully!");
+        setSuccessMessage(t('success.child-updated'));
         
         // Clear success message after 3 seconds
         setTimeout(() => {
@@ -169,7 +171,7 @@ export default function Profile() {
       }
     } catch (error: any) {
       console.error("Error updating child:", error);
-      setError(error.response?.data?.detail || "Failed to update child");
+      setError(error.response?.data?.detail || t('errors.update-child'));
     } finally {
       setLoading(false);
     }
@@ -177,7 +179,7 @@ export default function Profile() {
 
   // Delete child
   const handleDeleteChild = async (childId: string) => {
-    if (!confirm("Are you sure you want to delete this child? This action cannot be undone.")) {
+    if (!confirm(t('confirm.delete-child'))) {
       return;
     }
     
@@ -191,7 +193,7 @@ export default function Profile() {
       await fetchUserData();
       // Refresh the children list in the context
       await refreshChildren();
-      setSuccessMessage("Child deleted successfully!");
+      setSuccessMessage(t('success.child-deleted'));
       
       // Clear success message after 3 seconds
       setTimeout(() => {
@@ -199,7 +201,7 @@ export default function Profile() {
       }, 3000);
     } catch (error: any) {
       console.error("Error deleting child:", error);
-      setError(error.response?.data?.detail || "Failed to delete child");
+      setError(error.response?.data?.detail || t('errors.delete-child'));
     } finally {
       setLoading(false);
     }
@@ -244,15 +246,15 @@ export default function Profile() {
       {/* User profile section */}
       <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
         <div className="flex flex-col items-center w-full md:w-1/3">
-          <h2 className="text-3xl font-bold mb-6">Account</h2>
+          <h2 className="text-3xl font-bold mb-6">{t('account')}</h2>
           <Image
             src="/icons/user-avatar.png"
-            alt="User Avatar"
+            alt={t('user-avatar-alt')}
             width={160}
             height={160}
             className="bg-[#F9DB63] rounded-xl w-40 h-40"
           />
-          <p className="mt-3 text-xl font-bold">Personal Account</p>
+          <p className="mt-3 text-xl font-bold">{t('personal-account')}</p>
         </div>
         
         <div className="flex-1 p-4 md:p-10 relative w-full">
@@ -261,16 +263,16 @@ export default function Profile() {
               <button 
                 className="absolute top-3 right-2 text-2xl text-gray-800 hover:text-gray-600"
                 onClick={() => setEditMode(true)}
-                aria-label="Edit profile"
+                aria-label={t('buttons.edit-profile')}
               >
                 <BiPencil />
               </button>
               <div className="space-y-4 w-full">
                 <div className="bg-[#F9DB63] px-7 py-2 rounded-3xl text-lg font-semibold">
-                  Name: {user?.full_name}
+                  {t('name')}: {user?.full_name}
                 </div>
                 <div className="bg-[#F9DB63] px-7 py-2 rounded-3xl text-lg font-semibold">
-                  Email: {user?.email}
+                  {t('email')}: {user?.email}
                 </div>
               </div>
             </>
@@ -290,17 +292,17 @@ export default function Profile() {
                     }
                   }}
                   className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-full flex items-center"
-                  aria-label="Cancel editing"
+                  aria-label={t('buttons.cancel-editing')}
                 >
-                  <BiX className="mr-1" /> Cancel
+                  <BiX className="mr-1" /> {t('buttons.cancel')}
                 </button>
                 <button 
                   type="submit"
                   className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full flex items-center"
                   disabled={loading}
-                  aria-label="Save profile changes"
+                  aria-label={t('buttons.save-profile-changes')}
                 >
-                  <BiSave className="mr-1" /> Save
+                  <BiSave className="mr-1" /> {t('buttons.save')}
                 </button>
               </div>
               <div className="space-y-4">
@@ -311,10 +313,10 @@ export default function Profile() {
                     value={formData.full_name}
                     onChange={handleInputChange}
                     className="bg-[#F9DB63] px-7 py-2 rounded-3xl text-lg font-semibold w-full"
-                    placeholder="Full Name"
+                    placeholder={t('placeholders.full-name')}
                     required
                   />
-                  <label className="absolute left-3 top-1 text-xs text-gray-700">Name</label>
+                  <label className="absolute left-3 top-1 text-xs text-gray-700">{t('labels.name')}</label>
                 </div>
                 <div className="relative">
                   <input 
@@ -323,10 +325,10 @@ export default function Profile() {
                     value={formData.email}
                     onChange={handleInputChange}
                     className="bg-[#F9DB63] px-7 py-2 rounded-3xl text-lg font-semibold w-full"
-                    placeholder="Email"
+                    placeholder={t('placeholders.email')}
                     required
                   />
-                  <label className="absolute left-3 top-1 text-xs text-gray-700">Email</label>
+                  <label className="absolute left-3 top-1 text-xs text-gray-700">{t('labels.email')}</label>
                 </div>
               </div>
             </form>
@@ -337,20 +339,20 @@ export default function Profile() {
       {/* Children section */}
       <div className="mt-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-3xl font-bold">Children</h2>
+          <h2 className="text-3xl font-bold">{t('children')}</h2>
           <button 
             onClick={() => setAddChildMode(true)}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full flex items-center"
-            aria-label="Add new child"
+            aria-label={t('buttons.add-new-child')}
           >
-            <BiPlus className="mr-1" /> Add Child
+            <BiPlus className="mr-1" /> {t('buttons.add-child')}
           </button>
         </div>
         
         {/* Add child form */}
         {addChildMode && (
           <div className="bg-white p-4 rounded-lg shadow-md mb-6">
-            <h3 className="font-bold text-xl mb-3">Add New Child</h3>
+            <h3 className="font-bold text-xl mb-3">{t('add-new-child')}</h3>
             <form onSubmit={handleAddChild}>
               <div className="flex flex-col md:flex-row gap-3">
                 <input 
@@ -359,7 +361,7 @@ export default function Profile() {
                   value={childFormData.full_name}
                   onChange={handleChildInputChange}
                   className="bg-[#F9DB63] px-4 py-2 rounded-xl text-md font-semibold flex-1"
-                  placeholder="Child's Name"
+                  placeholder={t('placeholders.child-name')}
                   required
                 />
                 <div className="flex gap-2">
@@ -371,14 +373,14 @@ export default function Profile() {
                     }}
                     className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-full flex items-center"
                   >
-                    <BiX className="mr-1" /> Cancel
+                    <BiX className="mr-1" /> {t('buttons.cancel')}
                   </button>
                   <button 
                     type="submit"
                     className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full flex items-center"
                     disabled={loading}
                   >
-                    <BiSave className="mr-1" /> Save
+                    <BiSave className="mr-1" /> {t('buttons.save')}
                   </button>
                 </div>
               </div>
@@ -401,7 +403,7 @@ export default function Profile() {
                         value={childFormData.full_name}
                         onChange={handleChildInputChange}
                         className="bg-[#F9DB63] px-4 py-2 rounded-xl text-md font-semibold flex-1"
-                        placeholder="Child's Name"
+                        placeholder={t('placeholders.child-name')}
                         required
                       />
                     </div>
@@ -414,14 +416,14 @@ export default function Profile() {
                         }}
                         className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-3 py-1 rounded-full flex items-center text-sm"
                       >
-                        <BiX className="mr-1" /> Cancel
+                        <BiX className="mr-1" /> {t('buttons.cancel')}
                       </button>
                       <button 
                         type="submit"
                         className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-full flex items-center text-sm"
                         disabled={loading}
                       >
-                        <BiSave className="mr-1" /> Save
+                        <BiSave className="mr-1" /> {t('buttons.save')}
                       </button>
                     </div>
                   </form>
@@ -432,7 +434,7 @@ export default function Profile() {
                       <div className="flex items-center mb-3">
                         <Image
                           src="/icons/kid-avatar.png"
-                          alt="Child Avatar"
+                          alt={t('child-avatar-alt')}
                           width={40}
                           height={40}
                           className="bg-[#F9DB63] rounded-full mr-3"
@@ -446,14 +448,14 @@ export default function Profile() {
                             setChildFormData({ full_name: child.full_name });
                           }}
                           className="text-gray-600 hover:text-blue-600 p-1"
-                          aria-label="Edit child"
+                          aria-label={t('buttons.edit-child')}
                         >
                           <BiPencil />
                         </button>
                         <button 
                           onClick={() => handleDeleteChild(child.id)}
                           className="text-gray-600 hover:text-red-600 p-1"
-                          aria-label="Delete child"
+                          aria-label={t('buttons.delete-child')}
                         >
                           <BiTrash />
                         </button>
@@ -464,7 +466,7 @@ export default function Profile() {
                         onClick={() => handleSelectChild(child.id)}
                         className="bg-[#F9DB63] hover:bg-[#e9cc59] text-[#694800] font-bold py-2 px-6 rounded-full"
                       >
-                        Select for Games
+                        {t('buttons.select-for-games')}
                       </button>
                     </div>
                   </>
@@ -473,8 +475,8 @@ export default function Profile() {
             ))
           ) : (
             <div className="col-span-full text-center p-8 bg-yellow-50 rounded-lg">
-              <p className="text-lg text-yellow-700">No children added yet.</p>
-              <p className="text-gray-600 mt-2">Click "Add Child" to create your first child profile.</p>
+              <p className="text-lg text-yellow-700">{t('no-children.title')}</p>
+              <p className="text-gray-600 mt-2">{t('no-children.subtitle')}</p>
             </div>
           )}
         </div>

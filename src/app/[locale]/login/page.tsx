@@ -110,7 +110,7 @@ export default function LoginPage() {
             {t('welcome-message')}
           </h2>
           <img
-            src="/auth/logo_white.png"
+            src="/svg/samga_bj.svg"
             alt="samğa"
             className="relative z-10 w-56 h-auto mt-2"
           />

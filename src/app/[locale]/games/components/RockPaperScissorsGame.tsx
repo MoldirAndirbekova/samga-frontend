@@ -5,6 +5,7 @@ import api from "@/features/page";
 import { registerWebSocket, unregisterWebSocket } from "@/features/websocket";
 import { useChild } from "@/contexts/ChildContext";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface RockPaperScissorsGameProps {
   onGameOver: (score: number) => void;
@@ -12,6 +13,7 @@ interface RockPaperScissorsGameProps {
 }
 
 export default function RockPaperScissorsGame({ onGameOver, difficulty: initialDifficulty }: RockPaperScissorsGameProps) {
+  const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [gameState, setGameState] = useState({

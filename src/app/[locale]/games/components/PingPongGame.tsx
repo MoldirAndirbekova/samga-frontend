@@ -5,6 +5,7 @@ import api from "@/lib/api";
 import { registerWebSocket, unregisterWebSocket } from "@/features/websocket";
 import { useChild } from "@/contexts/ChildContext";
 import PauseResumeButtons from "@/components/PauseResumeButtonsProps";
+import { useRouter } from "next/navigation";
 
 interface PingPongGameProps {
   onGameOver: (score: number) => void;
@@ -12,6 +13,7 @@ interface PingPongGameProps {
 }
 
 export default function PingPongGame({ onGameOver, difficulty: initialDifficulty }: PingPongGameProps) {
+  const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);

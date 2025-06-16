@@ -5,6 +5,7 @@ import api from "@/lib/api";
 import { registerWebSocket, unregisterWebSocket } from "@/features/websocket";
 import { useChild } from "@/contexts/ChildContext";
 import PauseResumeButtons from "@/components/PauseResumeButtonsProps";
+import { useRouter } from "next/navigation";
 
 interface BubblePopGameProps {
   onGameOver: (score: number) => void;
@@ -12,6 +13,7 @@ interface BubblePopGameProps {
 }
 
 export default function BubblePopGame({ onGameOver, difficulty: initialDifficulty }: BubblePopGameProps) {
+  const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [gameState, setGameState] = useState({

@@ -1,12 +1,13 @@
 'use client'
 import api from "@/lib/api";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSidebar } from "@/lib/context/SidebarContext";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
+  const router = useRouter();
   const t = useTranslations("Dashboard");
   const { collapsed } = useSidebar();
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);

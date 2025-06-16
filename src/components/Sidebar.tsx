@@ -32,19 +32,19 @@ export default function Sidebar() {
   return (
     <aside
       className={`${
-        collapsed ? "w-16" : "w-[200px]"
-      } border-r border-[#694800] bg-transparent p-4 h-screen text-[#694800] ml-3 flex flex-col items-start transition-all duration-300`}
+        collapsed ? "w-16" : "w-[250px]"
+      } border-r border-[#694800] bg-transparent pt-0 pr-4 pb-2 pl-4 h-screen text-[#694800] ml-3 flex flex-col items-start transition-all duration-300`}
     >
       {/* Product Logo */}
       <Link href={"/"}>
-        <div className="mb-6 flex justify-center w-full">
+        <div className="flex justify-center w-full">
           <Image src="/logo.png" alt="Product Logo" width={64} height={64} />
         </div>
       </Link>
       {/* Toggle Button */}
       <button
         onClick={toggleSidebar}
-        className="mb-4 p-2 bg-blue-100 rounded-full hover:bg-blue-200 transition self-end"
+        className="mb-0 p-2 bg-blue-100 rounded-full hover:bg-blue-200 transition self-end"
       >
         {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
       </button>

@@ -6,8 +6,10 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ChildSelector from "./ChildSelector";
 import { useChild } from "@/contexts/ChildContext";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
+  const t = useTranslations("Header");
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const { selectedChildId, setSelectedChildId, refreshChildren } = useChild();
   const router = useRouter();
@@ -53,7 +55,7 @@ export default function Header() {
   return (
     <header className="bg-[#2959BF] p-4 flex justify-between items-center text-white shadow-md mb-3 px-10">
       <Link href="/">
-        <Image src="/logo.png" alt="Samga Logo" width={100} height={40} />
+        <Image src="/svg/samga_bj.svg" alt={t('logo-alt')} width={100} height={40} />
       </Link>
 
       <div className="flex items-center space-x-4">
@@ -68,7 +70,7 @@ export default function Header() {
           <button className="rounded-full border-2 border-white p-1 mr-3">
             <Image
               src="/icons/photo.png"
-              alt="User Photo"
+              alt={t('user-photo-alt')}
               width={32}
               height={32}
               className="rounded-full"
@@ -81,7 +83,7 @@ export default function Header() {
           >
             <Image
               src="/icons/avatar.png"
-              alt="User Avatar"
+              alt={t('user-avatar-alt')}
               width={32}
               height={32}
               className="rounded-full"
@@ -94,13 +96,13 @@ export default function Header() {
                 className="px-4 py-2 flex items-center space-x-2 cursor-pointer hover:bg-gray-200"
                 onClick={() => router.push("/profile")}
               >
-                <User className="w-4 h-4" /> <span>Profile</span>
+                <User className="w-4 h-4" /> <span>{t('profile')}</span>
               </div>
               <div
                 className="px-4 py-2 flex items-center space-x-2 cursor-pointer hover:bg-gray-200"
                 onClick={handleLogout}
               >
-                <LogOut className="w-4 h-4" /> <span>Logout</span>
+                <LogOut className="w-4 h-4" /> <span>{t('logout')}</span>
               </div>
             </div>
           )}

@@ -14,7 +14,7 @@ export const config = {
 };
 
 // Публичные маршруты (без учета локали)
-const publicRoutes = ['/', '/login', '/register', '/reset-password'];
+const publicRoutes = ['/', '/login', '/register', '/reset-password', '/skills/cognitive', '/skills/motoric', '/whowehelp', '/terms'];
 
 // Функция для проверки, является ли маршрут публичным
 function isPublicRoute(pathname: string): boolean {

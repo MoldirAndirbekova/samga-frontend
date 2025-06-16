@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ChevronDown, User, UserPlus } from 'lucide-react';
 import { useChild, Child } from '@/contexts/ChildContext';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 interface ChildSelectorProps {
   onSelectChild: (childId: string | null) => void;
@@ -11,6 +12,7 @@ interface ChildSelectorProps {
 }
 
 export default function ChildSelector({ onSelectChild, selectedChildId: propSelectedChildId }: ChildSelectorProps) {
+  const t = useTranslations("ChildSelector");
   const { children, selectedChildId: contextSelectedChildId, loading, error } = useChild();
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
@@ -37,7 +39,7 @@ export default function ChildSelector({ onSelectChild, selectedChildId: propSele
   if (!loading && children.length === 0) {
     return (
       <div className="text-sm bg-red-100 text-red-700 p-2 rounded-md">
-        Please add a child to play games
+        {t('add-child-message')}
       </div>
     );
   }
@@ -45,17 +47,17 @@ export default function ChildSelector({ onSelectChild, selectedChildId: propSele
   return (
     <div className="relative">
       <div className="flex items-center gap-2">
-        <span className="text-sm">Child:</span>
+        <span className="text-sm">{t('child-label')}:</span>
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full px-3 py-1 text-black"
         >
           {loading ? (
-            'Loading...'
+            t('loading')
           ) : selectedChild ? (
             selectedChild.full_name
           ) : (
-            'Select Child'
+            t('select-child')
           )}
           <ChevronDown className="ml-1 w-4 h-4" />
         </button>
@@ -83,10 +85,10 @@ export default function ChildSelector({ onSelectChild, selectedChildId: propSele
             onClick={handleAddChild}
           >
             <UserPlus className="mr-2 w-4 h-4" />
-            <span>Add New Child</span>
+            <span>{t('add-new-child')}</span>
           </div>
         </div>
       )}
     </div>
   );
-} 
+}

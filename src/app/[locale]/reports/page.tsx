@@ -144,12 +144,19 @@ export default function Reports() {
   // Get skill display name
   const getSkillDisplayName = (skillName: string) => {
     switch (skillName) {
-      case 'hand_eye_coordination': return 'Hand-Eye Coordination';
-      case 'agility': return 'Agility';
-      case 'focus': return 'Focus';
-      case 'reaction_time': return 'Reaction Time';
+      case 'hand_eye_coordination': return t('skills.hand_eye_coordination');
+      case 'agility': return t('skills.agility');
+      case 'focus': return t('skills.focus');
+      case 'reaction_time': return t('skills.reaction_time');
       default: return skillName;
     }
+  };
+
+  // Get skill performance level
+  const getSkillPerformanceLevel = (score: number) => {
+    if (score < 40) return t('performance.needs_practice');
+    if (score < 70) return t('performance.good');
+    return t('performance.excellent');
   };
 
   // Get color based on skill score
@@ -181,13 +188,13 @@ export default function Reports() {
               className={`px-4 py-2 rounded-md ${viewMode === 'table' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
               onClick={() => setViewMode('table')}
             >
-              <FaTable className="inline mr-2" /> Table View
+              <FaTable className="inline mr-2" /> {t('view_modes.table_view')}
             </button>
             <button 
               className={`px-4 py-2 rounded-md ${viewMode === 'chart' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
               onClick={() => setViewMode('chart')}
             >
-              <FaChartBar className="inline mr-2" /> Chart View
+              <FaChartBar className="inline mr-2" /> {t('view_modes.chart_view')}
             </button>
             <button 
               className={`px-4 py-2 rounded-md ${viewMode === 'skills' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
@@ -262,7 +269,7 @@ export default function Reports() {
                 {gameReport.skill_metrics ? (
                   <div className="bg-white rounded-xl shadow-md overflow-hidden mb-6">
                     <div className="p-4 bg-purple-500 text-white">
-                      <h3 className="text-lg font-bold">{t("skills")}</h3>
+                      <h3 className="text-lg font-bold">{t("skillsover")}</h3>
                     </div>
                     <div className="p-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -281,8 +288,8 @@ export default function Reports() {
                               ></div>
                             </div>
                             <div className="flex justify-between text-sm text-gray-600">
-                              <span>{t('score')}: {Math.round(score)}/100</span>
-                              <span>{score < 40 ? 'Needs Practice' : score < 70 ? 'Good' : 'Excellent'}</span>
+                              <span>{t('labels.score')}: {Math.round(score)}/100</span>
+                              <span>{getSkillPerformanceLevel(score)}</span>
                             </div>
                           </div>
                         ))}
@@ -305,23 +312,23 @@ export default function Reports() {
                     <div className="p-6">
                       <div className="mb-6">
                         <div className="flex justify-between items-center mb-4">
-                          <h4 className="font-semibold">Progress Over Time</h4>
+                          <h4 className="font-semibold">{t('charts.progress_over_time')}</h4>
                           <div className="flex items-center space-x-2 text-sm">
                             <div className="flex items-center">
                               <div className="w-3 h-3 rounded-full bg-blue-500 mr-1"></div>
-                              <span>Hand-Eye</span>
+                              <span>{t('skills.hand_eye_short')}</span>
                             </div>
                             <div className="flex items-center">
                               <div className="w-3 h-3 rounded-full bg-yellow-500 mr-1"></div>
-                              <span>Agility</span>
+                              <span>{t('skills.agility')}</span>
                             </div>
                             <div className="flex items-center">
                               <div className="w-3 h-3 rounded-full bg-purple-500 mr-1"></div>
-                              <span>Focus</span>
+                              <span>{t('skills.focus')}</span>
                             </div>
                             <div className="flex items-center">
                               <div className="w-3 h-3 rounded-full bg-green-500 mr-1"></div>
-                              <span>Reaction</span>
+                              <span>{t('skills.reaction_short')}</span>
                             </div>
                           </div>
                         </div>
@@ -337,11 +344,11 @@ export default function Reports() {
                               type="category"
                               allowDuplicatedCategory={false}
                               tickFormatter={(value) => new Date(value).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
-                              label={{ value: 'Date', position: 'insideBottomRight', offset: -10 }}
+                              label={{ value: t('labels.date'), position: 'insideBottomRight', offset: -10 }}
                             />
                             <YAxis 
                               domain={[0, 100]} 
-                              label={{ value: 'Skill Level', angle: -90, position: 'insideLeft' }} 
+                              label={{ value: t('labels.skill_level'), angle: -90, position: 'insideLeft' }} 
                             />
                             <Tooltip 
                               content={({ active, payload, label }) => {
@@ -521,11 +528,8 @@ export default function Reports() {
                               {/* Latest game details */}
                               <div className="mt-3 text-sm bg-white p-2 rounded border border-gray-200">
                                 <div className="flex items-center justify-between">
-                                  <span className="font-medium">Latest: {Math.round(lastValue)}%</span>
-                                  <span className="text-xs text-gray-500"
-                                  
-                                  
-                >
+                                  <span className="font-medium">{t('labels.latest')}: {Math.round(lastValue)}%</span>
+                                  <span className="text-xs text-gray-500">
                                     {sortedData[sortedData.length - 1].game_type}
                                   </span>
                                 </div>
@@ -546,7 +550,7 @@ export default function Reports() {
               <div className="p-6">
                 {/* Score Distribution Chart */}
                 <div className="mb-8">
-                  <h4 className="text-lg font-semibold mb-4">{t("score_dist") || "Score Distribution"}</h4>
+                  <h4 className="text-lg font-semibold mb-4">{t("charts.score_distribution")}</h4>
                   <ResponsiveContainer width="100%" height={300}>
                     <ComposedChart 
                       data={gameReport.recent_games.map((game, index) => ({
@@ -564,7 +568,7 @@ export default function Reports() {
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis 
                         dataKey="index" 
-                        label={{ value: 'Game Session', position: 'insideBottomRight', offset: -10 }}
+                        label={{ value: t('labels.game_session'), position: 'insideBottomRight', offset: -10 }}
                         tick={(props) => {
                           const { x, y, payload } = props;
                           const value = gameReport.recent_games[payload.value - 1];
@@ -581,8 +585,8 @@ export default function Reports() {
                           );
                         }}
                       />
-                      <YAxis yAxisId="left" label={{ value: 'Score', angle: -90, position: 'insideLeft' }} />
-                      <YAxis yAxisId="right" orientation="right" label={{ value: 'Duration (min)', angle: 90, position: 'insideRight' }} />
+                      <YAxis yAxisId="left" label={{ value: t('labels.score'), angle: -90, position: 'insideLeft' }} />
+                      <YAxis yAxisId="right" orientation="right" label={{ value: t('labels.duration_min'), angle: 90, position: 'insideRight' }} />
                       <Tooltip 
                         content={({ active, payload, label }) => {
                           if (active && payload && payload.length) {
@@ -600,19 +604,19 @@ export default function Reports() {
                                 </p>
                                 <div className="grid grid-cols-2 gap-2 mt-2">
                                   <div>
-                                    <p className="text-xs text-gray-500">Score</p>
+                                    <p className="text-xs text-gray-500">{t('labels.score')}</p>
                                     <p className="font-semibold">{data.score}</p>
                                   </div>
                                   <div>
-                                    <p className="text-xs text-gray-500">Duration</p>
+                                    <p className="text-xs text-gray-500">{t('labels.duration')}</p>
                                     <p className="font-semibold">{Math.round(data.duration_seconds / 60)} min</p>
                                   </div>
                                   <div>
-                                    <p className="text-xs text-gray-500">Left Score</p>
+                                    <p className="text-xs text-gray-500">{t('labels.left_score')}</p>
                                     <p className="font-semibold">{data.left_score}</p>
                                   </div>
                                   <div>
-                                    <p className="text-xs text-gray-500">Right Score</p>
+                                    <p className="text-xs text-gray-500">{t('labels.right_score')}</p>
                                     <p className="font-semibold">{data.right_score}</p>
                                   </div>
                                 </div>
@@ -626,7 +630,7 @@ export default function Reports() {
                       <Bar 
                         yAxisId="left" 
                         dataKey="score" 
-                        name="Score" 
+                        name={t('labels.score')} 
                         barSize={20}
                         fill="#8884d8"
                       />
@@ -636,7 +640,7 @@ export default function Reports() {
                         dataKey="score" 
                         stroke="#8884d8" 
                         strokeWidth={2} 
-                        name="Score Trend" 
+                        name={t('labels.score_trend')} 
                         dot={{ r: 4 }}
                       />
                       <Line 
@@ -645,7 +649,7 @@ export default function Reports() {
                         dataKey="duration" 
                         stroke="#ff7300" 
                         strokeWidth={2} 
-                        name="Duration" 
+                        name={t('labels.duration')} 
                         dot={{ r: 4 }}
                       />
                     </ComposedChart>
@@ -654,7 +658,7 @@ export default function Reports() {
 
                 {/* Left/Right Score Comparison */}
                 <div className="mb-8">
-                  <h4 className="text-lg font-semibold mb-4">Left/Right Score Comparison</h4>
+                  <h4 className="text-lg font-semibold mb-4">{t('charts.left_right_comparison')}</h4>
                   <ResponsiveContainer width="100%" height={300}>
                     <BarChart
                       data={gameReport.recent_games.map((game, index) => ({
@@ -671,7 +675,7 @@ export default function Reports() {
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis 
                         dataKey="index"
-                        label={{ value: 'Game Session', position: 'insideBottomRight', offset: -10 }}
+                        label={{ value: t('labels.game_session'), position: 'insideBottomRight', offset: -10 }}
                         tick={(props) => {
                           const { x, y, payload } = props;
                           const game = gameReport.recent_games[payload.value - 1];
@@ -688,7 +692,7 @@ export default function Reports() {
                           );
                         }}
                       />
-                      <YAxis label={{ value: 'Score', angle: -90, position: 'insideLeft' }} />
+                      <YAxis label={{ value: t('labels.score'), angle: -90, position: 'insideLeft' }} />
                       <Tooltip
                         content={({ active, payload, label }) => {
                           if (active && payload && payload.length) {
@@ -699,24 +703,24 @@ export default function Reports() {
                                 <p className="text-sm">{new Date(game.timestamp).toLocaleString()}</p>
                                 <div className="grid grid-cols-2 gap-2 mt-2">
                                   <div>
-                                    <p className="text-xs text-gray-500">Left Score</p>
+                                    <p className="text-xs text-gray-500">{t('labels.left_score')}</p>
                                     <p className="font-semibold">{game.left_score}</p>
                                   </div>
                                   <div>
-                                    <p className="text-xs text-gray-500">Right Score</p>
+                                    <p className="text-xs text-gray-500">{t('labels.right_score')}</p>
                                     <p className="font-semibold">{game.right_score}</p>
                                   </div>
                                   <div className="col-span-2">
-                                    <p className="text-xs text-gray-500">Difference</p>
+                                    <p className="text-xs text-gray-500">{t('labels.difference')}</p>
                                     <p className={`font-semibold ${
                                       game.left_score > game.right_score ? 'text-blue-600' : 
                                       game.right_score > game.left_score ? 'text-green-600' : 'text-gray-600'
                                     }`}>
                                       {game.left_score > game.right_score 
-                                        ? `Left side is stronger by ${game.left_score - game.right_score}` 
+                                        ? `${t('comparisons.left_stronger')} ${game.left_score - game.right_score}` 
                                         : game.right_score > game.left_score 
-                                          ? `Right side is stronger by ${game.right_score - game.left_score}`
-                                          : 'Both sides are equal'}
+                                          ? `${t('comparisons.right_stronger')} ${game.right_score - game.left_score}`
+                                          : t('comparisons.both_equal')}
                                     </p>
                                   </div>
                                 </div>
@@ -727,13 +731,13 @@ export default function Reports() {
                         }}
                       />
                       <Legend />
-                      <Bar dataKey="left" name="Left Side" fill="#3b82f6" />
-                      <Bar dataKey="right" name="Right Side" fill="#10b981" />
+                      <Bar dataKey="left" name={t('labels.left_side')} fill="#3b82f6" />
+                      <Bar dataKey="right" name={t('labels.right_side')} fill="#10b981" />
                       <Line 
                         type="monotone" 
                         dataKey="left" 
                         stroke="#3b82f6" 
-                        name="Left Trend" 
+                        name={t('labels.left_trend')} 
                         strokeWidth={2} 
                         dot={{ r: 3 }}
                       />
@@ -741,7 +745,7 @@ export default function Reports() {
                         type="monotone" 
                         dataKey="right" 
                         stroke="#10b981" 
-                        name="Right Trend" 
+                        name={t('labels.right_trend')} 
                         strokeWidth={2} 
                         dot={{ r: 3 }}
                       />
@@ -752,7 +756,7 @@ export default function Reports() {
                 {/* Progress Over Time */}
                 {gameReport.recent_games.length > 1 && (
                   <div>
-                    <h4 className="text-lg font-semibold mb-4">Progress Over Time</h4>
+                    <h4 className="text-lg font-semibold mb-4">{t('charts.progress_over_time')}</h4>
                     <ResponsiveContainer width="100%" height={300}>
                       <LineChart
                         data={gameReport.recent_games.map((game, index) => ({
@@ -768,7 +772,7 @@ export default function Reports() {
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis 
                           dataKey="name" 
-                          label={{ value: 'Session Number', position: 'insideBottomRight', offset: -10 }}
+                          label={{ value: t('labels.session_number'), position: 'insideBottomRight', offset: -10 }}
                         />
                         <YAxis />
                         <Tooltip
@@ -776,16 +780,16 @@ export default function Reports() {
                             if (active && payload && payload.length) {
                               return (
                                 <div className="bg-white p-3 border border-gray-300 shadow-md rounded">
-                                  <p className="font-semibold">Session {label}</p>
+                                  <p className="font-semibold">{t('labels.session')} {label}</p>
                                   <p className="text-sm">{payload[0]?.payload.game}</p>
                                   <p className="text-sm">{payload[0]?.payload.date}</p>
                                   <div className="grid grid-cols-2 gap-2 mt-2">
                                     <div>
-                                      <p className="text-xs text-gray-500">Score</p>
+                                      <p className="text-xs text-gray-500">{t('labels.score')}</p>
                                       <p className="font-semibold">{payload[0]?.value}</p>
                                     </div>
                                     <div>
-                                      <p className="text-xs text-gray-500">Duration</p>
+                                      <p className="text-xs text-gray-500">{t('labels.duration')}</p>
                                       <p className="font-semibold">{payload[1]?.value} min</p>
                                     </div>
                                   </div>
@@ -800,7 +804,7 @@ export default function Reports() {
                           type="monotone" 
                           dataKey="score" 
                           stroke="#8884d8" 
-                          name="Score" 
+                          name={t('labels.score')} 
                           strokeWidth={2} 
                           activeDot={{ r: 8 }}
                         />
@@ -808,7 +812,7 @@ export default function Reports() {
                           type="monotone" 
                           dataKey="duration" 
                           stroke="#82ca9d" 
-                          name="Duration (min)" 
+                          name={t('labels.duration_min')} 
                           strokeWidth={2} 
                           activeDot={{ r: 8 }}
                         />
@@ -820,12 +824,12 @@ export default function Reports() {
             ) : viewMode === 'table' ? (
               <div className="bg-white rounded-xl shadow-md overflow-hidden">
                 <div className="p-4 bg-blue-500 text-white">
-                  <h3 className="text-lg font-bold">Recent Games</h3>
+                  <h3 className="text-lg font-bold">{t('table.recent_games')}</h3>
                 </div>
                 <div className="p-6">
                   {gameReport.recent_games.length === 0 ? (
                     <div className="bg-yellow-100 text-yellow-700 p-4 rounded-md">
-                      {t("no_recent_games") || "No recent games found"}
+                      {t("no_recent_games")}
                     </div>
                   ) : (
                     <div className="overflow-x-auto">
@@ -833,25 +837,25 @@ export default function Reports() {
                         <thead className="bg-gray-50">
                           <tr>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              "Game name"
+                              {t('table.headers.game_name')}
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              "Difficulty"
+                              {t('table.headers.difficulty')}
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              "Score"
+                              {t('table.headers.score')}
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              "Left Score"
+                              {t('table.headers.left_score')}
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              "Right Score"
+                              {t('table.headers.right_score')}
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              "Duration"
+                              {t('table.headers.duration')}
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                              "Date"
+                              {t('table.headers.date')}
                             </th>
                           </tr>
                         </thead>

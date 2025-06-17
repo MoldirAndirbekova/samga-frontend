@@ -37,97 +37,79 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
   const [gameDimensions, setGameDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
   const [showLevelSelect, setShowLevelSelect] = useState(true);
   
-  // Complete level configurations matching backend
+  // Updated level configurations - simplified design without white boxes
   const levels = [
     { 
       level: 1, 
-      name: "Simple Shapes", 
-      duration: 90, 
-      pieces: 4, 
-      theme: "basic",
-      description: "Learn the basics with simple shapes",
-      color: "bg-blue-500 hover:bg-blue-600",
-      emoji: "🔵"
+      name: "Magic Mushroom", 
+      duration: 120, 
+      pieces: 3, 
+      description: "Start with simple pieces",
+      color: "bg-blue-500 hover:bg-blue-600"
     },
     { 
       level: 2, 
-      name: "Flower Garden", 
-      duration: 100, 
-      pieces: 5, 
-      theme: "nature",
-      description: "Create a beautiful flower pattern",
-      color: "bg-pink-500 hover:bg-pink-600",
-      emoji: "🌸"
+      name: "Beautiful Flower", 
+      duration: 120, 
+      pieces: 4, 
+      description: "Build with pieces",
+      color: "bg-green-500 hover:bg-green-600"
     },
     { 
       level: 3, 
       name: "Racing Car", 
-      duration: 110, 
-      pieces: 6, 
-      theme: "vehicle",
-      description: "Build a speedy race car",
-      color: "bg-red-500 hover:bg-red-600",
-      emoji: "🏎️"
+      duration: 140, 
+      pieces: 5, 
+      description: "Challenge with pieces",
+      color: "bg-yellow-500 hover:bg-yellow-600"
     },
     { 
       level: 4, 
       name: "Magic Tree", 
-      duration: 120, 
-      pieces: 7, 
-      theme: "nature",
-      description: "Grow a magical tree with branches",
-      color: "bg-green-500 hover:bg-green-600",
-      emoji: "🌳"
+      duration: 140, 
+      pieces: 6, 
+      description: "Advanced with pieces",
+      color: "bg-orange-500 hover:bg-orange-600"
     },
     { 
       level: 5, 
       name: "Express Train", 
-      duration: 130, 
-      pieces: 8, 
-      theme: "vehicle",
-      description: "Construct a long train",
-      color: "bg-indigo-500 hover:bg-indigo-600",
-      emoji: "🚂"
+      duration: 140, 
+      pieces: 7, 
+      description: "Expert level with pieces",
+      color: "bg-red-500 hover:bg-red-600"
     },
     { 
       level: 6, 
       name: "Rainbow Bridge", 
-      duration: 140, 
-      pieces: 7, 
-      theme: "colorful",
-      description: "Paint a colorful rainbow",
-      color: "bg-purple-500 hover:bg-purple-600",
-      emoji: "🌈"
+      duration: 200, 
+      pieces: 8, 
+      description: "Master level with pieces",
+      color: "bg-purple-500 hover:bg-purple-600"
     },
     { 
       level: 7, 
       name: "Dream House", 
-      duration: 150, 
+      duration: 220, 
       pieces: 9, 
-      theme: "building",
-      description: "Build your dream home",
-      color: "bg-orange-500 hover:bg-orange-600",
-      emoji: "🏠"
+      description: "Pro level with pieces",
+      color: "bg-indigo-500 hover:bg-indigo-600"
     },
     { 
       level: 8, 
       name: "Wiggle Worm", 
-      duration: 160, 
+      duration: 220, 
       pieces: 10, 
-      theme: "animal",
-      description: "Create a wiggly worm",
-      color: "bg-yellow-500 hover:bg-yellow-600",
-      emoji: "🐛"
+      description: "Expert challenge with pieces",
+      color: "bg-pink-500 hover:bg-pink-600"
     },
     { 
       level: 9, 
       name: "Royal Castle", 
-      duration: 180, 
-      pieces: 12, 
-      theme: "building",
-      description: "Construct a majestic castle",
-      color: "bg-gray-700 hover:bg-gray-800",
-      emoji: "🏰"
+      duration: 240, 
+      pieces: 11, 
+      description: "Ultimate challenge with pieces",
+      color: "bg-gray-700 hover:bg-gray-800"
     }
   ];
 
@@ -331,7 +313,7 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
   
   const startGameWithLevel = (level: number) => {
     if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
-      console.log(`🚀 Starting level ${level}: ${levels[level - 1]?.name}`);
+      console.log(`🚀 Starting ${levels[level - 1]?.name}`);
       
       const message = {
         type: 'start_game',
@@ -349,14 +331,14 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
       setGameState(prev => ({ 
         ...prev, 
         selectedLevel: level,
-        totalPieces: levels[level - 1]?.pieces || 4,
+        totalPieces: levels[level - 1]?.pieces || 3,
         score: 0,
         piecesPlaced: 0,
         gameOver: false
       }));
       setShowLevelSelect(false);
       
-      console.log(`📋 Level ${level} selected - Expected pieces: ${levels[level - 1]?.pieces}`);
+      console.log(`📋 ${levels[level - 1]?.name} selected - Expected pieces: ${levels[level - 1]?.pieces}`);
     } else {
       console.error("❌ WebSocket not connected");
     }
@@ -517,13 +499,13 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
       {/* Level selection overlay */}
       {socketConnected && showLevelSelect && !gameState.gameActive && (
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-85">
-          <div className="bg-white bg-opacity-98 p-8 rounded-2xl max-w-7xl w-full mx-4 max-h-[95vh] overflow-y-auto shadow-2xl">
+          <div className="bg-white bg-opacity-98 p-8 rounded-2xl max-w-6xl w-full mx-4 max-h-[95vh] overflow-y-auto shadow-2xl">
             <div className="text-center mb-8">
               <h2 className="text-5xl font-bold text-gray-800 mb-4">
                 🏗️ Constructor Challenge
               </h2>
               <p className="text-xl text-gray-600 mb-2">
-                Choose your building adventure!
+                Choose your building level!
               </p>
               <p className="text-lg text-gray-500">
                 Use pinch gestures (👆🤏) to grab and place pieces
@@ -537,41 +519,25 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
                   <button
                     key={level.level}
                     onClick={() => startGameWithLevel(level.level)}
-                    className={`p-6 text-white rounded-xl transition-all transform hover:scale-105 shadow-lg ${level.color} relative overflow-hidden`}
+                    className={`p-8 text-white rounded-xl transition-all transform hover:scale-105 shadow-lg ${level.color} relative overflow-hidden`}
                   >
-                    {/* Level badge */}
-                    <div className="absolute top-2 right-2 bg-white bg-opacity-20 px-2 py-1 rounded-full text-xs font-bold">
-                      #{level.level}
-                    </div>
-                    
                     <div className="text-center">
-                      {/* Emoji and title */}
-                      <div className="text-4xl mb-2">{level.emoji}</div>
-                      <h3 className="text-2xl font-bold mb-2">{level.name}</h3>
-                      <p className="text-sm opacity-90 mb-4 h-12 flex items-center justify-center">
+                      {/* Level number display */}
+                      <div className="text-8xl font-bold mb-4 text-white opacity-90">
+                        {level.level}
+                      </div>
+                      
+                      {/* Level name */}
+                      <h3 className="text-2xl font-bold mb-3">{level.name}</h3>
+                      
+                      {/* Description */}
+                      <p className="text-lg opacity-90 mb-4">
                         {level.description}
                       </p>
                       
-                      {/* Stats */}
-                      <div className="space-y-2 text-sm">
-                        <div className="bg-white bg-opacity-20 px-3 py-2 rounded-lg flex justify-between items-center">
-                          <span>🧩 Pieces:</span>
-                          <span className="font-bold">{level.pieces}</span>
-                        </div>
-                        <div className="bg-white bg-opacity-20 px-3 py-2 rounded-lg flex justify-between items-center">
-                          <span>⏱️ Time:</span>
-                          <span className="font-bold">{level.duration}s</span>
-                        </div>
-                        <div className="bg-white bg-opacity-20 px-3 py-2 rounded-lg flex justify-between items-center">
-                          <span>📊 Level:</span>
-                          <span className={`font-bold ${difficultyInfo.color.replace('text-', '')}`}>
-                            {difficultyInfo.text}
-                          </span>
-                        </div>
-                        <div className="bg-white bg-opacity-20 px-3 py-2 rounded-lg flex justify-between items-center">
-                          <span>🎨 Theme:</span>
-                          <span className="font-bold capitalize">{level.theme}</span>
-                        </div>
+                      {/* Simple difficulty indicator */}
+                      <div className="text-lg font-bold opacity-75">
+                        {difficultyInfo.text}
                       </div>
                     </div>
                   </button>
@@ -596,7 +562,7 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
                   <div className="text-center">
                     <div className="text-2xl mb-2">🎯</div>
                     <p className="font-semibold">Place Pieces</p>
-                    <p className="text-sm">Move to white circles</p>
+                    <p className="text-sm">Сollect all elements as in the preview</p>
                   </div>
                 </div>
               </div>
@@ -612,13 +578,13 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
             {/* Level info */}
             <div className="bg-blue-600 bg-opacity-95 text-white p-4 rounded-lg shadow-lg">
               <div className="flex items-center space-x-2">
-                <span className="text-2xl">{levels.find(l => l.level === gameState.selectedLevel)?.emoji}</span>
+                <span className="text-3xl font-bold">{gameState.selectedLevel}</span>
                 <div>
                   <p className="text-lg font-bold">
-                    Level {gameState.selectedLevel}
+                    {levels.find(l => l.level === gameState.selectedLevel)?.name || 'Level'}
                   </p>
                   <p className="text-sm opacity-90">
-                    {levels.find(l => l.level === gameState.selectedLevel)?.name}
+                    Constructor Challenge
                   </p>
                 </div>
               </div>
@@ -646,14 +612,14 @@ export default function ConstructorGame({ onGameOver, difficulty: initialDifficu
           <div className="bg-white bg-opacity-95 p-8 rounded-2xl text-center max-w-lg mx-4 shadow-2xl">
             <div className="text-6xl mb-4">🧠</div>
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Study Time!</h2>
-            <div className="text-2xl mb-4">
-              {levels.find(l => l.level === gameState.selectedLevel)?.emoji}
+            <div className="text-4xl mb-4 font-bold text-blue-600">
+              {gameState.selectedLevel}
             </div>
             <p className="text-xl text-gray-600 mb-4">
-              Level {gameState.selectedLevel}: {levels.find(l => l.level === gameState.selectedLevel)?.name}
+              {levels.find(l => l.level === gameState.selectedLevel)?.name || 'Level'}
             </p>
             <p className="text-lg text-blue-600 mb-4">
-              Memorize where the {gameState.totalPieces} pieces belong...
+              Memorize where the pieces belong...
             </p>
             <div className="animate-pulse">
               <p className="text-xl text-green-600 font-bold">Get ready to build! 🔧</p>

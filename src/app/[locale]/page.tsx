@@ -404,20 +404,42 @@ const [isLangOpen, setIsLangOpen] = useState(false);
 
       
       <div className="relative z-20 pt-48 px-6 text-center flex flex-col items-center">
-        <h1
-          className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-main')} text-white font-extrabold transition-all duration-700 ease-out ${
+        {/* Conditional rendering based on locale */}
+        {locale === 'en' ? (
+          // English version - keep original text
+          <>
+            <h1
+              className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-main')} text-white font-extrabold transition-all duration-700 ease-out ${
+                textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+            >
+              {t("header1")}
+            </h1>
+            <h1
+              className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-main')} text-white font-extrabold transition-all duration-700 ease-out delay-300 ${
+                textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+            >
+              {t("header2")}
+            </h1>
+          </>
+        ) : (
+          // Russian and Kazakh versions - use SVG files
+          <div className={`transition-all duration-700 ease-out ${
             textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          {t("header1")}
-        </h1>
-        <h1
-          className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-main')} text-white font-extrabold transition-all duration-700 ease-out delay-300 ${
-            textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-         {t("header2")}
-        </h1>
+          }`}>
+            <Image
+              src={locale === 'ru' ? "/svg/rus.svg" : "/svg/kaz.svg"}
+              alt={locale === 'ru' ? "WHERE PLAY MEETS PROGRESS in Russian" : "WHERE PLAY MEETS PROGRESS in Kazakh"}
+              width={800}
+              height={200}
+              className="w-full max-w-4xl h-auto"
+              priority
+            />
+          </div>
+        )}
+        
+        {/* Keep the empty h1 for spacing if needed */}
         <h1
           className={`${getFontClass(locale)} ${getFontSizeClass(locale, 'header-main')} text-white font-extrabold transition-all duration-700 ease-out delay-500 ${
             textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
